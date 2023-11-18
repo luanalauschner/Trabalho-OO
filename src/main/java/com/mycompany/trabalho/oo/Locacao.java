@@ -1,0 +1,85 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mycompany.trabalho.oo;
+
+import java.util.Date;
+/**
+ *
+ * @author Lana S. Silva
+ */
+public class Locacao {
+    
+    private int id;
+    private Date dataInicio;
+    private Date dataFim;
+    private Cliente locatario;
+    private Carro carro_alugado;
+    private Funcionario locador;
+
+    public Locacao(int id, Date dataInicio, Date dataFim, Cliente locatario, Carro carro_alugado, Funcionario locador) {
+        this.id = id;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.locatario = locatario;
+        this.carro_alugado = carro_alugado;
+        this.locador = locador;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Date getDataInicio() {
+        return dataInicio;
+    }
+
+    public Date getDataFim() {
+        return dataFim;
+    }
+
+    public Cliente getLocatario() {
+        return locatario;
+    }
+
+    public Carro getCarro_alugado() {
+        return carro_alugado;
+    }
+
+    public Funcionario getLocador() {
+        return locador;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
+    }
+
+    public void setLocatario(Cliente locatario) {
+        this.locatario = locatario;
+    }
+
+    public void setCarro_alugado(Carro carro_alugado) {
+        this.carro_alugado = carro_alugado;
+    }
+    
+    public double valorTotalLocacao(Carro c){
+        
+        return 0;
+    }
+
+    public void setLocador(Funcionario locador) {
+        this.locador = locador;
+    }
+    
+    
+}
