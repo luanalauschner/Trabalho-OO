@@ -19,6 +19,9 @@ public class Locacao {
     private Cliente locatario;
     private Carro carro_alugado;
     private Funcionario locador;
+    
+    private static boolean validade;
+    //true = contrato em período de validade; false = contrato encerrado ou cancelado (é mesmo necessário?)
 
     public Locacao(int id, Date dataInicio, Date dataFim, Cliente locatario, Carro carro_alugado, Funcionario locador) {
         this.id = id;
@@ -104,7 +107,7 @@ public class Locacao {
     
     //esse método é o responsável por disponibilizar novamente o carro quando o contrato termina por
     //cancelamento ou por termino da validade.
-    public void validadeContrato(){
+    public static void terminoContrato(){
         
     }
 }

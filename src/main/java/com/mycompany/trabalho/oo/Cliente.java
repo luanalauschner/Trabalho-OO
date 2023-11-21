@@ -73,7 +73,7 @@ public class Cliente extends Pessoa{
     public boolean validarCredito(){
         return true;
     }
-
+    
     public boolean cancelaLocacao(Locacao l, Date atual){
         //No cancelamento do contrato de locação, o cliente paga uma taxa por quebra de contrato se o contrato 
         //for cancelado antes de pelo menos um mês antes do término do contrato.
@@ -100,9 +100,14 @@ public class Cliente extends Pessoa{
         if(dias_taxa > 30){
             valor_taxa = ((double)dias_taxa/100) * l.valorTotalDoContrato();
             this.credito = valor_taxa * (-1);
-            //retira a locação da lista de locações do cliente, do funcionario e do administrador.
+            //retira a locação da lista de locações do funcionario e do administrador.
             //função na classe locação para disponibilizar o carro quando o contrato encerra
         }
+        
+        
+        Funcionario.removeLocacao(l);
+        Administrador.removeLocacao(l);
+        locacoes.remove(l);
         return true;
     }
     
@@ -110,5 +115,10 @@ public class Cliente extends Pessoa{
     //sendo definido com a mesma duração, mesmo funcionário e o mesmo valor total do contrato.
     public void renovarLocacao(){
     
+    }
+    
+    //função responsável pela confirmação do cliente que o mesmo está ciente que o contrato chegou ao fim
+    public void confirmarTermino(){
+        
     }
 }
