@@ -82,8 +82,8 @@ public class Locacao {
         this.locador = locador;
     }
     
-    public static double valorTotalDoContrato(){
-        int valor;
+    public double valorTotalDoContrato(){
+        double valor;
         int data_inicio, data_fim, dias_totais;
         
         Calendar c = Calendar.getInstance();
@@ -97,8 +97,14 @@ public class Locacao {
         data_fim = c2.get(Calendar.MONTH)*30 + c2.get(Calendar.DAY_OF_MONTH);
         dias_totais = data_fim - data_inicio;
         
-        //valor = carro_alugado.getPreco_diaria() * (double)dias_totais;
+        valor = carro_alugado.getPreco_diaria() * (double)dias_totais;
         
-        return 0;
+        return valor;
+    }
+    
+    //esse método é o responsável por disponibilizar novamente o carro quando o contrato termina por
+    //cancelamento ou por termino da validade.
+    public void validadeContrato(){
+        
     }
 }

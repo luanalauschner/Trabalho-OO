@@ -19,9 +19,9 @@ public class Cliente extends Pessoa{
     private String habilitacao;
     private List<Locacao> locacoes;
     private List<Reserva> reservas;
-    private boolean credito;
+    private double credito;
 
-    public Cliente(int id, String habilitacao, List<Locacao> locacoes, List<Reserva> reservas, boolean credito, String nome, String telefone, String cpf) {
+    public Cliente(int id, String habilitacao, List<Locacao> locacoes, List<Reserva> reservas, double credito, String nome, String telefone, String cpf) {
         super(nome, telefone, cpf);
         this.id = id;
         this.habilitacao = habilitacao;
@@ -46,7 +46,7 @@ public class Cliente extends Pessoa{
         return reservas;
     }
 
-    public boolean isCredito() {
+    public double isCredito() {
         return credito;
     }
 
@@ -66,7 +66,7 @@ public class Cliente extends Pessoa{
         this.reservas = reservas;
     }
 
-    public void setCredito(boolean credito) {
+    public void setCredito(double credito) {
         this.credito = credito;
     }
     
@@ -74,7 +74,7 @@ public class Cliente extends Pessoa{
         return true;
     }
 
-    public static boolean cancelaLocacao(Locacao l, Date atual){
+    public boolean cancelaLocacao(Locacao l, Date atual){
         //No cancelamento do contrato de locação, o cliente paga uma taxa por quebra de contrato se o contrato 
         //for cancelado antes de pelo menos um mês antes do término do contrato.
         //O valor da taxa é calculado pelo tanto de dias que procede o fim do contrato, se for cancelado antes de 30
@@ -99,10 +99,16 @@ public class Cliente extends Pessoa{
         //ele precisa realizar o pagamento. 
         if(dias_taxa > 30){
             valor_taxa = ((double)dias_taxa/100) * l.valorTotalDoContrato();
-            //this.credito = valor_taxa * (-1);
+            this.credito = valor_taxa * (-1);
             //retira a locação da lista de locações do cliente, do funcionario e do administrador.
             //função na classe locação para disponibilizar o carro quando o contrato encerra
         }
         return true;
+    }
+    
+    //a partir da data atual, é gerado um novo contrato de locacao a partir da data de finalizacao do antigo,
+    //sendo definido com a mesma duração, mesmo funcionário e o mesmo valor total do contrato.
+    public void renovarLocacao(){
+    
     }
 }

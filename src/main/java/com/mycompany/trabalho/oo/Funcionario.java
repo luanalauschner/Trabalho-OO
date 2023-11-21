@@ -58,7 +58,20 @@ public class Funcionario extends Pessoa {
         this.locacoes = locacoes;
     }
    
+    //calculo da comissao que é adicionada ao salário, a mesma é calculada a partir do valor total do contrato
+    //de locacao, sendo independente do cancelamento do mesmo.
     public void comissao(Locacao l){
+        
+    }
+
+    //realiza o contrato de locacao de um carro dado a disponibilidade do mesmo e o crédito positivo
+    //do cliente.
+    public void novaLocacao(){
+        
+    }
+    
+    //pesquisa de veículos nas filiais para conferir a disponibilidade do carro solicitado pelo cliente.
+    public void pesquisaCarros(){
         
     }    
 }
