@@ -7,6 +7,8 @@ package com.mycompany.trabalho.oo;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Calendar;
 /**
  *
  * @author Lana S. Silva
@@ -69,6 +71,38 @@ public class Cliente extends Pessoa{
     }
     
     public boolean validarCredito(){
+        return true;
+    }
+
+    public static boolean cancelaLocacao(Locacao l, Date atual){
+        //No cancelamento do contrato de locação, o cliente paga uma taxa por quebra de contrato se o contrato 
+        //for cancelado antes de pelo menos um mês antes do término do contrato.
+        //O valor da taxa é calculado pelo tanto de dias que procede o fim do contrato, se for cancelado antes de 30
+        //dias do fim do contrato, é cobrado uma taxa de 30% sobre o valor total do contrato.
+        int data_atual, data_final, dias_taxa;
+        double valor_taxa;
+        
+        Calendar c = Calendar.getInstance();
+        c.setTime(atual);
+        
+        Calendar c2 = Calendar.getInstance();
+        c2.setTime(l.getDataFim());
+        
+        //conferir condição para data atual ser antes do fim do contrato, o contrato
+        //quando chega ao fim, encerra sozinho
+        data_atual = c.get(Calendar.MONTH)*30 + c.get(Calendar.DAY_OF_MONTH);
+        data_final = c2.get(Calendar.MONTH)*30 + c2.get(Calendar.DAY_OF_MONTH);
+        
+        dias_taxa = data_final - data_atual;
+        
+        //o valor da taxa é colocado no crédito do cliente, o qual fica negativado e para realizar uma nova locação 
+        //ele precisa realizar o pagamento. 
+        if(dias_taxa > 30){
+            valor_taxa = ((double)dias_taxa/100) * l.valorTotalDoContrato();
+            //this.credito = valor_taxa * (-1);
+            //retira a locação da lista de locações do cliente, do funcionario e do administrador.
+            //função na classe locação para disponibilizar o carro quando o contrato encerra
+        }
         return true;
     }
 }

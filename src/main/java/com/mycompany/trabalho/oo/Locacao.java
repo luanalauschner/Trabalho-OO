@@ -6,6 +6,7 @@
 package com.mycompany.trabalho.oo;
 
 import java.util.Date;
+import java.util.Calendar;
 /**
  *
  * @author Lana S. Silva
@@ -81,5 +82,23 @@ public class Locacao {
         this.locador = locador;
     }
     
-    
+    public static double valorTotalDoContrato(){
+        int valor;
+        int data_inicio, data_fim, dias_totais;
+        
+        Calendar c = Calendar.getInstance();
+        c.setTime(dataInicio);
+        
+        Calendar c2 = Calendar.getInstance();
+        c2.setTime(dataFim);
+        
+       
+        data_inicio = c.get(Calendar.MONTH)*30 + c.get(Calendar.DAY_OF_MONTH);
+        data_fim = c2.get(Calendar.MONTH)*30 + c2.get(Calendar.DAY_OF_MONTH);
+        dias_totais = data_fim - data_inicio;
+        
+        //valor = carro_alugado.getPreco_diaria() * (double)dias_totais;
+        
+        return 0;
+    }
 }
