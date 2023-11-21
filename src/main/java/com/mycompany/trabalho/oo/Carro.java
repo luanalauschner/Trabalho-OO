@@ -65,5 +65,28 @@ public class Carro {
         this.preco_diaria = preco_diaria;
     }
     
+    //método responsável por conferir se o carro tem determinada característica
+    public boolean confereCarro(Object c){
+        String aux_ano;
+        String aux_preco;
+        String aux_cor;
+        String aux_exigencia;
+        
+        aux_ano = String.valueOf(ano);
+        aux_preco = String.valueOf(preco_diaria);
+        aux_cor = cor.toUpperCase();
+        //inserir um tratamento de exceção para os casos em que o object c ser uma string
+        aux_exigencia = String.valueOf(c);
+        aux_exigencia = aux_exigencia.toUpperCase();
+        
+        if(aux_exigencia.equals(aux_ano))
+            return true;
+        if(aux_exigencia.equals(aux_preco))
+            return true;
+        if(aux_exigencia.equals(aux_cor))
+            return true;
+        
+        return false;
+    }
     
 }
