@@ -60,8 +60,32 @@ public class Funcionario extends Pessoa {
    
     //calculo da comissao que é adicionada ao salário, a mesma é calculada a partir do valor total do contrato
     //de locacao, sendo independente do cancelamento do mesmo.
-    public void comissao(){
+    //o funcionário pode ser locador ou gerente, caso seja gerente a comissão é 10% do valor total de cada locacao
+    // e caso seja locador a comissao é de 5%.
+    public double calcularComissao(){
+        String aux_cargo = cargo.toLowerCase();
+        double comissao_gerada, porcentagem = 0, comissao_total = 0;
         
+        if(aux_cargo.equals("GERENTE"))
+            porcentagem = 0.1;
+        
+        if(aux_cargo.equals("LOCADOR"))
+            porcentagem = 0.05;
+        
+        List<Locacao> aux_locacoes = getLocacoes();
+        for(Locacao l: aux_locacoes){
+            comissao_gerada = l.valorTotalDoContrato()*porcentagem;
+            comissao_total += comissao_gerada;
+        }
+        
+        return comissao_total;
+    }
+    
+    public double calcularPagamento(){
+        double comissao;
+        comissao = calcularComissao();
+        
+        return comissao + salario;
     }
     
     //pesquisa de veículos nas filiais para conferir a disponibilidade do carro solicitado pelo cliente.
@@ -72,7 +96,7 @@ public class Funcionario extends Pessoa {
         */
         List<Carro> catalogo = f.getCarrosDisponiveis();
         
-        for (Carro c : catalogo) {
+        for(Carro c : catalogo) {
             if(c.confereCarro(exigencia) == false){
                 catalogo.remove(c);
             }
@@ -81,33 +105,31 @@ public class Funcionario extends Pessoa {
         return catalogo;
     }
     
-    /*
-    dúvida: a função pesquisa deve retornar uma lista de carros de acordo com aquelas exigência ou um 
-    boolean se aquele carro está disponível naquela determinada filial?
-    public boolean pesquisaCarros(Filial f, Object exigencia){
-        List<Carro> catalogo = f.getCarrosDisponiveis();
-        
-        for (Carro c : catalogo) {
-            if(c.confereCarro(exigencia) == false){
-                catalogo.remove(c);
-            }
-        }
-        
-        if(catalogo != null)
-            return true;
-    
-        return false;  
-    }
-    
-    */
-    
     //realiza o contrato de locacao de um carro dado a disponibilidade do mesmo e o crédito positivo
     //do cliente.
-    public void novaLocacao(){
+    public boolean novaLocacao(Cliente locatario, Carro c, Date inicio, Date fim, Filial f){
+        //confere disponibilidade do carro
+        if(!c.isDisponibilidade())
+            return false;
         
+        //confere crédito do cliente
+        if(locatario.getCredito() < 0)
+            return false;
+        
+        //olhar geração de id, fazer no main ou na classe?
+        Locacao l = new Locacao(0, inicio, fim, locatario, c, true);
+        Administrador.adicionaLocacao(l);
+        Funcionario.addLocacao(l);
+        f.atualizacaoCarros(c, false);
+        
+        return true;
     }
     
     public static void removeLocacao(Locacao l){
         locacoes.remove(l);
-    }   
+    }
+    
+    public static void addLocacao(Locacao l){
+        locacoes.add(l);
+    } 
 }

@@ -87,5 +87,12 @@ public class Filial {
         this.gerente = gerente;
     }
     
-    
+    //função responsavel por atualizar a lista de veículos, seja para adicionar ou remover o veículo 
+    //da lista de carros disponíveis
+    public void atualizacaoCarros(Carro c, boolean b){
+        if(b)
+            this.carrosDisponiveis.add(c);
+        else
+            this.carrosDisponiveis.remove(c);
+    }
 }
