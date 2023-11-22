@@ -23,13 +23,14 @@ public class Locacao {
     private static boolean validade;
     //true = contrato em período de validade; false = contrato encerrado ou cancelado (é mesmo necessário?)
 
-    public Locacao(int id, Date dataInicio, Date dataFim, Cliente locatario, Carro carro_alugado, Funcionario locador) {
+    public Locacao(int id, Date dataInicio, Date dataFim, Cliente locatario, Carro carro_alugado, boolean validade) {
         this.id = id;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.locatario = locatario;
         this.carro_alugado = carro_alugado;
-        this.locador = locador;
+        //this.locador = locador;
+        Locacao.validade = validade;
     }
 
     public int getId() {

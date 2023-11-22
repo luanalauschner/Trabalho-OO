@@ -46,7 +46,7 @@ public class Cliente extends Pessoa{
         return reservas;
     }
 
-    public double isCredito() {
+    public double getCredito() {
         return credito;
     }
 
