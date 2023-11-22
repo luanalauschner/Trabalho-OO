@@ -113,12 +113,22 @@ public class Cliente extends Pessoa{
     
     //a partir da data atual, é gerado um novo contrato de locacao a partir da data de finalizacao do antigo,
     //sendo definido com a mesma duração, mesmo funcionário e o mesmo valor total do contrato.
-    public void renovarLocacao(){
+    public void renovarLocacao(Locacao l){
     
     }
     
-    //função responsável pela confirmação do cliente que o mesmo está ciente que o contrato chegou ao fim
-    public void confirmarTermino(){
-        
+    //função responsável pela confirmação do cliente que o mesmo está ciente que o contrato chegou ao fim,
+    //caso seja true, é chamado os métodos de disponibilição do carro e caso seja false é chamada o 
+    //método de renovação de contrato/locacao
+    public boolean confirmarTermino(boolean b, Locacao l){
+        if(b){
+           Administrador.removeLocacao(l);
+           Funcionario.removeLocacao(l);
+           //método na classe locação ou filial para disponibilizar o carro quando o contrato encerra
+           return true;
+        }else{
+            renovarLocacao(l);
+        }
+        return true;
     }
 }
