@@ -96,7 +96,7 @@ public class Locacao {
         Calendar c2 = Calendar.getInstance();
         c2.setTime(dataFim);
         
-       
+        //da a data exata do ano 
         data_inicio = c.get(Calendar.MONTH)*30 + c.get(Calendar.DAY_OF_MONTH);
         data_fim = c2.get(Calendar.MONTH)*30 + c2.get(Calendar.DAY_OF_MONTH);
         dias_totais = data_fim - data_inicio;
