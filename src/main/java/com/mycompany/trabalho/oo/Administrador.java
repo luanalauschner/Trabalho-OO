@@ -15,7 +15,7 @@ public class Administrador {
     private List <Cliente> clientes;
     private List <Funcionario> funcionarios;
     private static List <Carro> carros;
-    private List <Filial> filiais;
+    private static List <Filial> filiais;
     private static List <Locacao> locacoes;
     private static List <Reserva> reservas;
 
@@ -27,19 +27,19 @@ public class Administrador {
         return funcionarios;
     }
 
-    public List<Carro> getCarros() {
+    public static List<Carro> getCarros() {
         return carros;
     }
 
-    public List<Filial> getFiliais() {
+    public static List<Filial> getFiliais() {
         return filiais;
     }
 
-    public List<Locacao> getLocacoes() {
+    public static List<Locacao> getLocacoes() {
         return locacoes;
     }
 
-    public List<Reserva> getReservas() {
+    public static List<Reserva> getReservas() {
         return reservas;
     }
 
@@ -56,7 +56,7 @@ public class Administrador {
     }
 
     public void setFiliais(List<Filial> filiais) {
-        this.filiais = filiais;
+        Administrador.filiais = filiais;
     }
 
     public void setLocacoes(List<Locacao> locacoes) {

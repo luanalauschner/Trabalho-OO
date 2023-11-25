@@ -116,9 +116,21 @@ public class Funcionario extends Pessoa {
         //confere crédito do cliente
         if(locatario.getCredito() < 0)
             return false;
+
+        List<Reserva> reservas = Administrador.getReservas();
+        Locacao l = new Locacao(0, inicio, fim, locatario, c, true);
+
+        for(Reserva r : reservas){
+            if(r.getCarro().equals(c)){
+                if(r.sobreposicaoReserva(l)){
+                    return true;
+                }
+            }
+        }
         
         //olhar geração de id, fazer no main ou na classe?
-        Locacao l = new Locacao(0, inicio, fim, locatario, c, true);
+        //Locacao l = new Locacao(0, inicio, fim, locatario, c, true);
+        c.setDisponibilidade(false);
         Administrador.adicionaLocacao(l);
         Funcionario.addLocacao(l);
         f.atualizacaoCarros(c, false);

@@ -73,6 +73,20 @@ public class Cliente extends Pessoa{
     public boolean validarCredito(){
         return true;
     }
+
+    public void locacaoFilial(Locacao l){
+        List<Filial> filiais = Administrador.getFiliais();
+        List<Locacao> locacoes_filiais = null;
+
+        for(Filial f : filiais){
+            locacoes_filiais = f.getLocacoes();
+            for(Locacao l2 : locacoes_filiais){
+                if(l.equals(l2))
+                    f.removeLocacao(l);
+                    f.atualizacaoCarros(l.getCarro_alugado(), true);
+            }
+        }
+    }
     
     public boolean cancelaLocacao(Locacao l, Date atual){
         //No cancelamento do contrato de locação, o cliente paga uma taxa por quebra de contrato se o contrato 
@@ -90,8 +104,8 @@ public class Cliente extends Pessoa{
         
         //conferir condição para data atual ser antes do fim do contrato, o contrato
         //quando chega ao fim, encerra sozinho
-        data_atual = c.get(Calendar.MONTH)*30 + c.get(Calendar.DAY_OF_MONTH);
-        data_final = c2.get(Calendar.MONTH)*30 + c2.get(Calendar.DAY_OF_MONTH);
+        data_atual = c.get(Calendar.DAY_OF_YEAR);
+        data_final = c2.get(Calendar.DAY_OF_YEAR);
         
         dias_taxa = data_final - data_atual;
         
@@ -104,7 +118,7 @@ public class Cliente extends Pessoa{
             //função na classe locação para disponibilizar o carro quando o contrato encerra
         }
         
-        
+        locacaoFilial(l);
         Funcionario.removeLocacao(l);
         Administrador.removeLocacao(l);
         locacoes.remove(l);
@@ -114,6 +128,104 @@ public class Cliente extends Pessoa{
     //a partir da data atual, é gerado um novo contrato de locacao a partir da data de finalizacao do antigo,
     //sendo definido com a mesma duração, mesmo funcionário e o mesmo valor total do contrato.
     public void renovarLocacao(Locacao l){
+        int dias_de_contrato, diaInicio, diaFim, aux;
+
+        Calendar dataFimAtualizada = Calendar.getInstance();
+        Calendar inicio = Calendar.getInstance();
+        inicio.setTime(l.getDataInicio());
+
+        Calendar fim = Calendar.getInstance();
+        fim.setTime(l.getDataFim());
+
+        diaInicio = inicio.get(Calendar.DAY_OF_YEAR);
+        diaFim = fim.get(Calendar.DAY_OF_YEAR);
+        dias_de_contrato = diaFim - diaInicio;
+
+        diaFim = diaFim + dias_de_contrato;
+
+        if(diaFim > 365){
+            aux = diaFim - 365;
+            if(aux < 30){
+                dataFimAtualizada.set(Calendar.DAY_OF_MONTH,aux);
+                dataFimAtualizada.set(Calendar.MONTH, 1);
+                dataFimAtualizada.set(Calendar.YEAR, fim.get(Calendar.YEAR) + 1);
+            }else{
+                int mes;
+                mes = aux/30;
+
+                switch (mes) {
+                    case 2:
+                        dataFimAtualizada.set(Calendar.DAY_OF_MONTH,aux%30);
+                        dataFimAtualizada.set(Calendar.MONTH, 2);
+                        dataFimAtualizada.set(Calendar.YEAR, fim.get(Calendar.YEAR) + 1);
+                        break;
+                    
+                    case 3:
+                        dataFimAtualizada.set(Calendar.DAY_OF_MONTH,aux%30);
+                        dataFimAtualizada.set(Calendar.MONTH, 3);
+                        dataFimAtualizada.set(Calendar.YEAR, fim.get(Calendar.YEAR) + 1);
+                        break;
+
+                    case 4: 
+                        dataFimAtualizada.set(Calendar.DAY_OF_MONTH,aux%30);
+                        dataFimAtualizada.set(Calendar.MONTH, 4);
+                        dataFimAtualizada.set(Calendar.YEAR, fim.get(Calendar.YEAR) + 1);
+                        break;
+
+                    case 5:
+                        dataFimAtualizada.set(Calendar.DAY_OF_MONTH,aux%30);
+                        dataFimAtualizada.set(Calendar.MONTH, 5);
+                        dataFimAtualizada.set(Calendar.YEAR, fim.get(Calendar.YEAR) + 1);
+                        break;
+
+                    case 6:
+                        dataFimAtualizada.set(Calendar.DAY_OF_MONTH,aux%30);
+                        dataFimAtualizada.set(Calendar.MONTH, 2);
+                        dataFimAtualizada.set(Calendar.YEAR, fim.get(Calendar.YEAR) + 1);
+                        break;
+
+                    case 7:
+                        dataFimAtualizada.set(Calendar.DAY_OF_MONTH,aux%30);
+                        dataFimAtualizada.set(Calendar.MONTH, 2);
+                        dataFimAtualizada.set(Calendar.YEAR, fim.get(Calendar.YEAR) + 1);
+                        break;
+
+                    case 8:
+                        dataFimAtualizada.set(Calendar.DAY_OF_MONTH,aux%30);
+                        dataFimAtualizada.set(Calendar.MONTH, 2);
+                        dataFimAtualizada.set(Calendar.YEAR, fim.get(Calendar.YEAR) + 1);
+                        break;
+
+                    case 9:
+                        dataFimAtualizada.set(Calendar.DAY_OF_MONTH,aux%30);
+                        dataFimAtualizada.set(Calendar.MONTH, 2);
+                        dataFimAtualizada.set(Calendar.YEAR, fim.get(Calendar.YEAR) + 1);
+                        break;
+
+                    case 10:
+                        dataFimAtualizada.set(Calendar.DAY_OF_MONTH,aux%30);
+                        dataFimAtualizada.set(Calendar.MONTH, 2);
+                        dataFimAtualizada.set(Calendar.YEAR, fim.get(Calendar.YEAR) + 1);
+                        break;
+
+                    case 11:
+                        dataFimAtualizada.set(Calendar.DAY_OF_MONTH,aux%30);
+                        dataFimAtualizada.set(Calendar.MONTH, 2);
+                        dataFimAtualizada.set(Calendar.YEAR, fim.get(Calendar.YEAR) + 1);
+                        break;
+
+                    case 12:
+                        dataFimAtualizada.set(Calendar.DAY_OF_MONTH,aux%30);
+                        dataFimAtualizada.set(Calendar.MONTH, 2);
+                        dataFimAtualizada.set(Calendar.YEAR, fim.get(Calendar.YEAR) + 1);
+                        break;
+                
+                    default:
+                        break;
+                }
+
+            }
+        }
     
     }
     
@@ -124,11 +236,13 @@ public class Cliente extends Pessoa{
         if(b){
            Administrador.removeLocacao(l);
            Funcionario.removeLocacao(l);
+           locacaoFilial(l);
            //método na classe locação ou filial para disponibilizar o carro quando o contrato encerra
            return true;
         }else{
             renovarLocacao(l);
         }
+
         return true;
     }
 }

@@ -105,10 +105,14 @@ public class Locacao {
         
         return valor;
     }
-    
-    //esse método é o responsável por disponibilizar novamente o carro quando o contrato termina por
-    //cancelamento ou por termino da validade.
-    public static void terminoContrato(){
-        
+
+    public boolean equals(Locacao l){
+        if(l == null)
+            return false;
+
+        if(this.id == l.getId())
+            return true;
+
+        return false;
     }
 }

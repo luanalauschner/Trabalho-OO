@@ -56,15 +56,15 @@ public class Reserva {
         return dataFim;
     }
 
-    public boolean sobreposicaoReserva(Reserva r, Carro carro){
-        int aux_reserva, aux_reservaFim;
-        int aux_reserva2, aux_reserva2Fim;
+    public boolean sobreposicaoReserva(Reserva r){
+        int aux_reservaInicio, aux_reservaFim;
+        int aux_reserva2Inicio, aux_reserva2Fim;
 
         Calendar c1 = Calendar.getInstance();
-        c1.getTime(this.dataInicio);
+        c1.setTime(this.dataInicio);
 
         Calendar c2 = Calendar.getInstance();
-        c2.getTime(this.dataFim);
+        c2.setTime(this.dataFim);
 
         Calendar r1 = Calendar.getInstance();
         r1.setTime(r.dataInicio);
@@ -72,17 +72,63 @@ public class Reserva {
         Calendar r2 = Calendar.getInstance();
         r2.setTime(r.dataFim);
         
-        aux_reserva = c1.get(Calendar.MONTH)*30 + c1.get(Calendar.DAY_OF_MONTH);
+        aux_reservaInicio = c1.get(Calendar.MONTH)*30 + c1.get(Calendar.DAY_OF_MONTH);
         aux_reservaFim = c2.get(Calendar.MONTH)*30 + c2.get(Calendar.DAY_OF_MONTH);
-        aux_reserva = r1.get(Calendar.MONTH)*30 + r1.get(Calendar.DAY_OF_MONTH);
+        aux_reserva2Inicio = r1.get(Calendar.MONTH)*30 + r1.get(Calendar.DAY_OF_MONTH);
         aux_reserva2Fim = r2.get(Calendar.MONTH)*30 + r2.get(Calendar.DAY_OF_MONTH);
 
-        if(carros.isDisponibilidade==true){
+        /*if(carros.isDisponibilidade==true){
             if(r1 > c1 && r1 < c2 || r1 < c1 && r2 > c1 || r1 > c1 && r2 < c2 || r1 < c1 && r2 > c2){
                 return true;
             }
             return false;
-        }
+        }*/
+
+        if(aux_reserva2Inicio < aux_reservaInicio && aux_reserva2Fim < aux_reservaInicio)
+            return false;
+
+        if(aux_reserva2Inicio > aux_reservaInicio && aux_reserva2Inicio > aux_reservaFim)
+            return false;
+        
+        return true;
+
+    }
+
+    public boolean sobreposicaoReserva(Locacao l){
+        int aux_reservaInicio, aux_reservaFim;
+        int aux_locacaoInicio, aux_locacaoFim;
+
+        Calendar c1 = Calendar.getInstance();
+        c1.setTime(this.dataInicio);
+
+        Calendar c2 = Calendar.getInstance();
+        c2.setTime(this.dataFim);
+
+        Calendar l1 = Calendar.getInstance();
+        l1.setTime(l.getDataInicio());
+
+        Calendar l2 = Calendar.getInstance();
+        l2.setTime(l.getDataFim());
+        
+        aux_reservaInicio = c1.get(Calendar.MONTH)*30 + c1.get(Calendar.DAY_OF_MONTH);
+        aux_reservaFim = c2.get(Calendar.MONTH)*30 + c2.get(Calendar.DAY_OF_MONTH);
+        aux_locacaoInicio = l1.get(Calendar.MONTH)*30 + l1.get(Calendar.DAY_OF_MONTH);
+        aux_locacaoFim = l2.get(Calendar.MONTH)*30 + l2.get(Calendar.DAY_OF_MONTH);
+
+        /*if(carros.isDisponibilidade==true){
+            if(r1 > c1 && r1 < c2 || r1 < c1 && r2 > c1 || r1 > c1 && r2 < c2 || r1 < c1 && r2 > c2){
+                return true;
+            }
+            return false;
+        }*/
+
+        if(aux_locacaoInicio < aux_reservaInicio && aux_locacaoFim < aux_reservaInicio)
+            return false;
+
+        if(aux_locacaoInicio > aux_reservaInicio && aux_locacaoInicio > aux_reservaFim)
+            return false;
+        
+        return true;
 
     }
 }

@@ -6,6 +6,8 @@
  */
 package com.mycompany.trabalho.oo;
 
+import java.util.Objects;
+
 /**
  *
  * @author Lana S. Silva
@@ -77,6 +79,10 @@ public class Carro {
         aux_preco = String.valueOf(preco_diaria);
         aux_cor = cor.toUpperCase();
         //inserir um tratamento de exceção para os casos em que o object c ser uma string
+
+        if(c instanceof String){
+            aux_exigencia = c.toUpperCase();
+        }
         aux_exigencia = String.valueOf(c);
         aux_exigencia = aux_exigencia.toUpperCase();
         
@@ -88,6 +94,19 @@ public class Carro {
             return true;
         
         return false;
+    }
+
+    public boolean equals(Carro c) {
+        if (this == c) 
+            return true;
+
+        if (c == null)
+            return false;
+
+        Carro carro = (Carro) c;
+        return ano == carro.ano &&
+                Objects.equals(preco_diaria, carro.preco_diaria) &&
+                Objects.equals(cor, carro.cor);
     }
     
 }

@@ -95,4 +95,8 @@ public class Filial {
         else
             this.carrosDisponiveis.remove(c);
     }
+
+    public void removeLocacao(Locacao l){
+        locacoes.remove(l);
+    }
 }
