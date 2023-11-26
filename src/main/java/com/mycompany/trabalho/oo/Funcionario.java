@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
+import java.util.Random;
 import java.util.HashMap;
 /**
  *
@@ -123,10 +124,19 @@ public class Funcionario extends Pessoa {
         }
         return catalogo;
     }*/
+
+    public static int gerarId() {
+        
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(1000);
+
+        return numeroAleatorio;
+    }
     
     //realiza o contrato de locacao de um carro dado a disponibilidade do mesmo e o crédito positivo
     //do cliente.
     public boolean novaLocacao(Cliente locatario, Carro c, Date inicio, Date fim, Filial f){
+        int id;
         //confere disponibilidade do carro
         if(!c.isDisponibilidade())
             return false;
@@ -136,7 +146,8 @@ public class Funcionario extends Pessoa {
             return false;
 
         List<Reserva> reservas = Administrador.getReservas();
-        Locacao l = new Locacao(0, inicio, fim, locatario, c, true);
+        id = gerarId();
+        Locacao l = new Locacao(id, inicio, fim, locatario, c, true);
 
         for(Reserva r : reservas){
             if(r.getCarro().equals(c)){
@@ -147,7 +158,6 @@ public class Funcionario extends Pessoa {
         }
         
         //olhar geração de id, fazer no main ou na classe?
-        //Locacao l = new Locacao(0, inicio, fim, locatario, c, true);
         c.setDisponibilidade(false);
         Administrador.adicionaLocacao(l);
         Funcionario.addLocacao(l);
