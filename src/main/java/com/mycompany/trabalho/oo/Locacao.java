@@ -97,9 +97,13 @@ public class Locacao {
         c2.setTime(dataFim);
         
         //da a data exata do ano 
-        data_inicio = c.get(Calendar.MONTH)*30 + c.get(Calendar.DAY_OF_MONTH);
-        data_fim = c2.get(Calendar.MONTH)*30 + c2.get(Calendar.DAY_OF_MONTH);
-        dias_totais = data_fim - data_inicio;
+        data_inicio = c.get(Calendar.DAY_OF_YEAR);
+        data_fim = c2.get(Calendar.DAY_OF_YEAR);
+
+        if(c.get(Calendar.YEAR) != c2.get(Calendar.YEAR))
+            dias_totais = (365-data_inicio) + data_fim;
+            else 
+                dias_totais = data_fim - data_inicio;
         
         valor = carro_alugado.getPreco_diaria() * (double)dias_totais;
         

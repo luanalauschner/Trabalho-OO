@@ -107,7 +107,10 @@ public class Cliente extends Pessoa{
         data_atual = c.get(Calendar.DAY_OF_YEAR);
         data_final = c2.get(Calendar.DAY_OF_YEAR);
         
-        dias_taxa = data_final - data_atual;
+        if(c.get(Calendar.YEAR) != c2.get(Calendar.YEAR))
+            dias_taxa = (data_final + 365) - data_atual;
+            else
+                dias_taxa = data_final - data_atual;
         
         //o valor da taxa é colocado no crédito do cliente, o qual fica negativado e para realizar uma nova locação 
         //ele precisa realizar o pagamento. 

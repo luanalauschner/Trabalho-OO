@@ -8,6 +8,8 @@ package com.mycompany.trabalho.oo;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
+import java.util.HashMap;
 /**
  *
  * @author Lana S. Silva
@@ -105,6 +107,22 @@ public class Funcionario extends Pessoa {
         
         return catalogo;
     }
+
+    /*public Map<Filial,Carro> pesquisaCarros(Object exigencia){
+        Map<Filial,Carro> catalogo = new HashMap();
+        List<Filial> filais = Administrador.getFiliais();
+        List<Carro> carros = null;
+
+        for(Filial f: filais){
+            carros = f.getCarrosDisponiveis();
+            for(Carro c : carros) {
+                if(c.confereCarro(exigencia)){
+                    
+                }
+            }
+        }
+        return catalogo;
+    }*/
     
     //realiza o contrato de locacao de um carro dado a disponibilidade do mesmo e o crédito positivo
     //do cliente.
