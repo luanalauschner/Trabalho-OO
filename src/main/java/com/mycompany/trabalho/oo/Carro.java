@@ -100,12 +100,21 @@ public class Carro {
         aux_ano = String.valueOf(ano);
         aux_preco = String.valueOf(preco_diaria);
 
-        try {
+        /*try {
             aux_exigencia = (String) c;
             aux_exigencia = aux_exigencia.toUpperCase();
         } catch (ClassCastException e) {
             aux_exigencia = String.valueOf(c);
         }
+        */
+
+        if(c instanceof String){
+            aux_exigencia = (String) c;
+            aux_exigencia = aux_exigencia.toUpperCase();
+        }else{
+            aux_exigencia = String.valueOf(c);
+        }
+
         
         if(aux_exigencia.equals(aux_ano))
             return true;
