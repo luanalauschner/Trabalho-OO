@@ -15,10 +15,10 @@ public class Pessoa {
     private String telefone;
     private String cpf;
 
-    public Pessoa(String nome, String telefone, String cpf) throws CpfException, TelefoneException {
+    public Pessoa(String nome, String telefone, String cpf){
         this.nome = nome;
-        validarTelefone(telefone);
-        validarCpf(cpf);
+        this.cpf = cpf;
+        this.telefone = telefone;
     }
 
     public String getNome() {
@@ -54,7 +54,7 @@ public class Pessoa {
              (aux[6].length() == 0 || aux[6].length() != 2))
             throw new CpfException();
             else 
-                setCpf(c);
+                this.setCpf(c);
 
         return true;
     }
@@ -66,7 +66,7 @@ public class Pessoa {
                 (aux[3].length() != 4 || aux[3].length()!=5) && !aux[4].equals('-') && aux[5].length() != 4)
             throw new TelefoneException();
         else
-            setTelefone(tel);
+            this.setTelefone(tel);
 
         return true;
     }

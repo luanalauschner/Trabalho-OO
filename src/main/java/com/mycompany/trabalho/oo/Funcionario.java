@@ -22,7 +22,7 @@ public class Funcionario extends Pessoa {
     private int salario;
     private static List<Locacao> locacoes;
 
-    public Funcionario(int id, String cargo, int salario, List<Locacao> locacoes, String nome, String telefone, String cpf) throws CpfException, TelefoneException {
+    public Funcionario(int id, String cargo, int salario, List<Locacao> locacoes, String nome, String telefone, String cpf){
         super(nome, telefone, cpf);
         this.id = id;
         this.cargo = cargo;

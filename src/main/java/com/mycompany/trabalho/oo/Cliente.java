@@ -21,7 +21,7 @@ public class Cliente extends Pessoa{
     private List<Reserva> reservas;
     private double credito;
 
-    public Cliente(int id, String habilitacao, List<Locacao> locacoes, List<Reserva> reservas, double credito, String nome, String telefone, String cpf) throws CpfException, TelefoneException {
+    public Cliente(int id, String habilitacao, List<Locacao> locacoes, List<Reserva> reservas, double credito, String nome, String telefone, String cpf){
         super(nome, telefone, cpf);
         this.id = id;
         this.habilitacao = habilitacao;
