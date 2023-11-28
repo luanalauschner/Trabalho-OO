@@ -19,10 +19,11 @@ public class Funcionario extends Pessoa {
     
     private int id;
     private String cargo;
-    private int salario;
+    private double salario;
     private static List<Locacao> locacoes;
+    private double comissao;
 
-    public Funcionario(int id, String cargo, int salario, List<Locacao> locacoes, String nome, String telefone, String cpf){
+    public Funcionario(int id, String cargo, double salario, List<Locacao> locacoes, String nome, String telefone, String cpf){
         super(nome, telefone, cpf);
         this.id = id;
         this.cargo = cargo;
@@ -38,7 +39,7 @@ public class Funcionario extends Pessoa {
         return cargo;
     }
 
-    public int getSalario() {
+    public double getSalario() {
         return salario;
     }
 
@@ -54,7 +55,7 @@ public class Funcionario extends Pessoa {
         this.cargo = cargo;
     }
 
-    public void setSalario(int salario) {
+    public void setSalario(double salario) {
         this.salario = salario;
     }
 
@@ -66,8 +67,8 @@ public class Funcionario extends Pessoa {
     //de locacao, sendo independente do cancelamento do mesmo.
     //o funcionário pode ser locador ou gerente, caso seja gerente a comissão é 10% do valor total de cada locacao
     // e caso seja locador a comissao é de 5%.
-    public double calcularComissao(){
-        String aux_cargo = cargo.toLowerCase();
+    /*public double calcularComissao(){
+        String aux_cargo = cargo.toUpperCase();
         double comissao_gerada, porcentagem = 0, comissao_total = 0;
         
         if(aux_cargo.equals("GERENTE"))
@@ -84,11 +85,23 @@ public class Funcionario extends Pessoa {
         
         return comissao_total;
     }
+    */
+
+    public void calcularComissao(Locacao l){
+        String aux_cargo = cargo.toUpperCase();
+        double comissao_gerada, porcentagem = 0;
+        
+        if(aux_cargo.equals("GERENTE"))
+            porcentagem = 0.1;
+        
+        if(aux_cargo.equals("LOCADOR"))
+            porcentagem = 0.05;
+
+        comissao_gerada = porcentagem * l.valorTotalDoContrato();
+        this.comissao += comissao_gerada;
+    }
     
     public double calcularPagamento(){
-        double comissao;
-        comissao = calcularComissao();
-        
         return comissao + salario;
     }
     
@@ -108,22 +121,6 @@ public class Funcionario extends Pessoa {
         
         return catalogo;
     }
-
-    /*public Map<Filial,Carro> pesquisaCarros(Object exigencia){
-        Map<Filial,Carro> catalogo = new HashMap();
-        List<Filial> filais = Administrador.getFiliais();
-        List<Carro> carros = null;
-
-        for(Filial f: filais){
-            carros = f.getCarrosDisponiveis();
-            for(Carro c : carros) {
-                if(c.confereCarro(exigencia)){
-                    
-                }
-            }
-        }
-        return catalogo;
-    }*/
 
     public static int gerarId() {
         

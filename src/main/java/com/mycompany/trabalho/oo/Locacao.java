@@ -76,11 +76,6 @@ public class Locacao {
     public void setCarro_alugado(Carro carro_alugado) {
         this.carro_alugado = carro_alugado;
     }
-    
-    public double valorTotalLocacao(Carro c){
-        
-        return 0;
-    }
 
     public void setLocador(Funcionario locador) {
         this.locador = locador;

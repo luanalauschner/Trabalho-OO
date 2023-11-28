@@ -122,6 +122,7 @@ public class Cliente extends Pessoa{
         }
         
         locacaoFilial(l);
+        l.getLocador().calcularComissao(l);
         Funcionario.removeLocacao(l);
         Administrador.removeLocacao(l);
         locacoes.remove(l);
@@ -238,6 +239,7 @@ public class Cliente extends Pessoa{
     public boolean confirmarTermino(boolean b, Locacao l){
         if(b){
            Administrador.removeLocacao(l);
+           l.getLocador().calcularComissao(l);
            Funcionario.removeLocacao(l);
            locacaoFilial(l);
            //método na classe locação ou filial para disponibilizar o carro quando o contrato encerra
