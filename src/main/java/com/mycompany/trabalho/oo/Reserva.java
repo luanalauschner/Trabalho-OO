@@ -110,10 +110,10 @@ public class Reserva {
         Calendar l2 = Calendar.getInstance();
         l2.setTime(l.getDataFim());
         
-        aux_reservaInicio = c1.get(Calendar.MONTH)*30 + c1.get(Calendar.DAY_OF_MONTH);
-        aux_reservaFim = c2.get(Calendar.MONTH)*30 + c2.get(Calendar.DAY_OF_MONTH);
-        aux_locacaoInicio = l1.get(Calendar.MONTH)*30 + l1.get(Calendar.DAY_OF_MONTH);
-        aux_locacaoFim = l2.get(Calendar.MONTH)*30 + l2.get(Calendar.DAY_OF_MONTH);
+        aux_reservaInicio = c1.get(Calendar.DAY_OF_YEAR);
+        aux_reservaFim = c2.get(Calendar.DAY_OF_YEAR);
+        aux_locacaoInicio = l1.get(Calendar.DAY_OF_YEAR);
+        aux_locacaoFim = l2.get(Calendar.DAY_OF_YEAR);
 
         /*if(carros.isDisponibilidade==true){
             if(r1 > c1 && r1 < c2 || r1 < c1 && r2 > c1 || r1 > c1 && r2 < c2 || r1 < c1 && r2 > c2){

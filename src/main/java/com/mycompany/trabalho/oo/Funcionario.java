@@ -148,7 +148,7 @@ public class Funcionario extends Pessoa {
 
         for(Reserva r : reservas){
             if(r.getCarro().equals(c)){
-                if(r.sobreposicaoReserva(l)){
+                if(!r.sobreposicaoReserva(l)){
                     return true;
                 }
             }
