@@ -23,12 +23,12 @@ public class Funcionario extends Pessoa {
     private static List<Locacao> locacoes;
     private double comissao;
 
-    public Funcionario(int id, String cargo, double salario, List<Locacao> locacoes, String nome, String telefone, String cpf){
+    public Funcionario(int id, String cargo, double salario, String nome, String telefone, String cpf){
         super(nome, telefone, cpf);
         this.id = id;
         this.cargo = cargo;
         this.salario = salario;
-        this.locacoes = locacoes;
+        this.locacoes = new ArrayList();
     }
 
     public int getId() {
@@ -47,9 +47,9 @@ public class Funcionario extends Pessoa {
         return locacoes;
     }
 
-    public void setId(int id) {
+    /*public void setId(int id) {
         this.id = id;
-    }
+    }*/
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
@@ -59,9 +59,9 @@ public class Funcionario extends Pessoa {
         this.salario = salario;
     }
 
-    public void setLocacoes(List<Locacao> locacoes) {
+    /*public void setLocacoes(List<Locacao> locacoes) {
         Funcionario.locacoes = locacoes;
-    }
+    }*/
    
     //calculo da comissao que é adicionada ao salário, a mesma é calculada a partir do valor total do contrato
     //de locacao, sendo independente do cancelamento do mesmo.

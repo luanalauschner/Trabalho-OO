@@ -21,12 +21,12 @@ public class Cliente extends Pessoa{
     private List<Reserva> reservas;
     private double credito;
 
-    public Cliente(int id, String habilitacao, List<Locacao> locacoes, List<Reserva> reservas, double credito, String nome, String telefone, String cpf){
+    public Cliente(int id, String habilitacao, double credito, String nome, String telefone, String cpf){
         super(nome, telefone, cpf);
         this.id = id;
         this.habilitacao = habilitacao;
-        this.locacoes = locacoes;
-        this.reservas = reservas;
+        this.locacoes = new ArrayList();
+        this.reservas = new ArrayList();
         this.credito = credito;
     }
 
