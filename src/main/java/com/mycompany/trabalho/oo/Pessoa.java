@@ -9,7 +9,7 @@ package com.mycompany.trabalho.oo;
  *
  * @author Lana S. Silva
  */
-public class Pessoa {
+public abstract class Pessoa {
     
     private String nome;
     private String telefone;

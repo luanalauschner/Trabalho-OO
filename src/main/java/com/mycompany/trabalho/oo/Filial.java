@@ -17,7 +17,7 @@ public class Filial {
     private int id;
     private String nome;
     private List<Carro> carrosDisponiveis;
-   // private List<Locacao> locacoes;
+    private List<Locacao> locacoes;
     private List<Reserva> reservas;
     private Funcionario gerente;
 
@@ -26,7 +26,7 @@ public class Filial {
         this.id = id;
         this.nome = nome;
         this.carrosDisponiveis = new ArrayList();
-       // this.locacoes = new ArrayList();
+        this.locacoes = new ArrayList();
         this.reservas = new ArrayList();
         this.gerente = gerente;
     }
@@ -47,9 +47,9 @@ public class Filial {
         return carrosDisponiveis;
     }
 
-    /*  public List<Locacao> getLocacoes() {
+    public List<Locacao> getLocacoes() {
         return locacoes;
-    }*/
+    }
 
     public List<Reserva> getReservas() {
         return reservas;
@@ -96,11 +96,11 @@ public class Filial {
             this.carrosDisponiveis.remove(c);
     }
 
-    /*public void removeLocacao(Locacao l){
+    public void removeLocacao(Locacao l){
         locacoes.remove(l);
     }
 
     public void adicionaLocacao(Locacao l){
         locacoes.add(l);
-    }*/
+    }
 }
