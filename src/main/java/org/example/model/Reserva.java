@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.trabalho.oo;
+package org.example.model;
+import org.example.model.Locacao;
+import org.example.model.Carro;
 import java.util.Date;
 import java.util.Calendar;
 

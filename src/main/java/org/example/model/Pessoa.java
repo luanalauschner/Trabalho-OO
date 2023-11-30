@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.trabalho.oo;
+package org.example.model;
 
 import java.util.InputMismatchException;
+import org.example.exception.CpfException;
+import org.example.exception.TelefoneException;
 
 /**
  *
  * @author Lana S. Silva
  */
-public abstract class Pessoa implements Interface {
+public abstract class Pessoa {
     
     private String nome;
     private String telefone;
@@ -23,32 +25,26 @@ public abstract class Pessoa implements Interface {
         this.telefone = telefone;
     }
 
-    @Override
     public String getNome() {
         return nome;
     }
 
-    @Override
     public String getTelefone() {
         return telefone;
     }
 
-    @Override
     public String getCpf() {
         return cpf;
     }
 
-    @Override
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    @Override
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
-    @Override
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }

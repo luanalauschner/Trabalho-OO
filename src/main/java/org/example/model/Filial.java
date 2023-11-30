@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.trabalho.oo;
+package org.example.model;
 
+import org.example.model.Reserva;
+import org.example.model.Locacao;
+import org.example.model.Carro;
+import org.example.model.Funcionario;
 import java.util.List;
 import java.util.ArrayList;
 /**

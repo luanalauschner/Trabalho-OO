@@ -1,4 +1,4 @@
-package com.mycompany.trabalho.oo;
+package org.example.exception;
 
 public class TelefoneException extends Exception{
     public TelefoneException(){

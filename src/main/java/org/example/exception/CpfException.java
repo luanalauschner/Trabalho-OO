@@ -1,4 +1,4 @@
-package com.mycompany.trabalho.oo;
+package org.example.exception;
 
 public class CpfException extends Exception{
     public CpfException(){

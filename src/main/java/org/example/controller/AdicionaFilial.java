@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.example.main;
+package org.example.controller;
 
-public class main {
+/**
+ *
+ * @author Lana S. Silva
+ */
+public class AdicionaFilial {
     
-    public static void main(String args[]){
-        
-    }
 }
