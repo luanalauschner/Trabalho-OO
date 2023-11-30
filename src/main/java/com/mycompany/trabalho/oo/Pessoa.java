@@ -5,11 +5,13 @@
  */
 package com.mycompany.trabalho.oo;
 
+import java.util.InputMismatchException;
+
 /**
  *
  * @author Lana S. Silva
  */
-public abstract class Pessoa {
+public abstract class Pessoa implements Interface {
     
     private String nome;
     private String telefone;
@@ -21,29 +23,45 @@ public abstract class Pessoa {
         this.telefone = telefone;
     }
 
+    @Override
     public String getNome() {
         return nome;
     }
 
+    @Override
     public String getTelefone() {
         return telefone;
     }
 
+    @Override
     public String getCpf() {
         return cpf;
     }
 
+    @Override
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    @Override
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
+    @Override
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+    /*public static boolean confereCaracter(String s){
+        try {
+            valor = teclado.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("");
+        }
+
+        return true;
+    }*/
     
     public static boolean validarCpf(String c) throws CpfException{
         String[] aux = c.split("[\\.-]");
