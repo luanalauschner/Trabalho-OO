@@ -66,9 +66,12 @@ public class Endereco {
     }
     
     public boolean validarCEP(String s) throws CepException{
-        String[] aux = s.split("[-]");
+        String[] aux = s.split("[\\-]");
 
-        if((aux[0].length() == 0 || aux[0].length() != 5) || !aux[1].equals('-') || (aux[0].length() == 0 || aux[0].length() != 3))
+        if(aux.length != 2)
+            throw new CepException();
+
+        if(aux[0].length() != 5 || aux[1].length() != 3)
             throw new CepException();
             else
                 return true;
