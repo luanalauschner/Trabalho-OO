@@ -77,12 +77,6 @@ public class Reserva {
         aux_reserva2Inicio = r1.get(Calendar.MONTH)*30 + r1.get(Calendar.DAY_OF_MONTH);
         aux_reserva2Fim = r2.get(Calendar.MONTH)*30 + r2.get(Calendar.DAY_OF_MONTH);
 
-        /*if(carros.isDisponibilidade==true){
-            if(r1 > c1 && r1 < c2 || r1 < c1 && r2 > c1 || r1 > c1 && r2 < c2 || r1 < c1 && r2 > c2){
-                return true;
-            }
-            return false;
-        }*/
 
         if(aux_reserva2Inicio < aux_reservaInicio && aux_reserva2Fim < aux_reservaInicio)
             return false;
@@ -115,12 +109,6 @@ public class Reserva {
         aux_locacaoInicio = l1.get(Calendar.DAY_OF_YEAR);
         aux_locacaoFim = l2.get(Calendar.DAY_OF_YEAR);
 
-        /*if(carros.isDisponibilidade==true){
-            if(r1 > c1 && r1 < c2 || r1 < c1 && r2 > c1 || r1 > c1 && r2 < c2 || r1 < c1 && r2 > c2){
-                return true;
-            }
-            return false;
-        }*/
 
         if(aux_locacaoInicio < aux_reservaInicio && aux_locacaoFim < aux_reservaInicio)
             return false;
