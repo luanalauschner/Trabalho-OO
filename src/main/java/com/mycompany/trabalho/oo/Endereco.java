@@ -71,8 +71,6 @@ public class Endereco {
         if((aux[0].length() == 0 || aux[0].length() != 5) && !aux[1].equals('-') && (aux[0].length() == 0 || aux[0].length() != 3))
             throw new CepException();
             else
-                setCep(s);
-                
-        return true;
+                return true;
     }
 }
