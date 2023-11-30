@@ -139,7 +139,7 @@ public class Funcionario extends Pessoa {
             return false;
         
         //confere crédito do cliente
-        if(locatario.getCredito() < 0)
+        if(!locatario.getCredito())
             return false;
 
         List<Reserva> reservas = Administrador.getReservas();
@@ -154,7 +154,6 @@ public class Funcionario extends Pessoa {
             }
         }
         
-        //olhar geração de id, fazer no main ou na classe?
         c.setDisponibilidade(false);
         Administrador.adicionaLocacao(l);
         Funcionario.addLocacao(l);
@@ -170,4 +169,11 @@ public class Funcionario extends Pessoa {
     public static void addLocacao(Locacao l){
         locacoes.add(l);
     } 
+
+    //função responsável por validar o crédito do cliente, o funcionário recebe o pagamento para positivar o credito
+    //do cliente e positiva ele no sistema 
+    public static boolean validaCliente(Cliente c){
+        c.validarCredito();
+        return true;
+    }
 }

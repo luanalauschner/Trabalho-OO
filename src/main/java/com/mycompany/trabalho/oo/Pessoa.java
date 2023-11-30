@@ -46,7 +46,7 @@ public abstract class Pessoa {
     }
     
     public static boolean validarCpf(String c) throws CpfException{
-        String[] aux = c.split("\\..-");
+        String[] aux = c.split("..-");
 
         if((aux[0].length() == 0 || aux[0].length() != 3) && !aux[1].equals('.') && 
             (aux[2].length() == 0 || aux[2].length() != 3) && !aux[3].equals('.') &&

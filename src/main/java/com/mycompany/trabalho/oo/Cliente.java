@@ -19,9 +19,9 @@ public class Cliente extends Pessoa{
     private String habilitacao;
     private List<Locacao> locacoes;
     private List<Reserva> reservas;
-    private double credito;
+    private boolean credito;
 
-    public Cliente(int id, String habilitacao, double credito, String nome, String telefone, String cpf){
+    public Cliente(int id, String habilitacao, boolean credito, String nome, String telefone, String cpf){
         super(nome, telefone, cpf);
         this.id = id;
         this.habilitacao = habilitacao;
@@ -46,7 +46,7 @@ public class Cliente extends Pessoa{
         return reservas;
     }
 
-    public double getCredito() {
+    public boolean getCredito() {
         return credito;
     }
 
@@ -58,20 +58,20 @@ public class Cliente extends Pessoa{
         this.habilitacao = habilitacao;
     }
 
-    public void setLocacoes(List<Locacao> locacoes) {
+    /*public void setLocacoes(List<Locacao> locacoes) {
         this.locacoes = locacoes;
-    }
+    }*/
 
     public void setReservas(List<Reserva> reservas) {
         this.reservas = reservas;
     }
 
-    public void setCredito(double credito) {
+    /*public void setCredito(boolean credito) {
         this.credito = credito;
-    }
+    }*/
     
-    public boolean validarCredito(){
-        return true;
+    public void validarCredito(){
+        this.credito = true;
     }
 
     public void locacaoFilial(Locacao l){
@@ -94,7 +94,6 @@ public class Cliente extends Pessoa{
         //O valor da taxa é calculado pelo tanto de dias que procede o fim do contrato, se for cancelado antes de 30
         //dias do fim do contrato, é cobrado uma taxa de 30% sobre o valor total do contrato.
         int data_atual, data_final, dias_taxa;
-        double valor_taxa;
         
         Calendar c = Calendar.getInstance();
         c.setTime(atual);
@@ -112,13 +111,9 @@ public class Cliente extends Pessoa{
             else
                 dias_taxa = data_final - data_atual;
         
-        //o valor da taxa é colocado no crédito do cliente, o qual fica negativado e para realizar uma nova locação 
-        //ele precisa realizar o pagamento. 
+        //o credito do cliente não armazena o valor que ele deve, e sim se ele tá positivado ou negativado 
         if(dias_taxa > 30){
-            valor_taxa = ((double)dias_taxa/100) * l.valorTotalDoContrato();
-            this.credito = valor_taxa * (-1);
-            //retira a locação da lista de locações do funcionario e do administrador.
-            //função na classe locação para disponibilizar o carro quando o contrato encerra
+            this.credito = false;
         }
         
         locacaoFilial(l);
