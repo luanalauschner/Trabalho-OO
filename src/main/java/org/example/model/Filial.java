@@ -107,4 +107,8 @@ public class Filial {
     public void adicionaLocacao(Locacao l){
         locacoes.add(l);
     }
+
+    public String toString(){
+        return String.valueOf(this.id);
+    }
 }

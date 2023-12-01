@@ -117,4 +117,8 @@ public class Locacao {
 
         return false;
     }
+
+    public String toString(){
+        return String.valueOf(this.id);
+    }
 }

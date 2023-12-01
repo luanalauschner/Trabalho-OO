@@ -145,4 +145,7 @@ public class Carro {
                 Objects.equals(modelo, carro.modelo);
     }
     
+    public String toString(){
+        return this.placa;
+    }
 }

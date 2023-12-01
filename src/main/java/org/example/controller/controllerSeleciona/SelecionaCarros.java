@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controllerSeleciona;
 
 import org.example.view.TelaAdministrador;
 
@@ -9,17 +9,17 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author Lana S. Silva
  */
-public class SelecionaFuncionarios implements ListSelectionListener{
+public class SelecionaCarros implements ListSelectionListener{
     
     private final TelaAdministrador tela;
 
-    public SelecionaFuncionarios(TelaAdministrador tela) {
+    public SelecionaCarros(TelaAdministrador tela) {
         this.tela = tela;
     }
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        tela.atualizaPainelDir_Funcionarios();
+        tela.atualizaPainelDir_Carros();
     }
     
 }

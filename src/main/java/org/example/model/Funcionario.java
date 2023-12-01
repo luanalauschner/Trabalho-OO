@@ -178,4 +178,8 @@ public class Funcionario extends Pessoa {
         c.validarCredito();
         return true;
     }
+
+    public String toString(){
+        return this.nome;
+    }
 }

@@ -121,4 +121,8 @@ public class Reserva {
         return true;
 
     }
+
+    public String toString(){
+        return String.valueOf(this.id);
+    }
 }

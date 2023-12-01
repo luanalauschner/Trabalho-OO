@@ -13,6 +13,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
 import javax.swing.event.ListSelectionEvent;
+import java.util.List;
 
 /**
  *
@@ -25,6 +26,13 @@ public class TelaAdministrador {
     private final int HEIGHT = 300;
     private final int V_GAP = 10;
     private final int H_GAP = 5;
+
+    private JList<Cliente> jlClientes;
+    private JList<Carro> jlCarro;
+    private JList<Locacao> jlLocacao;
+    private JList<Filial> jlFilial;
+    private JList<Funcionario> jlFunc;
+    private JList<Reserva> jlReserva;
     
     private JMenuBar menuBarra;
     private JMenu menuCadastra;
@@ -43,6 +51,7 @@ public class TelaAdministrador {
         tela_adm.setLayout(new BorderLayout());
         
         inicializaComponentes();
+        desenhaSplitPanel();
         
         tela_adm.pack();
     }
@@ -96,6 +105,7 @@ public class TelaAdministrador {
     public void liberaMenu(){
         menuCadastra.setEnabled(true);
         menuConsulta.setEnabled(true);
+        menuBarra.setVisible(true);
     }
     
     public void desenhaSplitPanel(){
@@ -117,33 +127,56 @@ public class TelaAdministrador {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
-                    if("CLIENTE".equals(lista.getSelectedValue().toUpperCase()))
-                        new SelecionaClientes(this);
+                    if("CLIENTE".equals(lista.getSelectedValue().toUpperCase())){
+                        DefaultListModel<Cliente> model = new DefaultListModel<>();
+                        jlClientes =  new JList<>(model);
+                        painel_dir.add(new JScrollPane(jlClientes), BorderLayout.LEFT);
+                        painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Clientes"));
+                    }
                     
-                    if("CARROS".equals(lista.getSelectedValue().toUpperCase()))
-                        new SelecionaCarros(this);
+                    if("CARROS".equals(lista.getSelectedValue().toUpperCase())){
+                        DefaultListModel<Carro> model = new DefaultListModel<>();
+                        jlCarro =  new JList<>(model);
+                        painel_dir.add(new JScrollPane(jlCarro), BorderLayout.LEFT);
+                        painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Carros"));
+                    }
                     
-                    if("FUNCIONÁRIOS".equals(lista.getSelectedValue().toUpperCase()))
-                        new SelecionaFuncionarios(this);
+                    if("FUNCIONÁRIOS".equals(lista.getSelectedValue().toUpperCase())){
+                        DefaultListModel<Funcionario> model = new DefaultListModel<>();
+                        jlFunc =  new JList<>(model);
+                        painel_dir.add(new JScrollPane(jlFunc), BorderLayout.LEFT);
+                        painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Funcionários"));
+                    }
                     
-                    if("FILIAIS".equals(lista.getSelectedValue().toUpperCase()))
-                        new SelecionaFiliais(this);
+                    if("FILIAIS".equals(lista.getSelectedValue().toUpperCase())){
+                        DefaultListModel<Filial> model = new DefaultListModel<>();
+                        jlFilial =  new JList<>(model);
+                        painel_dir.add(new JScrollPane(jlFilial), BorderLayout.LEFT);
+                        painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Filiais"));
+                    }
                     
-                    if("LOCAÇÕES".equals(lista.getSelectedValue().toUpperCase()))
-                        new SelecionaLocacoes(this);
+                    if("LOCAÇÕES".equals(lista.getSelectedValue().toUpperCase())){
+                        DefaultListModel<Locacao> model = new DefaultListModel<>();
+                        jlLocacao =  new JList<>(model);
+                        painel_dir.add(new JScrollPane(jlLocacao), BorderLayout.LEFT);
+                        painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Locações"));
+                    }
                     
-                    if("RESERVAS".equals(lista.getSelectedValue().toUpperCase()))
-                        new SelecionaReservas(this);
+                    if("RESERVAS".equals(lista.getSelectedValue().toUpperCase())){
+                        DefaultListModel<Reserva> model = new DefaultListModel<>();
+                        jlReserva =  new JList<>(model);
+                        painel_dir.add(new JScrollPane(jlReserva), BorderLayout.LEFT);
+                        painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Reservas"));
+                    }
                 }
             }
         });
         
         JScrollPane scroll= new JScrollPane (lista);
-        painel_esq.add(scroll); //adiciona a lista co rolamento ao painel esquerda
+        painel_esq.add(scroll, BorderLayout.LEFT); //adiciona a lista co rolamento ao painel esquerda
         
         //criação da borda dos paineis que vão compor o SplitPane
         painel_esq.setBorder(BorderFactory.createTitledBorder("Listagem"));
-        painel_dir.setBorder(BorderFactory.createTitledBorder(""));
         
         //definição do tamanho dos paineis
         //painel_dir.setPreferredSize(new Dimension(WIDTH/2, HEIGHT));
@@ -154,13 +187,44 @@ public class TelaAdministrador {
         JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, painel_esq, painel_dir);
         
         sp.setDividerLocation(250); //confira o local inicial da divisão
-        //tela_adm.add(sp); //adiciona o splitPane ao JFrame
+        tela_adm.add(sp); //adiciona o splitPane ao JFrame
         
         
     }
     
-    public void atualizaPainelDir_Clientes(){
-        
+    public List<Contato> atualizaPainelDir_Clientes(){
+        /*
+        public List<Contato> listaContatos(){
+        DefaultListModel<Contato> model = (DefaultListModel<Contato>)jlContatos.getModel();
+        List<Contato> contatos = new ArrayList<>();
+
+        for (int i = 0; i < model.size(); i++) {
+            contatos.add(model.get(i));
+        }
+
+        return contatos;
+    }
+        */
+
+       /*
+       private void desenhaLista(){
+
+        JPanel painel = new JPanel();
+        painel.setBorder(BorderFactory.createTitledBorder("Contatos"));
+        painel.setPreferredSize(new Dimension(WIDTH/3, HEIGHT));
+        painel.setLayout(new BorderLayout());
+
+        DefaultListModel<Contato> model = new DefaultListModel<>();
+
+
+        jlContatos = new JList<>(model);
+        jlContatos.addListSelectionListener(new SelecionarContato(this));
+
+        painel.add(new JScrollPane(jlContatos), BorderLayout.CENTER);
+
+        tela.getContentPane().add(painel, BorderLayout.WEST);
+    }
+       */
         
     }
     

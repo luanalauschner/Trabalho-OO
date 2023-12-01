@@ -246,4 +246,8 @@ public class Cliente extends Pessoa{
 
         return true;
     }
+
+    public String toString(){
+        return this.nome;
+    }
 }
