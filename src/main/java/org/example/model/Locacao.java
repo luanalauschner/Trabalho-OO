@@ -118,6 +118,7 @@ public class Locacao {
         return false;
     }
 
+    @Override
     public String toString(){
         return String.valueOf(this.id);
     }

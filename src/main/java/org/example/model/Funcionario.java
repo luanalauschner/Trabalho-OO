@@ -179,7 +179,8 @@ public class Funcionario extends Pessoa {
         return true;
     }
 
-    public String toString(){
-        return this.nome;
+    @Override
+    public String toString() {
+        return this.getNome();
     }
 }
