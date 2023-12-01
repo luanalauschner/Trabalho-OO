@@ -1,4 +1,4 @@
-package org.example.controllerSeleciona;
+package org.example.controller.controllerSeleciona;
 
 import org.example.view.TelaAdministrador;
 
@@ -19,7 +19,7 @@ public class SelecionaClientes implements ListSelectionListener{
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        tela.atualizaPainelDir_Clientes();
+        //tela.atualizaPainelDir_Clientes();
     }
     
 }

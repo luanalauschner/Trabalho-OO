@@ -1,4 +1,4 @@
-package org.example.controllerSeleciona;
+package org.example.controller.controllerSeleciona;
 
 import org.example.view.TelaAdministrador;
 
