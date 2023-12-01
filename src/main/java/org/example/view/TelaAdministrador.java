@@ -130,42 +130,42 @@ public class TelaAdministrador {
                     if("CLIENTE".equals(lista.getSelectedValue().toUpperCase())){
                         DefaultListModel<Cliente> model = new DefaultListModel<>();
                         jlClientes =  new JList<>(model);
-                        painel_dir.add(new JScrollPane(jlClientes), BorderLayout.LEFT);
+                        painel_dir.add(new JScrollPane(jlClientes));
                         painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Clientes"));
                     }
                     
                     if("CARROS".equals(lista.getSelectedValue().toUpperCase())){
                         DefaultListModel<Carro> model = new DefaultListModel<>();
                         jlCarro =  new JList<>(model);
-                        painel_dir.add(new JScrollPane(jlCarro), BorderLayout.LEFT);
+                        painel_dir.add(new JScrollPane(jlCarro));
                         painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Carros"));
                     }
                     
                     if("FUNCIONÁRIOS".equals(lista.getSelectedValue().toUpperCase())){
                         DefaultListModel<Funcionario> model = new DefaultListModel<>();
                         jlFunc =  new JList<>(model);
-                        painel_dir.add(new JScrollPane(jlFunc), BorderLayout.LEFT);
+                        painel_dir.add(new JScrollPane(jlFunc));
                         painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Funcionários"));
                     }
                     
                     if("FILIAIS".equals(lista.getSelectedValue().toUpperCase())){
                         DefaultListModel<Filial> model = new DefaultListModel<>();
                         jlFilial =  new JList<>(model);
-                        painel_dir.add(new JScrollPane(jlFilial), BorderLayout.LEFT);
+                        painel_dir.add(new JScrollPane(jlFilial));
                         painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Filiais"));
                     }
                     
                     if("LOCAÇÕES".equals(lista.getSelectedValue().toUpperCase())){
                         DefaultListModel<Locacao> model = new DefaultListModel<>();
                         jlLocacao =  new JList<>(model);
-                        painel_dir.add(new JScrollPane(jlLocacao), BorderLayout.LEFT);
+                        painel_dir.add(new JScrollPane(jlLocacao));
                         painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Locações"));
                     }
                     
                     if("RESERVAS".equals(lista.getSelectedValue().toUpperCase())){
                         DefaultListModel<Reserva> model = new DefaultListModel<>();
                         jlReserva =  new JList<>(model);
-                        painel_dir.add(new JScrollPane(jlReserva), BorderLayout.LEFT);
+                        painel_dir.add(new JScrollPane(jlReserva));
                         painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Reservas"));
                     }
                 }
@@ -173,7 +173,7 @@ public class TelaAdministrador {
         });
         
         JScrollPane scroll= new JScrollPane (lista);
-        painel_esq.add(scroll, BorderLayout.LEFT); //adiciona a lista co rolamento ao painel esquerda
+        painel_esq.add(scroll); //adiciona a lista co rolamento ao painel esquerda
         
         //criação da borda dos paineis que vão compor o SplitPane
         painel_esq.setBorder(BorderFactory.createTitledBorder("Listagem"));
@@ -192,7 +192,9 @@ public class TelaAdministrador {
         
     }
     
-    public List<Contato> atualizaPainelDir_Clientes(){
+    public void atualizaPainelDir_Clientes(){
+
+
         /*
         public List<Contato> listaContatos(){
         DefaultListModel<Contato> model = (DefaultListModel<Contato>)jlContatos.getModel();

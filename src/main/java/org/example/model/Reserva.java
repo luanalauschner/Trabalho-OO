@@ -14,6 +14,7 @@ import java.util.Calendar;
  * @author Lana S. Silva
  */
 public class Reserva {
+    private int id;
     private Locacao locacao;
     private Carro carro;
     private Date dataInicio;
@@ -122,6 +123,7 @@ public class Reserva {
 
     }
 
+    @Override
     public String toString(){
         return String.valueOf(this.id);
     }
