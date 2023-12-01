@@ -10,9 +10,7 @@ import org.example.model.Pessoa;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
 import java.util.Random;
-import java.util.HashMap;
 /**
  *
  * @author Lana S. Silva
@@ -30,7 +28,7 @@ public class Funcionario extends Pessoa {
         this.id = id;
         this.cargo = cargo;
         this.salario = salario;
-        this.locacoes = new ArrayList();
+        Funcionario.locacoes = new ArrayList<>();
     }
 
     public int getId() {

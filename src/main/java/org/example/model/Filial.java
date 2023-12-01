@@ -29,9 +29,9 @@ public class Filial {
         this.endereco = endereco;
         this.id = id;
         this.nome = nome;
-        this.carrosDisponiveis = new ArrayList();
-        this.locacoes = new ArrayList();
-        this.reservas = new ArrayList();
+        this.carrosDisponiveis = new ArrayList<>();
+        this.locacoes = new ArrayList<>();
+        this.reservas = new ArrayList<>();
         this.gerente = gerente;
     }
 
