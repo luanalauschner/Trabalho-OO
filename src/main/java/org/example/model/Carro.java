@@ -145,6 +145,8 @@ public class Carro {
                 Objects.equals(modelo, carro.modelo);
     }
     
+    @Override
+    
     public String toString(){
         return this.placa;
     }

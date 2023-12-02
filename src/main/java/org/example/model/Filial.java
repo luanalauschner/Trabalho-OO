@@ -11,6 +11,7 @@ import org.example.model.Carro;
 import org.example.model.Funcionario;
 import java.util.List;
 import java.util.ArrayList;
+
 /**
  *
  * @author Lana S. Silva
@@ -107,6 +108,8 @@ public class Filial {
     public void adicionaLocacao(Locacao l){
         locacoes.add(l);
     }
+
+    @Override
 
     public String toString(){
         return String.valueOf(this.id);
