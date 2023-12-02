@@ -26,8 +26,8 @@ public class Cliente extends Pessoa{
         super(nome, telefone, cpf);
         this.id = id;
         this.habilitacao = habilitacao;
-        this.locacoes = new ArrayList();
-        this.reservas = new ArrayList();
+        this.locacoes = new ArrayList<>();
+        this.reservas = new ArrayList<>();
         this.credito = credito;
     }
 
