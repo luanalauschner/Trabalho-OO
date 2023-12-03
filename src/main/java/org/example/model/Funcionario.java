@@ -21,6 +21,7 @@ public class Funcionario extends Pessoa {
     private String cargo;
     private double salario;
     private static List<Locacao> locacoes;
+    private static List<Reserva> reservas;
     private double comissao;
 
     public Funcionario(String cargo, double salario, String nome, String telefone, String cpf){
@@ -29,6 +30,7 @@ public class Funcionario extends Pessoa {
         this.cargo = cargo;
         this.salario = salario;
         Funcionario.locacoes = new ArrayList<>();
+        Funcionario.reservas = new ArrayList<>();
     }
 
     public int getId() {
@@ -45,6 +47,10 @@ public class Funcionario extends Pessoa {
 
     public List<Locacao> getLocacoes() {
         return locacoes;
+    }
+
+    public List<Reserva> getReservas(){
+        return reservas;
     }
 
     /*public void setId(int id) {
@@ -168,6 +174,45 @@ public class Funcionario extends Pessoa {
     
     public static void addLocacao(Locacao l){
         locacoes.add(l);
+    } 
+
+    //realiza a reserva de um carro dado a disponibilidade do mesmo e o crédito positiva do cliente.
+    public boolean novaReserva(Cliente locatario, Carro c, Date inicio, Date fim, Filial f){
+        int id;
+        //confere disponibilidade do carro
+        if(!c.isDisponibilidade())
+            return false;
+        
+        //confere crédito do cliente
+        if(!locatario.getCredito())
+            return false;
+
+        List<Reserva> reservas = Administrador.getReservas();
+        id = gerarId();
+        Reserva r = new Reserva( c, locatario, inicio, fim);
+
+        for(Reserva r1 : reservas){
+            if(r1.getCarro().equals(c)){
+                if(!r1.sobreposicaoReserva(r1)){
+                    return true;
+                }
+            }
+        }
+        
+        c.setDisponibilidade(false);
+        Administrador.adicionaReserva(r);
+        Funcionario.addReserva(r);
+        f.atualizacaoCarros(c, false);
+        
+        return true;
+    }
+
+    public static void removeReserva(Reserva r){
+        reservas.remove(r);
+    }
+    
+    public static void addReserva(Reserva r){
+        reservas.add(r);
     } 
 
     //função responsável por validar o crédito do cliente, o funcionário recebe o pagamento para positivar o credito

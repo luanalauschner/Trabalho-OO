@@ -7,6 +7,7 @@ package org.example.model;
 import org.example.model.Locacao;
 import org.example.model.Carro;
 import java.util.Date;
+import java.util.Random;
 import java.util.Calendar;
 
 /**
@@ -15,19 +16,17 @@ import java.util.Calendar;
  */
 public class Reserva {
     private int id;
-    private Locacao locacao;
     private Carro carro;
+    private Cliente locatorio;
     private Date dataInicio;
     private Date dataFim;
 
-    public Reserva (Locacao locacao, Carro carro, Date dataInicio, Date dataFim){
-        this.locacao = locacao;
+    public Reserva (Carro carro, Cliente c, Date dataInicio, Date dataFim){
+        this.id = gerarId();
         this.carro = carro;
+        this.locatorio = c;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
-    }
-    public void setLocacao (Locacao locacao){
-        this.locacao = locacao;
     }
 
     public void setCarro (Carro carro){
@@ -42,12 +41,16 @@ public class Reserva {
         this.dataFim = dataFim;
     }
 
-    public Locacao getLocacao(){
-        return locacao;
+    public void setCliente(Cliente c){
+        this.locatorio = c;
     }
 
     public Carro getCarro(){
         return carro;
+    }
+
+    public Cliente getCliente(){
+        return locatorio;
     }
 
     public Date getDataInicio(){
@@ -126,5 +129,13 @@ public class Reserva {
     @Override
     public String toString(){
         return String.valueOf(this.id);
+    }
+
+    public static int gerarId() {
+        
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(1000);
+
+        return numeroAleatorio;
     }
 }
