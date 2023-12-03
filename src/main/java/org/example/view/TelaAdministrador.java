@@ -12,7 +12,6 @@ import org.example.model.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
-import javax.swing.event.ListSelectionEvent;
 import java.util.List;
 
 /**
@@ -70,6 +69,9 @@ public class TelaAdministrador {
         miCadastraCarro = new JMenuItem("Cadastra Carro");
         miCadastraFunc = new JMenuItem("Cadastra Funcionário");
         miCadastraFilial = new JMenuItem("Cadastra Filial");
+
+        //definindo a função do addActionListener para os menu itens do menu cadastro
+
         
         //inicializando os itens do menu consulta ou listagem
         miConsultaCliente = new JMenuItem("Lista Clientes");
@@ -188,8 +190,7 @@ public class TelaAdministrador {
         
         sp.setDividerLocation(250); //confira o local inicial da divisão
         tela_adm.add(sp); //adiciona o splitPane ao JFrame
-        
-        
+    
     }
     
     public void atualizaPainelDir_Clientes(){
@@ -250,7 +251,19 @@ public class TelaAdministrador {
         
     }
     
-    public void itemSelecionado(ListSelectionEvent e){
-        
+    public void cadastraCliente(){
+
+    }
+
+    public void cadastraCarro(){
+
+    }
+
+    public void cadastraFunc(){
+
+    }
+
+    public void cadastraFilial(){
+
     }
 }
