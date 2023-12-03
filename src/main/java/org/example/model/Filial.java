@@ -11,41 +11,31 @@ import org.example.model.Carro;
 import org.example.model.Funcionario;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
  * @author Lana S. Silva
  */
-public class Filial {
-    
-    private Endereco endereco;
+public class Filial extends Endereco{
+
     private int id;
-    private String nome;
     private List<Carro> carrosDisponiveis;
     private List<Locacao> locacoes;
     private List<Reserva> reservas;
     private Funcionario gerente;
 
-    public Filial(Endereco endereco, int id, String nome, List<Carro> carrosDisponiveis, Funcionario gerente) {
-        this.endereco = endereco;
-        this.id = id;
-        this.nome = nome;
+    public Filial(Funcionario gerente, String logadouro, int numero, String cidade, String estado, String cep) {
+        super(logadouro, numero, cidade, estado, cep);
+        this.id = gerarId();
         this.carrosDisponiveis = new ArrayList<>();
         this.locacoes = new ArrayList<>();
         this.reservas = new ArrayList<>();
         this.gerente = gerente;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
     public int getId() {
         return id;
-    }
-
-    public String getNome() {
-        return nome;
     }
 
     public List<Carro> getCarrosDisponiveis() {
@@ -64,16 +54,8 @@ public class Filial {
         return gerente;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public void setCarrosDisponiveis(List<Carro> carrosDisponiveis) {
@@ -113,5 +95,13 @@ public class Filial {
 
     public String toString(){
         return String.valueOf(this.id);
+    }
+
+    public static int gerarId() {
+        
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(1000);
+
+        return numeroAleatorio;
     }
 }

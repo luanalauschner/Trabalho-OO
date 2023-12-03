@@ -67,6 +67,12 @@ public class TelaAdministrador {
     //inicialização dos textFields do carro
     private JTextField tfMarca, tfCor, tfAno, tfPlaca, tfPrecoDiaria, tfModelo;
 
+    //inicialização dos textFields da filial
+    private JTextField tfLogadouro, tfCidade, tfEstado, tfCep, tfNumero;
+    
+    //inicialização do combo box para seleção do gerente
+    private JComboBox jcGerentes;
+
     //inicialização do combo box para seleção do cargo do funcionário
     private JComboBox jcLista_cargos;
     
