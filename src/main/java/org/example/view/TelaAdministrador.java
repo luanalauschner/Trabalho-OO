@@ -13,7 +13,7 @@ import org.example.controller.controllerAdiciona.AdicionaFilial;
 import org.example.controller.controllerAdiciona.AdicionaFuncionario;
 
 //importação do package exception
-import org.example.exception.*;
+import org.example.exception.FormatoException;
 
 import org.example.model.*;
 
@@ -307,18 +307,12 @@ public class TelaAdministrador {
     }
     
     public void cadastraCliente(){
-        /*
-        public void addContato(){
-
-        DefaultListModel<Contato> model = (DefaultListModel<Contato>)jlContatos.getModel();
-        try {
-            model.addElement(new Contato(tfNome.getText(), tfTelefone.getText(), new Email(tfEmail.getText()), tfDescricao.getText()));
-        } catch (EmailException e) {
-            JOptionPane.showMessageDialog(tela, "O email " +tfEmail.getText() +" é invalido!");
+        DefaultListModel<Cliente> model = (DefaultListModel<Cliente>)jlClientes.getModel();
+        try{
+            model.addElement(new Cliente(tfHabilitacao_Cliente.getText(), true, tfNome_Cliente.getText(), tfTelefone_Cliente.getText(), tfCpf_Cliente.getText()));
+        }catch (FormatoException e){
+            JOptionPane.showMessageDialog(tela_adm, "O telefone ou o CPf apresenta um formato inválido!");
         }
-
-    }
-        */
     }
 
     public void cadastraCarro(){

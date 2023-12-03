@@ -7,6 +7,7 @@ package org.example.model;
 
 import org.example.model.Pessoa;
 import java.util.List;
+import java.util.Random;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
@@ -22,9 +23,9 @@ public class Cliente extends Pessoa{
     private List<Reserva> reservas;
     private boolean credito;
 
-    public Cliente(int id, String habilitacao, boolean credito, String nome, String telefone, String cpf){
+    public Cliente(String habilitacao, boolean credito, String nome, String telefone, String cpf){
         super(nome, telefone, cpf);
-        this.id = id;
+        this.id = gerarId();
         this.habilitacao = habilitacao;
         this.locacoes = new ArrayList<>();
         this.reservas = new ArrayList<>();
@@ -51,25 +52,18 @@ public class Cliente extends Pessoa{
         return credito;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setHabilitacao(String habilitacao) {
         this.habilitacao = habilitacao;
     }
 
-    /*public void setLocacoes(List<Locacao> locacoes) {
-        this.locacoes = locacoes;
-    }*/
 
     public void setReservas(List<Reserva> reservas) {
         this.reservas = reservas;
     }
 
-    /*public void setCredito(boolean credito) {
+    public void setCredito(boolean credito) {
         this.credito = credito;
-    }*/
+    }
     
     public void validarCredito(){
         this.credito = true;
@@ -250,5 +244,13 @@ public class Cliente extends Pessoa{
     @Override
     public String toString() {
         return this.getNome();
+    }
+
+    public static int gerarId() {
+        
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(1000);
+
+        return numeroAleatorio;
     }
 }
