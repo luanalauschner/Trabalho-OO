@@ -23,9 +23,9 @@ public class Funcionario extends Pessoa {
     private static List<Locacao> locacoes;
     private double comissao;
 
-    public Funcionario(int id, String cargo, double salario, String nome, String telefone, String cpf){
+    public Funcionario(String cargo, double salario, String nome, String telefone, String cpf){
         super(nome, telefone, cpf);
-        this.id = id;
+        this.id = gerarId();
         this.cargo = cargo;
         this.salario = salario;
         Funcionario.locacoes = new ArrayList<>();

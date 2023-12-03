@@ -15,11 +15,19 @@ import org.example.controller.controllerAdiciona.AdicionaFuncionario;
 //importação do package exception
 import org.example.exception.FormatoException;
 
+//importação do package model
 import org.example.model.*;
 
+//importação da biblioteca utilizada
 import javax.swing.*;
 import javax.swing.event.*;
+
+//importação dos packages do awt utilizados
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
 import java.util.List;
 
 /**
@@ -51,6 +59,9 @@ public class TelaAdministrador {
     private JTextField tfCpf_Cliente, tfCpf_Func;
     private JTextField tfTelefone_Cliente, tfTelefone_Func;
     private JTextField tfHabilitacao_Cliente;
+    private JTextField tfSalario, tfCargo;
+
+    private JComboBox jcLista_cargos;
     
     public void desenha(){
 
@@ -83,10 +94,34 @@ public class TelaAdministrador {
         miCadastraFilial = new JMenuItem("Cadastra Filial");
 
         //definindo a função do addActionListener para os menu itens do menu cadastro
-        miCadastraCliente.addActionListener(new AdicionaCliente(this));
-        miCadastraCarro.addActionListener(new AdicionaCarro(this));
-        miCadastraFunc.addActionListener(new AdicionaFuncionario(this));
-        miCadastraFilial.addActionListener(new AdicionaFilial(this));
+        miCadastraCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                desenhaFormulario_Cliente();
+            }
+        });
+        
+        miCadastraFunc.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                desenhaFormulario_Func();
+            }
+        });
+
+
+        miCadastraCarro.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                desenhaFormulario_carro();
+            }
+        });
+
+        miCadastraFilial.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                desenhaFormulario_filial();
+            }
+        });
 
         
         //inicializando os itens do menu consulta ou listagem
@@ -213,7 +248,7 @@ public class TelaAdministrador {
 
         //criação do painel
         JPanel painel = new JPanel();
-        painel.setBorder(BorderFactory.createTitledBorder("Formulário cliente"));
+        painel.setBorder(BorderFactory.createTitledBorder("Formulário novo cliente"));
 
         //criação do painel que contém o formulário
         JPanel formulario_cliente = new JPanel();
@@ -246,6 +281,60 @@ public class TelaAdministrador {
 
         JButton btnAdicionar = new JButton("Adicionar");
         btnAdicionar.addActionListener(new AdicionaCliente(this));
+
+    }
+
+    public void desenhaFormulario_Func(){
+
+        //criação do painel
+        JPanel painel = new JPanel();
+        painel.setBorder(BorderFactory.createTitledBorder("Formulário novo funcionário"));
+
+        //criação do painel que contém o formulário
+        JPanel formulario_func = new JPanel();
+        JPanel painelLabel = new JPanel();
+        painelLabel.setLayout(new GridLayout(0, 1, H_GAP,V_GAP));
+        painelLabel.add(new JLabel("Nome"));
+        painelLabel.add(new JLabel("CPF"));
+        painelLabel.add(new JLabel("Telefone"));
+        painelLabel.add(new JLabel("Cargo"));
+        painelLabel.add(new JLabel("Salário"));
+
+        //implementação que contém os espaços que o usuário preenche os dados do funcionário
+        JPanel painelField = new JPanel();
+        painelField.setLayout(new GridLayout(0,1, H_GAP,V_GAP));
+        tfNome_Func = new JTextField(20);
+        tfCpf_Func = new JTextField(20);
+        tfTelefone_Func = new JTextField(20);
+        tfSalario = new JTextField(20);
+
+        //inicialização do jComboBox para seleção do cargo
+        String[] list = {"Locador", "Gerente"};
+        jcLista_cargos = new JComboBox(list);
+
+        //inserção do elementos TextField
+        painelField.add(tfNome_Func);
+        painelField.add(tfCpf_Func);
+        painelField.add(tfTelefone_Func);
+        painelField.add(jcLista_cargos);
+        painelField.add(tfSalario);
+
+        formulario_func.add(painelLabel);
+        formulario_func.add(painelField);
+
+        painel.setLayout(new BorderLayout());
+        painel.add(formulario_func, BorderLayout.CENTER);
+
+        JButton btnAdicionar = new JButton("Adicionar");
+        btnAdicionar.addActionListener(new AdicionaFuncionario(this));
+    }
+
+    public void desenhaFormulario_carro(){
+
+    }
+
+    public void desenhaFormulario_filial(){
+
     }
     
     public void atualizaPainelDir_Clientes(){
@@ -310,7 +399,8 @@ public class TelaAdministrador {
         DefaultListModel<Cliente> model = (DefaultListModel<Cliente>)jlClientes.getModel();
         try{
             model.addElement(new Cliente(tfHabilitacao_Cliente.getText(), true, tfNome_Cliente.getText(), tfTelefone_Cliente.getText(), tfCpf_Cliente.getText()));
-        }catch (FormatoException e){
+            JOptionPane.showMessageDialog(tela_adm, "Cliente cadastrado com sucesso!");
+        } catch(FormatoException e){
             JOptionPane.showMessageDialog(tela_adm, "O telefone ou o CPf apresenta um formato inválido!");
         }
     }
@@ -320,7 +410,14 @@ public class TelaAdministrador {
     }
 
     public void cadastraFunc(){
-
+        DefaultListModel<Funcionario> model = (DefaultListModel<Funcionario>)jlFunc.getModel();
+        try{
+            double d = Double.parseDouble(tfSalario.getText());
+            model.addElement(new Funcionario((String) jcLista_cargos.getSelectedItem(), d, tfNome_Func.getText(), tfTelefone_Func.getText(), tfCpf_Func.getText()));
+            JOptionPane.showMessageDialog(tela_adm, "Funcionário cadastrado com sucesso!");
+        } catch(FormatoException e){
+            JOptionPane.showMessageDialog(tela_adm, "O telefone ou o CPf apresenta um formato inválido!");
+        }
     }
 
     public void cadastraFilial(){
