@@ -26,8 +26,7 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -71,10 +70,10 @@ public class TelaAdministrador {
     private JTextField tfLogadouro, tfCidade, tfEstado, tfCep, tfNumero;
     
     //inicialização do combo box para seleção do gerente
-    private JComboBox jcGerentes;
+    private JComboBox<Funcionario> jcGerentes;
 
     //inicialização do combo box para seleção do cargo do funcionário
-    private JComboBox jcLista_cargos;
+    private JComboBox<String> jcLista_cargos;
     
     public void desenha(){
 
@@ -358,7 +357,7 @@ public class TelaAdministrador {
         painelLabel.add(new JLabel("Ano"));
         painelLabel.add(new JLabel("Preço diária"));
 
-        //implementação que contém os espaços que o usuário preenche os dados do cliente
+        //implementação que contém os espaços que o usuário preenche os dados do carro
         JPanel painelField = new JPanel();
         painelField.setLayout(new GridLayout(0,1, H_GAP,V_GAP));
         tfMarca = new JTextField(20);
@@ -385,6 +384,54 @@ public class TelaAdministrador {
     }
 
     public void desenhaFormulario_filial(){
+
+        //criação do painel
+        JPanel painel = new JPanel();
+        painel.setBorder(BorderFactory.createTitledBorder("Formulário nova filial"));
+
+        //criação do painel que contém o formulário
+        JPanel formulario_filial = new JPanel();
+        JPanel painelLabel = new JPanel();
+        painelLabel.setLayout(new GridLayout(0, 1, H_GAP,V_GAP));
+        painelLabel.add(new JLabel("Logadouro"));
+        painelLabel.add(new JLabel("Número"));
+        painelLabel.add(new JLabel("Cidade"));
+        painelLabel.add(new JLabel("Estado"));
+        painelLabel.add(new JLabel("CEP"));
+        painelLabel.add(new JLabel("Gerente"));
+
+        //implementação que contém os espaços que o usuário preenche os dados do cliente
+        JPanel painelField = new JPanel();
+        painelField.setLayout(new GridLayout(0,1, H_GAP,V_GAP));
+        tfLogadouro = new JTextField(20);
+        tfNumero = new JTextField(20);
+        tfCidade = new JTextField(20);
+        tfCep = new JTextField(20);
+        tfEstado = new JTextField(20);
+
+        //implementação do combo box dos funcionários que são gerentes
+        DefaultComboBoxModel<Funcionario> model = new DefaultComboBoxModel<>();
+        for(Funcionario f: Administrador.getFuncionarios()){
+            if(f.getCargo().toUpperCase().equals("GERENTE"))
+                model.addElement(f);
+        }
+
+        jcGerentes = new JComboBox<>(model);
+        
+
+        //inserção dos elementos textField e do combo box
+        painelField.add(tfLogadouro);
+        painelField.add(tfNumero);
+        painelField.add(tfCidade);
+        painelField.add(tfCep);
+        painelField.add(tfEstado);
+        painelField.add(jcGerentes);
+
+        painel.setLayout(new BorderLayout());
+        painel.add(formulario_filial, BorderLayout.CENTER);
+
+        JButton btnAdicionar = new JButton("Adicionar");
+        btnAdicionar.addActionListener(new AdicionaFilial(this));
 
     }
     
@@ -479,6 +526,12 @@ public class TelaAdministrador {
     }
 
     public void cadastraFilial(){
-
+        DefaultListModel<Filial> model = (DefaultListModel<Filial>)jlFilial.getModel();
+        try{
+            model.addElement(new Filial(jcGerentes.getSelectedItem(), tfLogadouro.getText(), tfNumero.getText(), tfCidade.getText(), tfEstado.getText(), tfCep.getText()));
+            JOptionPane.showMessageDialog(tela_adm, "Filial cadastrado com sucesso!");
+        }catch(FormatoException e){
+            JOptionPane.showMessageDialog(tela_adm, "CEP no formato inválido!");
+        }
     }
 }

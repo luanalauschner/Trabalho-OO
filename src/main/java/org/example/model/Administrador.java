@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class Administrador {
     private List <Cliente> clientes;
-    private List <Funcionario> funcionarios;
+    private static List <Funcionario> funcionarios;
     private static List <Carro> carros;
     private static List <Filial> filiais;
     private static List <Locacao> locacoes;
@@ -26,8 +26,8 @@ public class Administrador {
         return clientes;
     }
 
-    public List<Funcionario> getFuncionarios() {
-        return funcionarios;
+    public static List<Funcionario> getFuncionarios() {
+        return Administrador.funcionarios;
     }
 
     public static List<Carro> getCarros() {
