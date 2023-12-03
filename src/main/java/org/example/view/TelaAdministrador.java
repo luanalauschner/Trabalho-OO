@@ -12,7 +12,9 @@ import org.example.controller.controllerAdiciona.AdicionaCarro;
 import org.example.controller.controllerAdiciona.AdicionaFilial;
 import org.example.controller.controllerAdiciona.AdicionaFuncionario;
 
+//importação do package exception
 import org.example.exception.*;
+
 import org.example.model.*;
 
 import javax.swing.*;
@@ -45,6 +47,10 @@ public class TelaAdministrador {
     private JMenuItem miCadastraCliente, miCadastraCarro, miCadastraFunc, miCadastraFilial;
     private JMenuItem miConsultaCliente, miConsultaFunc, miConsultaCarro, miConsultaFilial, miConsultaLocacoes, miConsultaReservas;
     
+    private JTextField tfNome_Cliente, tfNome_Func;
+    private JTextField tfCpf_Cliente, tfCpf_Func;
+    private JTextField tfTelefone_Cliente, tfTelefone_Func;
+    private JTextField tfHabilitacao_Cliente;
     
     public void desenha(){
 
@@ -202,6 +208,45 @@ public class TelaAdministrador {
         tela_adm.add(sp); //adiciona o splitPane ao JFrame
     
     }
+
+    public void desenhaFormulario_Cliente(){
+
+        //criação do painel
+        JPanel painel = new JPanel();
+        painel.setBorder(BorderFactory.createTitledBorder("Formulário cliente"));
+
+        //criação do painel que contém o formulário
+        JPanel formulario_cliente = new JPanel();
+        JPanel painelLabel = new JPanel();
+        painelLabel.setLayout(new GridLayout(0, 1, H_GAP,V_GAP));
+        painelLabel.add(new JLabel("Nome"));
+        painelLabel.add(new JLabel("CPF"));
+        painelLabel.add(new JLabel("Telefone"));
+        painelLabel.add(new JLabel("Habilitação"));
+
+        //implementação que contém os espaços que o usuário preenche os dados do cliente
+        JPanel painelField = new JPanel();
+        painelField.setLayout(new GridLayout(0,1, H_GAP,V_GAP));
+        tfNome_Cliente = new JTextField(20);
+        tfCpf_Cliente = new JTextField(20);
+        tfTelefone_Cliente = new JTextField(20);
+        tfHabilitacao_Cliente = new JTextField(20);
+
+        painelField.add(tfNome_Cliente);
+        painelField.add(tfCpf_Cliente);
+        painelField.add(tfTelefone_Cliente);
+        painelField.add(tfHabilitacao_Cliente);
+
+
+        formulario_cliente.add(painelLabel);
+        formulario_cliente.add(painelField);
+
+        painel.setLayout(new BorderLayout());
+        painel.add(formulario_cliente, BorderLayout.CENTER);
+
+        JButton btnAdicionar = new JButton("Adicionar");
+        btnAdicionar.addActionListener(new AdicionaCliente(this));
+    }
     
     public void atualizaPainelDir_Clientes(){
 
@@ -262,7 +307,18 @@ public class TelaAdministrador {
     }
     
     public void cadastraCliente(){
+        /*
+        public void addContato(){
 
+        DefaultListModel<Contato> model = (DefaultListModel<Contato>)jlContatos.getModel();
+        try {
+            model.addElement(new Contato(tfNome.getText(), tfTelefone.getText(), new Email(tfEmail.getText()), tfDescricao.getText()));
+        } catch (EmailException e) {
+            JOptionPane.showMessageDialog(tela, "O email " +tfEmail.getText() +" é invalido!");
+        }
+
+    }
+        */
     }
 
     public void cadastraCarro(){
