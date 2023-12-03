@@ -5,7 +5,13 @@
  */
 package org.example.view;
 
+//importação do package contorller
 import org.example.controller.*;
+import org.example.controller.controllerAdiciona.AdicionaCliente;
+import org.example.controller.controllerAdiciona.AdicionaCarro;
+import org.example.controller.controllerAdiciona.AdicionaFilial;
+import org.example.controller.controllerAdiciona.AdicionaFuncionario;
+
 import org.example.exception.*;
 import org.example.model.*;
 
@@ -71,6 +77,10 @@ public class TelaAdministrador {
         miCadastraFilial = new JMenuItem("Cadastra Filial");
 
         //definindo a função do addActionListener para os menu itens do menu cadastro
+        miCadastraCliente.addActionListener(new AdicionaCliente(this));
+        miCadastraCarro.addActionListener(new AdicionaCarro(this));
+        miCadastraFunc.addActionListener(new AdicionaFuncionario(this));
+        miCadastraFilial.addActionListener(new AdicionaFilial(this));
 
         
         //inicializando os itens do menu consulta ou listagem
