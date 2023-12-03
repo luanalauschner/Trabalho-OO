@@ -42,6 +42,7 @@ public class TelaAdministrador {
     private final int V_GAP = 10;
     private final int H_GAP = 5;
 
+    //inicialização das listas que vão ser exibidas na tela
     private JList<Cliente> jlClientes;
     private JList<Carro> jlCarro;
     private JList<Locacao> jlLocacao;
@@ -49,18 +50,24 @@ public class TelaAdministrador {
     private JList<Funcionario> jlFunc;
     private JList<Reserva> jlReserva;
     
+    //inicialização do menu
     private JMenuBar menuBarra;
     private JMenu menuCadastra;
     private JMenu menuConsulta;
     private JMenuItem miCadastraCliente, miCadastraCarro, miCadastraFunc, miCadastraFilial;
     private JMenuItem miConsultaCliente, miConsultaFunc, miConsultaCarro, miConsultaFilial, miConsultaLocacoes, miConsultaReservas;
-    
+   
+    //inicialização dos textFields do cliente e do funcionário, utilizados no formulário para o cadastro
     private JTextField tfNome_Cliente, tfNome_Func;
     private JTextField tfCpf_Cliente, tfCpf_Func;
     private JTextField tfTelefone_Cliente, tfTelefone_Func;
     private JTextField tfHabilitacao_Cliente;
-    private JTextField tfSalario, tfCargo;
+    private JTextField tfSalario;
 
+    //inicialização dos textFields do carro
+    private JTextField tfMarca, tfCor, tfAno, tfPlaca, tfPrecoDiaria, tfModelo;
+
+    //inicialização do combo box para seleção do cargo do funcionário
     private JComboBox jcLista_cargos;
     
     public void desenha(){
@@ -331,6 +338,44 @@ public class TelaAdministrador {
 
     public void desenhaFormulario_carro(){
 
+        //criação do painel
+        JPanel painel = new JPanel();
+        painel.setBorder(BorderFactory.createTitledBorder("Formulário novo carro"));
+
+        //criação do painel que contém o formulário
+        JPanel formulario_carro = new JPanel();
+        JPanel painelLabel = new JPanel();
+        painelLabel.setLayout(new GridLayout(0, 1, H_GAP,V_GAP));
+        painelLabel.add(new JLabel("Marca"));
+        painelLabel.add(new JLabel("Modelo"));
+        painelLabel.add(new JLabel("Placa"));
+        painelLabel.add(new JLabel("Ano"));
+        painelLabel.add(new JLabel("Preço diária"));
+
+        //implementação que contém os espaços que o usuário preenche os dados do cliente
+        JPanel painelField = new JPanel();
+        painelField.setLayout(new GridLayout(0,1, H_GAP,V_GAP));
+        tfMarca = new JTextField(20);
+        tfModelo = new JTextField(20);
+        tfAno = new JTextField(20);
+        tfCor = new JTextField(20);
+        tfPlaca = new JTextField(20);
+        tfPrecoDiaria = new JTextField(20);
+
+        //inserção do elementos TextField
+        painelField.add(tfMarca);
+        painelField.add(tfModelo);
+        painelField.add(tfAno);
+        painelField.add(tfCor);
+        painelField.add(tfPlaca);
+        painelField.add(tfPrecoDiaria);
+
+        painel.setLayout(new BorderLayout());
+        painel.add(formulario_carro, BorderLayout.CENTER);
+
+        JButton btnAdicionar = new JButton("Adicionar");
+        btnAdicionar.addActionListener(new AdicionaCarro(this));
+
     }
 
     public void desenhaFormulario_filial(){
@@ -406,6 +451,13 @@ public class TelaAdministrador {
     }
 
     public void cadastraCarro(){
+        DefaultListModel<Carro> model = (DefaultListModel<Carro>)jlCarro.getModel();
+        try{
+            model.addElement(new Carro(Integer.parseInt(tfAno.getText()), tfPlaca.getText(), tfCor.getText(), tfMarca.getText(), tfModelo.getText(), true, Double.parseDouble(tfPrecoDiaria.getText())));
+            JOptionPane.showMessageDialog(tela_adm, "Carro cadastrado com sucesso!");
+        } catch(FormatoException e){
+            JOptionPane.showMessageDialog(tela_adm, "Placa no formato errado");
+        }
 
     }
 
