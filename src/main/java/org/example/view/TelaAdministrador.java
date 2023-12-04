@@ -486,6 +486,26 @@ public class TelaAdministrador {
     }
     
     public void atualizaPainelDir_Carros(){
+
+        int selectedIndex = jlCarro.getSelectedIndex();
+
+        if(selectedIndex != -1){
+            DefaultListModel<Carro> model = (DefaultListModel<Carro>)jlCarro.getModel();
+            Carro carro = model.get(selectedIndex);
+
+            tfMarca.setText(carro.getMarca());
+            tfModelo.setText(carro.getModelo());
+            tfAno.setText(String.valueOf(carro.getAno()));
+            tfPlaca.setText(carro.getPlaca());
+            tfPrecoDiaria.setText(String.valueOf(carro.getPreco_diaria()));
+            
+            painel_dir.add(tfMarca);
+            painel_dir.add(tfModelo);
+            painel_dir.add(tfAno);
+            painel_dir.add(tfPlaca);
+            painel_dir.add(tfPrecoDiaria);
+            
+        }
         
         
     }
