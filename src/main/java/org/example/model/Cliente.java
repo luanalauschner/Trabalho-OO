@@ -11,6 +11,7 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
+import org.example.exception.*;
 /**
  *
  * @author Lana S. Silva
@@ -23,7 +24,8 @@ public class Cliente extends Pessoa{
     private List<Reserva> reservas;
     private boolean credito;
 
-    public Cliente(String habilitacao, boolean credito, String nome, String telefone, String cpf){
+    public Cliente(String habilitacao, boolean credito, String nome, String telefone, String cpf) throws FormatoException
+    {
         super(nome, telefone, cpf);
         this.id = gerarId();
         this.habilitacao = habilitacao;

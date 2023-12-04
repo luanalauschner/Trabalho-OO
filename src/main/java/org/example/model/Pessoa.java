@@ -6,9 +6,7 @@
 package org.example.model;
 
 import java.util.InputMismatchException;
-import org.example.exception.CpfException;
 import org.example.exception.FormatoException;
-import org.example.exception.TelefoneException;
 
 /**
  *
@@ -20,10 +18,10 @@ public abstract class Pessoa {
     private String telefone;
     private String cpf;
 
-    public Pessoa(String nome, String telefone, String cpf){
+    public Pessoa(String nome, String telefone, String cpf) throws FormatoException{
         this.nome = nome;
-        this.cpf = cpf;
-        this.telefone = telefone;
+        this.cpf = validarCpf(cpf);
+        this.telefone = validarTelefone(telefone);
     }
 
     public String getNome() {
@@ -60,7 +58,7 @@ public abstract class Pessoa {
         return true;
     }*/
     
-    public static boolean validarCpf(String c) throws FormatoException{
+    public static String validarCpf(String c) throws FormatoException{
         String[] aux = c.split("[\\.-]");
 
         if(aux.length != 4)
@@ -70,10 +68,10 @@ public abstract class Pessoa {
         if(aux[0].length() != 3 || aux[1].length() != 3 || aux[2].length() != 3 || aux[3].length() != 2)
             throw new FormatoException();
             else 
-                return true;
+                return c;
     }
     
-    public static boolean validarTelefone(String tel) throws FormatoException{
+    public static String validarTelefone(String tel) throws FormatoException{
         String[] aux = tel.split("[\\()-]");
 
         if(aux.length != 3)
@@ -82,6 +80,6 @@ public abstract class Pessoa {
         if(aux[0].length()!=2 ||  (aux[1].length() != 4 || aux[1].length()!=5) || aux[2].length() != 4)
             throw new FormatoException();
         else
-            return true;
+            return tel;
     }
 }

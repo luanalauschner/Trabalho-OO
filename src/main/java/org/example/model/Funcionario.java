@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+import org.example.exception.*;
 /**
  *
  * @author Lana S. Silva
@@ -24,7 +25,7 @@ public class Funcionario extends Pessoa {
     private static List<Reserva> reservas;
     private double comissao;
 
-    public Funcionario(String cargo, double salario, String nome, String telefone, String cpf){
+    public Funcionario(String cargo, double salario, String nome, String telefone, String cpf) throws FormatoException{
         super(nome, telefone, cpf);
         this.id = gerarId();
         this.cargo = cargo;

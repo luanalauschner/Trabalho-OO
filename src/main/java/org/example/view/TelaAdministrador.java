@@ -504,9 +504,8 @@ public class TelaAdministrador {
             painel_dir.add(tfAno);
             painel_dir.add(tfPlaca);
             painel_dir.add(tfPrecoDiaria);
-            
+
         }
-        
         
     }
     
