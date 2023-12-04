@@ -30,6 +30,8 @@ public class Cliente extends Pessoa{
         this.locacoes = new ArrayList<>();
         this.reservas = new ArrayList<>();
         this.credito = credito;
+
+        Administrador.adicionaCliente(this);
     }
 
     public int getId() {
