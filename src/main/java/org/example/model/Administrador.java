@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * @author Lana S. Silva
  */
 public class Administrador {
-    private List <Cliente> clientes;
+    private static List <Cliente> clientes;
     private static List <Funcionario> funcionarios;
     private static List <Carro> carros;
     private static List <Filial> filiais;
@@ -46,7 +46,7 @@ public class Administrador {
         return reservas;
     }
 
-    public void setClientes(List<Cliente> clientes) {
+    /*public void setClientes(List<Cliente> clientes) {
         this.clientes = clientes;
     }
 
@@ -68,7 +68,7 @@ public class Administrador {
 
     public void setReservas(List<Reserva> reservas) {
         Administrador.reservas = reservas;
-    }
+    }*/
     
     public static void removeLocacao(Locacao l){
         locacoes.remove(l);
@@ -85,5 +85,22 @@ public class Administrador {
     public static void adicionaReserva(Reserva r){
         reservas.add(r);
     }
+    
+    public static void adicionaCliente(Cliente c){
+        clientes.add(c);
+    }
+
+    public static void adicionaFuncionario(Funcionario f){
+        funcionarios.add(f);
+    }
+
+    public static void adicionaCarro(Carro c){
+        carros.add(c);
+    }
+
+    public static void adicionaFilial(Filial f){
+        filiais.add(f);
+    }
+
 }
 
