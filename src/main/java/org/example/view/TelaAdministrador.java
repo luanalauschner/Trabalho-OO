@@ -11,7 +11,12 @@ import org.example.controller.controllerAdiciona.AdicionaCliente;
 import org.example.controller.controllerAdiciona.AdicionaCarro;
 import org.example.controller.controllerAdiciona.AdicionaFilial;
 import org.example.controller.controllerAdiciona.AdicionaFuncionario;
-
+import org.example.controller.controllerSeleciona.SelecionaCarros;
+import org.example.controller.controllerSeleciona.SelecionaClientes;
+import org.example.controller.controllerSeleciona.SelecionaFiliais;
+import org.example.controller.controllerSeleciona.SelecionaFuncionarios;
+import org.example.controller.controllerSeleciona.SelecionaLocacoes;
+import org.example.controller.controllerSeleciona.SelecionaReservas;
 //importação do package exception
 import org.example.exception.FormatoException;
 
@@ -75,6 +80,9 @@ public class TelaAdministrador {
 
     //inicialização do combo box para seleção do cargo do funcionário
     private JComboBox<String> jcLista_cargos;
+
+    //definição dos paineis usados no ScrollPanel
+    private JPanel painel_esq, painel_dir;
     
     public void desenha(){
 
@@ -112,8 +120,7 @@ public class TelaAdministrador {
             @Override
             public void actionPerformed(ActionEvent e) {
                 desenha();
-            }
-            
+            } 
         });
 
         //definindo a função do addActionListener para os menu itens do menu cadastro
@@ -154,6 +161,16 @@ public class TelaAdministrador {
         miConsultaFilial = new JMenuItem("Lista Filiais");
         miConsultaLocacoes = new JMenuItem("Lista Locações");
         miConsultaReservas = new JMenuItem("Lista Reservar");
+
+        //definindo a ação do actionListener do menu item do menu consulta ou listagem
+        miConsultaCliente.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+            }
+
+        });
         
         //adicionando os itens ao menu cadastra
         menuCadastra.add(miCadastraCliente);
@@ -187,8 +204,8 @@ public class TelaAdministrador {
     
     public void desenhaSplitPanel(){
         
-        JPanel painel_esq = new JPanel();
-        JPanel painel_dir = new JPanel();
+        painel_esq = new JPanel();
+        painel_dir = new JPanel();
         
         //inicialização da lista do painel esquerda, onde apresenta o que o administrador pode listar
         DefaultListModel<String> modeloLista = new DefaultListModel<>();
@@ -449,43 +466,27 @@ public class TelaAdministrador {
     
     public void atualizaPainelDir_Clientes(){
 
+        int selectedIndex = jlClientes.getSelectedIndex();
 
-        /*
-        public List<Contato> listaContatos(){
-        DefaultListModel<Contato> model = (DefaultListModel<Contato>)jlContatos.getModel();
-        List<Contato> contatos = new ArrayList<>();
+        if(selectedIndex != -1){
+            DefaultListModel<Cliente> model = (DefaultListModel<Cliente>)jlClientes.getModel();
+            Cliente cliente = model.get(selectedIndex);
 
-        for (int i = 0; i < model.size(); i++) {
-            contatos.add(model.get(i));
+            tfNome_Cliente.setText(cliente.getNome());
+            tfCpf_Cliente.setText(cliente.getCpf());
+            tfTelefone_Cliente.setText(cliente.getTelefone());
+            tfHabilitacao_Cliente.setText(cliente.getHabilitacao());
+
+            painel_dir.add(tfNome_Cliente);
+            painel_dir.add(tfCpf_Cliente);
+            painel_dir.add(tfTelefone_Cliente);
+            painel_dir.add(tfHabilitacao_Cliente);
         }
-
-        return contatos;
-    }
-        */
-
-       /*
-       private void desenhaLista(){
-
-        JPanel painel = new JPanel();
-        painel.setBorder(BorderFactory.createTitledBorder("Contatos"));
-        painel.setPreferredSize(new Dimension(WIDTH/3, HEIGHT));
-        painel.setLayout(new BorderLayout());
-
-        DefaultListModel<Contato> model = new DefaultListModel<>();
-
-
-        jlContatos = new JList<>(model);
-        jlContatos.addListSelectionListener(new SelecionarContato(this));
-
-        painel.add(new JScrollPane(jlContatos), BorderLayout.CENTER);
-
-        tela.getContentPane().add(painel, BorderLayout.WEST);
-    }
-       */
         
     }
     
     public void atualizaPainelDir_Carros(){
+        
         
     }
     
@@ -545,5 +546,135 @@ public class TelaAdministrador {
         }catch(FormatoException e){
             JOptionPane.showMessageDialog(tela_adm, "CEP no formato inválido!");
         }
+    }
+
+    public void desenhaListaClientes(){
+
+        painel_esq = new JPanel();
+        painel_dir = new JPanel();
+        
+        DefaultListModel<Cliente> model = (DefaultListModel<Cliente>)jlClientes.getModel();
+        JList<Cliente> modelList = new JList<>(model);
+
+        modelList.addListSelectionListener(new SelecionaClientes(this));
+
+        painel_esq.add(new JScrollPane(modelList)); //adiciona a lista co rolamento ao painel esquerda
+        
+        //criação da borda dos paineis que vão compor o SplitPane
+        painel_esq.setBorder(BorderFactory.createTitledBorder("Listagem de clientes"));
+        
+        //inicialização do splitPane
+        JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, painel_esq, painel_dir);
+        
+        sp.setDividerLocation(250); //confira o local inicial da divisão
+        tela_adm.add(sp); //adiciona o splitPane ao JFrame
+    }
+
+    public void desenhaListaFuncionario(){
+
+        painel_esq = new JPanel();
+        painel_dir = new JPanel();
+
+        DefaultListModel<Funcionario> model = (DefaultListModel<Funcionario>)jlFunc.getModel();
+        JList<Funcionario> modelList = new JList<>(model);
+
+        modelList.addListSelectionListener(new SelecionaFuncionarios(this));
+
+        painel_esq.add(new JScrollPane(modelList));
+
+        painel_esq.setBorder(BorderFactory.createTitledBorder("Listagem de funcionários"));
+
+        //inicialização do splitPane
+        JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, painel_esq, painel_dir);
+        
+        sp.setDividerLocation(250); //confira o local inicial da divisão
+        tela_adm.add(sp); //adiciona o splitPane ao JFrame
+    }
+
+    public void desenhaListaFilial(){
+
+        painel_esq = new JPanel();
+        painel_dir = new JPanel();
+
+        DefaultListModel<Filial> model = (DefaultListModel<Filial>)jlFilial.getModel();
+        JList<Filial> modelList = new JList<>(model);
+
+        modelList.addListSelectionListener(new SelecionaFiliais(this));
+
+        painel_esq.add(new JScrollPane(modelList));
+
+        painel_esq.setBorder(BorderFactory.createTitledBorder("Listagem de filiais"));
+
+        //inicialização do splitPane
+        JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, painel_esq, painel_dir);
+        
+        sp.setDividerLocation(250); //confira o local inicial da divisão
+        tela_adm.add(sp); //adiciona o splitPane ao JFrame
+
+    }
+
+    public void desenhaListaCarro(){
+
+        painel_esq = new JPanel();
+        painel_dir = new JPanel();
+
+        DefaultListModel<Carro> model = (DefaultListModel<Carro>)jlCarro.getModel();
+        JList<Carro> modelList = new JList<>(model);
+
+        modelList.addListSelectionListener(new SelecionaCarros(this));
+
+        painel_esq.add(new JScrollPane(modelList));
+
+        painel_esq.setBorder(BorderFactory.createTitledBorder("Listagem de carros"));
+
+        //inicialização do splitPane
+        JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, painel_esq, painel_dir);
+        
+        sp.setDividerLocation(250); //confira o local inicial da divisão
+        tela_adm.add(sp); //adiciona o splitPane ao JFrame
+
+    }
+
+    public void desenhaListaReserva(){
+
+        painel_esq = new JPanel();
+        painel_dir = new JPanel();
+
+        DefaultListModel<Reserva> model = (DefaultListModel<Reserva>)jlReserva.getModel();
+        JList<Reserva> modelList = new JList<>(model);
+
+        modelList.addListSelectionListener(new SelecionaReservas(this));
+
+        painel_esq.add(new JScrollPane(modelList));
+
+        painel_esq.setBorder(BorderFactory.createTitledBorder("Listagem de reservas"));
+
+        //inicialização do splitPane
+        JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, painel_esq, painel_dir);
+        
+        sp.setDividerLocation(250); //confira o local inicial da divisão
+        tela_adm.add(sp); //adiciona o splitPane ao JFrame
+
+    }
+
+    public void desenhaListaLocacao(){
+
+        painel_esq = new JPanel();
+        painel_dir = new JPanel();
+
+        DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
+        JList<Locacao> modelList = new JList<>(model);
+
+        modelList.addListSelectionListener(new SelecionaLocacoes(this));
+
+        painel_esq.add(new JScrollPane(modelList));
+
+        painel_esq.setBorder(BorderFactory.createTitledBorder("Listagem de locacoes"));
+
+        //inicialização do splitPane
+        JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, painel_esq, painel_dir);
+        
+        sp.setDividerLocation(250); //confira o local inicial da divisão
+        tela_adm.add(sp); //adiciona o splitPane ao JFrame
     }
 }
