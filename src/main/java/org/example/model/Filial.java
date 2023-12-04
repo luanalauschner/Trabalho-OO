@@ -32,6 +32,8 @@ public class Filial extends Endereco{
         this.locacoes = new ArrayList<>();
         this.reservas = new ArrayList<>();
         this.gerente = gerente;
+
+        Administrador.adicionaFilial(this);
     }
 
     public int getId() {

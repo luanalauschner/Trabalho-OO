@@ -30,6 +30,8 @@ public class Carro {
         this.modelo = modelo;
         this.disponibilidade = disponibilidade;
         this.preco_diaria = preco_diaria;
+
+        Administrador.adicionaCarro(this);
     }
 
     public int getAno() {

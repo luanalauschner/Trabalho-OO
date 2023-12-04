@@ -31,6 +31,8 @@ public class Funcionario extends Pessoa {
         this.salario = salario;
         Funcionario.locacoes = new ArrayList<>();
         Funcionario.reservas = new ArrayList<>();
+
+        Administrador.adicionaFuncionario(this);
     }
 
     public int getId() {
