@@ -53,6 +53,7 @@ public class TelaAdministrador {
     private JMenuBar menuBarra;
     private JMenu menuCadastra;
     private JMenu menuConsulta;
+    private JMenu menuVoltar;
     private JMenuItem miCadastraCliente, miCadastraCarro, miCadastraFunc, miCadastraFilial;
     private JMenuItem miConsultaCliente, miConsultaFunc, miConsultaCarro, miConsultaFilial, miConsultaLocacoes, miConsultaReservas;
    
@@ -98,12 +99,22 @@ public class TelaAdministrador {
         menuCadastra.setMnemonic('C');
         menuConsulta = new JMenu("Consulta");
         menuConsulta.setMnemonic('L');
+        menuVoltar = new JMenu("Página Inicial");
         
         //inicializando os itens do menu cadastro
         miCadastraCliente = new JMenuItem("Cadastra Cliente");
         miCadastraCarro = new JMenuItem("Cadastra Carro");
         miCadastraFunc = new JMenuItem("Cadastra Funcionário");
         miCadastraFilial = new JMenuItem("Cadastra Filial");
+
+        //defininca ação do menuVoltar
+        menuVoltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                desenha();
+            }
+            
+        });
 
         //definindo a função do addActionListener para os menu itens do menu cadastro
         miCadastraCliente.addActionListener(new ActionListener() {
@@ -159,6 +170,7 @@ public class TelaAdministrador {
         menuConsulta.add(miConsultaReservas);
         
         //adicionando ao menu barra
+        menuBarra.add(menuVoltar);
         menuBarra.add(menuCadastra);
         menuBarra.add(menuConsulta);
         
