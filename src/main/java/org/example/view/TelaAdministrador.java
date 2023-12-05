@@ -570,7 +570,7 @@ public class TelaAdministrador {
     
     public void atualizaPainelDir_Reservas(){
 
-         int selectedIndex = jlReserva.getSelectedIndex();
+        int selectedIndex = jlReserva.getSelectedIndex();
 
         JTextField tfId, tfNome, tfCarro, tfDataInicio, tfDataFim;
 
@@ -599,8 +599,32 @@ public class TelaAdministrador {
     
     public void atualizaPainelDir_Filiais(){
 
-        
-        
+        int selectedIndex = jlFilial.getSelectedIndex();
+
+        JTextField tfId, tfNome;
+
+        if(selectedIndex != -1){
+            DefaultListModel<Filial> model = (DefaultListModel<Filial>)jlFilial.getModel();
+            Filial f = model.get(selectedIndex);
+
+            tfId = new JTextField(String.valueOf(f.getId()));
+            tfNome = new JTextField(f.getGerente().getNome());
+            tfLogadouro.setText(f.getLogadouro());
+            tfNumero.setText(String.valueOf(f.getNumero()));
+            tfCidade.setText(f.getCidade());
+            tfEstado.setText(f.getEstado());
+            tfCep.setText(f.getCep());
+
+            painel_dir.add(tfId);
+            painel_dir.add(tfNome);
+            painel_dir.add(tfLogadouro);
+            painel_dir.add(tfNumero);
+            painel_dir.add(tfCidade);
+            painel_dir.add(tfEstado);
+            painel_dir.add(tfCep);
+
+        }
+ 
     }
     
     public void cadastraCliente(){
