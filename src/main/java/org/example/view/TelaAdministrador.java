@@ -599,7 +599,9 @@ public class TelaAdministrador {
     public void cadastraFilial(){
         DefaultListModel<Filial> model = (DefaultListModel<Filial>)jlFilial.getModel();
         try{
-            //model.addElement(new Filial(jcGerentes.getSelectedItem(), tfLogadouro.getText(), tfNumero.getText(), tfCidade.getText(), tfEstado.getText(), tfCep.getText()));
+            Funcionario f = (Funcionario)jcGerentes.getSelectedItem();
+            int i = Integer.parseInt(tfNumero.getText());
+            model.addElement(new Filial(f, tfLogadouro.getText(), i, tfCidade.getText(), tfEstado.getText(), tfCep.getText()));
             JOptionPane.showMessageDialog(tela_adm, "Filial cadastrado com sucesso!");
         }catch(FormatoException e){
             JOptionPane.showMessageDialog(tela_adm, "CEP no formato inválido!");
