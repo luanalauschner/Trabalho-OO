@@ -7,7 +7,7 @@
 package org.example.model;
 
 import java.util.Objects;
-
+import org.example.exception.*;
 /**
  *
  * @author Lana S. Silva
@@ -91,7 +91,7 @@ public class Carro {
     }
 
     //método responsável por conferir se o carro tem determinada característica
-    public boolean confereCarro(Object c){
+    public boolean confereCarro(String c){
         String aux_ano;
         String aux_preco;
         String aux_cor = cor.toUpperCase();
@@ -101,14 +101,6 @@ public class Carro {
         
         aux_ano = String.valueOf(ano);
         aux_preco = String.valueOf(preco_diaria);
-
-        /*try {
-            aux_exigencia = (String) c;
-            aux_exigencia = aux_exigencia.toUpperCase();
-        } catch (ClassCastException e) {
-            aux_exigencia = String.valueOf(c);
-        }
-        */
 
         if(c instanceof String){
             aux_exigencia = (String) c;
@@ -151,5 +143,11 @@ public class Carro {
     
     public String toString(){
         return this.placa;
+    }
+
+    public String validaPlaca(String s) throws FormatoException{
+        //
+
+        return s;
     }
 }

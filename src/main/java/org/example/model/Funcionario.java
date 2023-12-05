@@ -115,7 +115,7 @@ public class Funcionario extends Pessoa {
     }
     
     //pesquisa de veículos nas filiais para conferir a disponibilidade do carro solicitado pelo cliente.
-    public List<Carro> pesquisaCarros(Filial f, Object exigencia){
+    public List<Carro> pesquisaCarros(Filial f, String exigencia){
         /* o parâmetro da exigência do carro pelo cliente é do tipo object por se tratar de uma variável a qual 
         não sabemos o tipo. Para realizar a pesquisa em si, convertemos o object e todos os parâmetros do carro 
         temporariamente em string, para realizarmos a comparação igualmente de objetos.
