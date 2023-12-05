@@ -512,6 +512,7 @@ public class TelaAdministrador {
     public void atualizaPainelDir_Funcionarios(){
 
         int selectedIndex = jlFunc.getSelectedIndex();
+        JTextField tfCargo, tfId;
 
         if(selectedIndex != -1){
             DefaultListModel<Funcionario> model = (DefaultListModel<Funcionario>)jlFunc.getModel();
@@ -519,15 +520,15 @@ public class TelaAdministrador {
 
             tfNome_Func.setText(func.getNome());
             tfCpf_Func.setText(func.getCpf());
-            //tfCargo.setText(func.getCargo());
+            tfCargo = new JTextField(func.getCargo());
             tfSalario.setText(String.valueOf(func.getSalario()));
-            //tfId.setText(String.valueOf(func.getId()));
+            tfId = new JTextField(String.valueOf(func.getId()));
 
             painel_dir.add(tfNome_Func);
             painel_dir.add(tfCpf_Func);
-            //painel_dir.add(tfCargo);
+            painel_dir.add(tfCargo);
             painel_dir.add(tfSalario);
-            //painel_dir.add(tfId);
+            painel_dir.add(tfId);
 
         }
         
@@ -544,12 +545,21 @@ public class TelaAdministrador {
             DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
             Locacao l = model.get(selectedIndex);
 
-            tfId = new JTextField(l.getId());
-            //tfNome = new JTextField(l.getLocatario());
-            //tfCarro = new JTextField(l.getCarro_alugado());
+            tfId = new JTextField(String.valueOf(l.getId()));
+            tfNome = new JTextField(l.getLocatario().getNome());
+            tfCarro = new JTextField(l.getCarro_alugado().getPlaca());
             //tfDataInicio = new JTextField(l.getDataInicio());
             //tfDataFim = new JTextField(l.getDataFim());
             tfValidade = new JTextField(String.valueOf(Locacao.validade(l)));
+            tfLocador = new JTextField(l.getLocador().getNome());
+
+            painel_dir.add(tfId);
+            painel_dir.add(tfNome);
+            painel_dir.add(tfCarro);
+            //painel.add(tfDataInicio);
+            //painel.add(tfDataFim);
+            painel_dir.add(tfValidade);
+            painel_dir.add(tfLocador);
 
 
         }

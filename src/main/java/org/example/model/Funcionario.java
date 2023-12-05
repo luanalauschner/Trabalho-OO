@@ -8,6 +8,7 @@ package org.example.model;
 import org.example.model.Cliente;
 import org.example.model.Pessoa;
 import java.util.List;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -141,7 +142,7 @@ public class Funcionario extends Pessoa {
     
     //realiza o contrato de locacao de um carro dado a disponibilidade do mesmo e o crédito positivo
     //do cliente.
-    public boolean novaLocacao(Cliente locatario, Carro c, Date inicio, Date fim, Filial f){
+    public boolean novaLocacao(Cliente locatario, Carro c, String inicio, String fim, Filial f) throws ParseException{
         int id;
         //confere disponibilidade do carro
         if(!c.isDisponibilidade())
@@ -180,7 +181,7 @@ public class Funcionario extends Pessoa {
     } 
 
     //realiza a reserva de um carro dado a disponibilidade do mesmo e o crédito positiva do cliente.
-    public boolean novaReserva(Cliente locatario, Carro c, Date inicio, Date fim, Filial f){
+    public boolean novaReserva(Cliente locatario, Carro c, String inicio, String fim, Filial f) throws ParseException{
         int id;
         //confere disponibilidade do carro
         if(!c.isDisponibilidade())
