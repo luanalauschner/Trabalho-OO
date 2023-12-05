@@ -31,6 +31,7 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -545,32 +546,60 @@ public class TelaAdministrador {
             DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
             Locacao l = model.get(selectedIndex);
 
+            //conversão do tipo date para String
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
             tfId = new JTextField(String.valueOf(l.getId()));
             tfNome = new JTextField(l.getLocatario().getNome());
             tfCarro = new JTextField(l.getCarro_alugado().getPlaca());
-            //tfDataInicio = new JTextField(l.getDataInicio());
-            //tfDataFim = new JTextField(l.getDataFim());
+            tfDataInicio = new JTextField(formato.format(l.getDataInicio()));
+            tfDataFim = new JTextField(formato.format(l.getDataFim()));
             tfValidade = new JTextField(String.valueOf(Locacao.validade(l)));
             tfLocador = new JTextField(l.getLocador().getNome());
 
             painel_dir.add(tfId);
             painel_dir.add(tfNome);
             painel_dir.add(tfCarro);
-            //painel.add(tfDataInicio);
-            //painel.add(tfDataFim);
+            painel_dir.add(tfDataInicio);
+            painel_dir.add(tfDataFim);
             painel_dir.add(tfValidade);
             painel_dir.add(tfLocador);
-
-
         }
         
     }
     
     public void atualizaPainelDir_Reservas(){
+
+         int selectedIndex = jlReserva.getSelectedIndex();
+
+        JTextField tfId, tfNome, tfCarro, tfDataInicio, tfDataFim;
+
+        if(selectedIndex != -1){
+            DefaultListModel<Reserva> model = (DefaultListModel<Reserva>)jlReserva.getModel();
+            Reserva l = model.get(selectedIndex);
+
+            //conversão do tipo date para String
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+            tfId = new JTextField(String.valueOf(l.getId()));
+            tfNome = new JTextField(l.getCliente().getNome());
+            tfCarro = new JTextField(l.getCarro().getPlaca());
+            tfDataInicio = new JTextField(formato.format(l.getDataInicio()));
+            tfDataFim = new JTextField(formato.format(l.getDataFim()));
+
+            painel_dir.add(tfId);
+            painel_dir.add(tfNome);
+            painel_dir.add(tfCarro);
+            painel_dir.add(tfDataInicio);
+            painel_dir.add(tfDataFim);
+
+        }
         
     }
     
     public void atualizaPainelDir_Filiais(){
+
+        
         
     }
     
