@@ -12,6 +12,7 @@ import org.example.model.Funcionario;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
+import org.example.exception.*;
 
 /**
  *
@@ -25,7 +26,7 @@ public class Filial extends Endereco{
     private List<Reserva> reservas;
     private Funcionario gerente;
 
-    public Filial(Funcionario gerente, String logadouro, int numero, String cidade, String estado, String cep) {
+    public Filial(Funcionario gerente, String logadouro, int numero, String cidade, String estado, String cep) throws FormatoException {
         super(logadouro, numero, cidade, estado, cep);
         this.id = gerarId();
         this.carrosDisponiveis = new ArrayList<>();

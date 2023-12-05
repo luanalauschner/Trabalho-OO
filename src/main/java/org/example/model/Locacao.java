@@ -83,25 +83,35 @@ public class Locacao {
     public void setLocador(Funcionario locador) {
         this.locador = locador;
     }
-    
-    public double valorTotalDoContrato(){
-        double valor;
-        int data_inicio, data_fim, dias_totais;
-        
+
+    public static int validade(Locacao l){
+        int dias, data_inicio, data_fim;
+
+
         Calendar c = Calendar.getInstance();
-        c.setTime(dataInicio);
+        c.setTime(l.dataInicio);
         
         Calendar c2 = Calendar.getInstance();
-        c2.setTime(dataFim);
+        c2.setTime(l.dataFim);
         
         //da a data exata do ano 
         data_inicio = c.get(Calendar.DAY_OF_YEAR);
         data_fim = c2.get(Calendar.DAY_OF_YEAR);
 
         if(c.get(Calendar.YEAR) != c2.get(Calendar.YEAR))
-            dias_totais = (365-data_inicio) + data_fim;
+            dias = (365-data_inicio) + data_fim;
             else 
-                dias_totais = data_fim - data_inicio;
+                dias = data_fim - data_inicio;
+
+        return dias;
+
+    }
+    
+    public double valorTotalDoContrato(){
+        double valor;
+        int dias_totais;
+        
+        dias_totais = validade(this);
         
         valor = carro_alugado.getPreco_diaria() * (double)dias_totais;
         

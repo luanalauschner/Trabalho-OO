@@ -510,10 +510,49 @@ public class TelaAdministrador {
     }
     
     public void atualizaPainelDir_Funcionarios(){
+
+        int selectedIndex = jlFunc.getSelectedIndex();
+
+        if(selectedIndex != -1){
+            DefaultListModel<Funcionario> model = (DefaultListModel<Funcionario>)jlFunc.getModel();
+            Funcionario func = model.get(selectedIndex);
+
+            tfNome_Func.setText(func.getNome());
+            tfCpf_Func.setText(func.getCpf());
+            //tfCargo.setText(func.getCargo());
+            tfSalario.setText(String.valueOf(func.getSalario()));
+            //tfId.setText(String.valueOf(func.getId()));
+
+            painel_dir.add(tfNome_Func);
+            painel_dir.add(tfCpf_Func);
+            //painel_dir.add(tfCargo);
+            painel_dir.add(tfSalario);
+            //painel_dir.add(tfId);
+
+        }
         
     }
     
     public void atualizaPainelDir_Locacoes(){
+
+        int selectedIndex = jlLocacao.getSelectedIndex();
+
+
+        JTextField tfId, tfNome, tfCarro, tfDataInicio, tfDataFim, tfValidade, tfLocador;
+
+        if(selectedIndex != -1){
+            DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
+            Locacao l = model.get(selectedIndex);
+
+            tfId = new JTextField(l.getId());
+            //tfNome = new JTextField(l.getLocatario());
+            //tfCarro = new JTextField(l.getCarro_alugado());
+            //tfDataInicio = new JTextField(l.getDataInicio());
+            //tfDataFim = new JTextField(l.getDataFim());
+            tfValidade = new JTextField(String.valueOf(Locacao.validade(l)));
+
+
+        }
         
     }
     
@@ -560,7 +599,7 @@ public class TelaAdministrador {
     public void cadastraFilial(){
         DefaultListModel<Filial> model = (DefaultListModel<Filial>)jlFilial.getModel();
         try{
-            model.addElement(new Filial(jcGerentes.getSelectedItem(), tfLogadouro.getText(), tfNumero.getText(), tfCidade.getText(), tfEstado.getText(), tfCep.getText()));
+            //model.addElement(new Filial(jcGerentes.getSelectedItem(), tfLogadouro.getText(), tfNumero.getText(), tfCidade.getText(), tfEstado.getText(), tfCep.getText()));
             JOptionPane.showMessageDialog(tela_adm, "Filial cadastrado com sucesso!");
         }catch(FormatoException e){
             JOptionPane.showMessageDialog(tela_adm, "CEP no formato inválido!");

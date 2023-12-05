@@ -5,7 +5,7 @@
  */
 package org.example.model;
 
-import org.example.exception.CepException;
+import org.example.exception.*;
 
 /**
  *
@@ -19,12 +19,12 @@ public class Endereco {
     private String estado;
     private String cep;
 
-    public Endereco(String logadouro, int numero, String cidade, String estado, String cep) {
+    public Endereco(String logadouro, int numero, String cidade, String estado, String cep) throws FormatoException{
         this.logadouro = logadouro;
         this.numero = numero;
         this.cidade = cidade;
         this.estado = estado;
-        this.cep = cep;
+        this.cep = validarCEP(cep);
     }
 
     public String getLogadouro() {
@@ -67,15 +67,15 @@ public class Endereco {
         this.cep = cep;
     }
     
-    public boolean validarCEP(String s) throws CepException{
+    public String validarCEP(String s) throws FormatoException{
         String[] aux = s.split("[\\-]");
 
         if(aux.length != 2)
-            throw new CepException();
+            throw new FormatoException();
 
         if(aux[0].length() != 5 || aux[1].length() != 3)
-            throw new CepException();
+            throw new FormatoException();
             else
-                return true;
+                return s;
     }
 }
