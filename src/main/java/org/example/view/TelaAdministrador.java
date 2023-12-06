@@ -233,6 +233,7 @@ public class TelaAdministrador {
     public void liberaMenu(){
         menuCadastra.setEnabled(true);
         menuConsulta.setEnabled(true);
+        menuVoltar.setEnalbled(true);
         menuBarra.setVisible(true);
     }
     
