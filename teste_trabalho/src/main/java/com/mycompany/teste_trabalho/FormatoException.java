@@ -8,8 +8,8 @@ package com.mycompany.teste_trabalho;
  *
  * @author vilar
  */
-public class FormatoException extends Exception {
-    public FormatoException(){
-        super("Formato inválido!");
+public class PontoException extends Exception{
+    public PontoException(){
+        super("Formato Incorreto");
     }
 }
