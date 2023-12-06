@@ -167,10 +167,43 @@ public class TelaAdministrador {
         miConsultaCliente.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+                desenhaListaClientes();
             }
+        });
 
+        miConsultaFunc.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                desenhaListaFuncionario();
+            }
+        });
+
+        miConsultaCarro.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0){
+                desenhaListaCarro();
+            }
+        });
+
+        miConsultaFilial.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0){
+                desenhaListaFilial();
+            }
+        });
+
+        miConsultaLocacoes.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0){
+                desenhaListaLocacao();
+            }
+        });
+
+        miConsultaReservas.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0){
+                desenhaListaReserva();
+            }
         });
         
         //adicionando os itens ao menu cadastra
