@@ -11,6 +11,7 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
+import org.example.exception.*;
 /**
  *
  * @author Lana S. Silva
@@ -23,7 +24,8 @@ public class Cliente extends Pessoa{
     private List<Reserva> reservas;
     private boolean credito;
 
-    public Cliente(String habilitacao, boolean credito, String nome, String telefone, String cpf){
+    public Cliente(String habilitacao, boolean credito, String nome, String telefone, String cpf) throws FormatoException
+    {
         super(nome, telefone, cpf);
         this.id = gerarId();
         this.habilitacao = habilitacao;
@@ -90,23 +92,9 @@ public class Cliente extends Pessoa{
         //for cancelado antes de pelo menos um mês antes do término do contrato.
         //O valor da taxa é calculado pelo tanto de dias que procede o fim do contrato, se for cancelado antes de 30
         //dias do fim do contrato, é cobrado uma taxa de 30% sobre o valor total do contrato.
-        int data_atual, data_final, dias_taxa;
+        int dias_taxa;
         
-        Calendar c = Calendar.getInstance();
-        c.setTime(atual);
-        
-        Calendar c2 = Calendar.getInstance();
-        c2.setTime(l.getDataFim());
-        
-        //conferir condição para data atual ser antes do fim do contrato, o contrato
-        //quando chega ao fim, encerra sozinho
-        data_atual = c.get(Calendar.DAY_OF_YEAR);
-        data_final = c2.get(Calendar.DAY_OF_YEAR);
-        
-        if(c.get(Calendar.YEAR) != c2.get(Calendar.YEAR))
-            dias_taxa = (data_final + 365) - data_atual;
-            else
-                dias_taxa = data_final - data_atual;
+        dias_taxa = Locacao.validade(l);
         
         //o credito do cliente não armazena o valor que ele deve, e sim se ele tá positivado ou negativado 
         if(dias_taxa > 30){
@@ -135,7 +123,7 @@ public class Cliente extends Pessoa{
 
         diaInicio = inicio.get(Calendar.DAY_OF_YEAR);
         diaFim = fim.get(Calendar.DAY_OF_YEAR);
-        dias_de_contrato = diaFim - diaInicio;
+        dias_de_contrato = Locacao.validade(l);
 
         diaFim = diaFim + dias_de_contrato;
 

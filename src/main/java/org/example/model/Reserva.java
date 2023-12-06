@@ -8,6 +8,8 @@ import org.example.model.Locacao;
 import org.example.model.Carro;
 import java.util.Date;
 import java.util.Random;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -17,16 +19,16 @@ import java.util.Calendar;
 public class Reserva {
     private int id;
     private Carro carro;
-    private Cliente locatorio;
+    private Cliente locatario;
     private Date dataInicio;
     private Date dataFim;
 
-    public Reserva (Carro carro, Cliente c, Date dataInicio, Date dataFim){
+    public Reserva (Carro carro, Cliente c, String dataInicio, String dataFim) throws ParseException{
         this.id = gerarId();
         this.carro = carro;
-        this.locatorio = c;
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
+        this.locatario = c;
+        this.dataInicio = retornaData(dataInicio);
+        this.dataFim = retornaData(dataFim);
     }
 
     public void setCarro (Carro carro){
@@ -42,7 +44,11 @@ public class Reserva {
     }
 
     public void setCliente(Cliente c){
-        this.locatorio = c;
+        this.locatario = c;
+    }
+
+    public int getId(){
+        return this.id;
     }
 
     public Carro getCarro(){
@@ -50,7 +56,7 @@ public class Reserva {
     }
 
     public Cliente getCliente(){
-        return locatorio;
+        return locatario;
     }
 
     public Date getDataInicio(){
@@ -137,5 +143,13 @@ public class Reserva {
         int numeroAleatorio = random.nextInt(1000);
 
         return numeroAleatorio;
+    }
+
+    public Date retornaData(String s) throws ParseException{
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date d = new Date();
+
+        d = formato.parse(s);
+        return d;
     }
 }

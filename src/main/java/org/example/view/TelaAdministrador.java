@@ -31,6 +31,7 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -504,26 +505,126 @@ public class TelaAdministrador {
             painel_dir.add(tfAno);
             painel_dir.add(tfPlaca);
             painel_dir.add(tfPrecoDiaria);
-            
+
         }
-        
         
     }
     
     public void atualizaPainelDir_Funcionarios(){
+
+        int selectedIndex = jlFunc.getSelectedIndex();
+        JTextField tfCargo, tfId;
+
+        if(selectedIndex != -1){
+            DefaultListModel<Funcionario> model = (DefaultListModel<Funcionario>)jlFunc.getModel();
+            Funcionario func = model.get(selectedIndex);
+
+            tfNome_Func.setText(func.getNome());
+            tfCpf_Func.setText(func.getCpf());
+            tfCargo = new JTextField(func.getCargo());
+            tfSalario.setText(String.valueOf(func.getSalario()));
+            tfId = new JTextField(String.valueOf(func.getId()));
+
+            painel_dir.add(tfNome_Func);
+            painel_dir.add(tfCpf_Func);
+            painel_dir.add(tfCargo);
+            painel_dir.add(tfSalario);
+            painel_dir.add(tfId);
+
+        }
         
     }
     
     public void atualizaPainelDir_Locacoes(){
+
+        int selectedIndex = jlLocacao.getSelectedIndex();
+
+
+        JTextField tfId, tfNome, tfCarro, tfDataInicio, tfDataFim, tfValidade, tfLocador;
+
+        if(selectedIndex != -1){
+            DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
+            Locacao l = model.get(selectedIndex);
+
+            //conversão do tipo date para String
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+            tfId = new JTextField(String.valueOf(l.getId()));
+            tfNome = new JTextField(l.getLocatario().getNome());
+            tfCarro = new JTextField(l.getCarro_alugado().getPlaca());
+            tfDataInicio = new JTextField(formato.format(l.getDataInicio()));
+            tfDataFim = new JTextField(formato.format(l.getDataFim()));
+            tfValidade = new JTextField(String.valueOf(Locacao.validade(l)));
+            tfLocador = new JTextField(l.getLocador().getNome());
+
+            painel_dir.add(tfId);
+            painel_dir.add(tfNome);
+            painel_dir.add(tfCarro);
+            painel_dir.add(tfDataInicio);
+            painel_dir.add(tfDataFim);
+            painel_dir.add(tfValidade);
+            painel_dir.add(tfLocador);
+        }
         
     }
     
     public void atualizaPainelDir_Reservas(){
+
+        int selectedIndex = jlReserva.getSelectedIndex();
+
+        JTextField tfId, tfNome, tfCarro, tfDataInicio, tfDataFim;
+
+        if(selectedIndex != -1){
+            DefaultListModel<Reserva> model = (DefaultListModel<Reserva>)jlReserva.getModel();
+            Reserva l = model.get(selectedIndex);
+
+            //conversão do tipo date para String
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+            tfId = new JTextField(String.valueOf(l.getId()));
+            tfNome = new JTextField(l.getCliente().getNome());
+            tfCarro = new JTextField(l.getCarro().getPlaca());
+            tfDataInicio = new JTextField(formato.format(l.getDataInicio()));
+            tfDataFim = new JTextField(formato.format(l.getDataFim()));
+
+            painel_dir.add(tfId);
+            painel_dir.add(tfNome);
+            painel_dir.add(tfCarro);
+            painel_dir.add(tfDataInicio);
+            painel_dir.add(tfDataFim);
+
+        }
         
     }
     
     public void atualizaPainelDir_Filiais(){
-        
+
+        int selectedIndex = jlFilial.getSelectedIndex();
+
+        JTextField tfId, tfNome;
+
+        if(selectedIndex != -1){
+            DefaultListModel<Filial> model = (DefaultListModel<Filial>)jlFilial.getModel();
+            Filial f = model.get(selectedIndex);
+
+            tfId = new JTextField(String.valueOf(f.getId()));
+            tfNome = new JTextField(f.getGerente().getNome());
+            tfLogadouro.setText(f.getLogadouro());
+            tfNumero.setText(String.valueOf(f.getNumero()));
+            tfCidade.setText(f.getCidade());
+            tfEstado.setText(f.getEstado());
+            tfCep.setText(f.getCep());
+
+            painel_dir.add(tfId);
+            painel_dir.add(tfNome);
+            painel_dir.add(tfLogadouro);
+            painel_dir.add(tfNumero);
+            painel_dir.add(tfCidade);
+            painel_dir.add(tfEstado);
+            painel_dir.add(tfCep);
+
+        }
+ 
     }
     
     public void cadastraCliente(){
@@ -561,7 +662,9 @@ public class TelaAdministrador {
     public void cadastraFilial(){
         DefaultListModel<Filial> model = (DefaultListModel<Filial>)jlFilial.getModel();
         try{
-            model.addElement(new Filial(jcGerentes.getSelectedItem(), tfLogadouro.getText(), tfNumero.getText(), tfCidade.getText(), tfEstado.getText(), tfCep.getText()));
+            Funcionario f = (Funcionario)jcGerentes.getSelectedItem();
+            int i = Integer.parseInt(tfNumero.getText());
+            model.addElement(new Filial(f, tfLogadouro.getText(), i, tfCidade.getText(), tfEstado.getText(), tfCep.getText()));
             JOptionPane.showMessageDialog(tela_adm, "Filial cadastrado com sucesso!");
         }catch(FormatoException e){
             JOptionPane.showMessageDialog(tela_adm, "CEP no formato inválido!");

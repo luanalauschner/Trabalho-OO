@@ -8,9 +8,11 @@ package org.example.model;
 import org.example.model.Cliente;
 import org.example.model.Pessoa;
 import java.util.List;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+import org.example.exception.*;
 /**
  *
  * @author Lana S. Silva
@@ -24,7 +26,7 @@ public class Funcionario extends Pessoa {
     private static List<Reserva> reservas;
     private double comissao;
 
-    public Funcionario(String cargo, double salario, String nome, String telefone, String cpf){
+    public Funcionario(String cargo, double salario, String nome, String telefone, String cpf) throws FormatoException{
         super(nome, telefone, cpf);
         this.id = gerarId();
         this.cargo = cargo;
@@ -114,7 +116,7 @@ public class Funcionario extends Pessoa {
     }
     
     //pesquisa de veículos nas filiais para conferir a disponibilidade do carro solicitado pelo cliente.
-    public List<Carro> pesquisaCarros(Filial f, Object exigencia){
+    public List<Carro> pesquisaCarros(Filial f, String exigencia){
         /* o parâmetro da exigência do carro pelo cliente é do tipo object por se tratar de uma variável a qual 
         não sabemos o tipo. Para realizar a pesquisa em si, convertemos o object e todos os parâmetros do carro 
         temporariamente em string, para realizarmos a comparação igualmente de objetos.
@@ -140,7 +142,7 @@ public class Funcionario extends Pessoa {
     
     //realiza o contrato de locacao de um carro dado a disponibilidade do mesmo e o crédito positivo
     //do cliente.
-    public boolean novaLocacao(Cliente locatario, Carro c, Date inicio, Date fim, Filial f){
+    public boolean novaLocacao(Cliente locatario, Carro c, String inicio, String fim, Filial f) throws ParseException{
         int id;
         //confere disponibilidade do carro
         if(!c.isDisponibilidade())
@@ -179,7 +181,7 @@ public class Funcionario extends Pessoa {
     } 
 
     //realiza a reserva de um carro dado a disponibilidade do mesmo e o crédito positiva do cliente.
-    public boolean novaReserva(Cliente locatario, Carro c, Date inicio, Date fim, Filial f){
+    public boolean novaReserva(Cliente locatario, Carro c, String inicio, String fim, Filial f) throws ParseException{
         int id;
         //confere disponibilidade do carro
         if(!c.isDisponibilidade())
