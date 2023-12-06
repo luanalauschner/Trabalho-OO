@@ -221,10 +221,10 @@ public class Funcionario extends Pessoa {
 
     //função responsável por validar o crédito do cliente, o funcionário recebe o pagamento para positivar o credito
     //do cliente e positiva ele no sistema 
-    public static boolean validaCliente(Cliente c){
+    /*public static boolean validaCliente(Cliente c){
         c.validarCredito();
         return true;
-    }
+    }*/
 
     @Override
     public String toString() {
