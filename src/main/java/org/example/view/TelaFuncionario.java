@@ -9,9 +9,12 @@ import org.example.controller.*;
 import org.example.exception.*;
 import org.example.model.*;
 
+import javafx.event.ActionEvent;
+
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.List;
 /**
  *
@@ -36,6 +39,7 @@ public class TelaFuncionario {
     private JMenu menuNovaReserva;
     private JMenu menuCalculaSalario;
     private JMenu menuCalculaComissao;
+    private JMenu menuVoltar;
 
     private JMenuItem miCadastraLocacao;
     private JMenuItem miCadastraReserva;
@@ -69,7 +73,8 @@ public class TelaFuncionario {
         menuCalculaSalario.setMnemonic('S');
         menuCalculaComissao = new JMenu("Calcula Comissao");
         menuCalculaComissao.setMnemonic('C');
-        
+        menuVoltar = new JMenu("Página Inicial");
+
         //inicializando os itens da locacao
         miCadastraLocacao = new JMenuItem("Cadastra Locacao");
 
@@ -82,6 +87,47 @@ public class TelaFuncionario {
         //inicilaizando os itens do salario
         miConsultaSalario = new JMenuItem("Consulta Salario");
         
+        //defininca ação do menuVoltar
+        menuVoltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                desenha();
+            }
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+            } 
+        });
+        
+           //definindo a função do addActionListener para os menu itens do menu cadastro
+           miCadastraLocacao.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                desenhaFormulario_Locacao();
+            }
+        });
+        
+        miCadastraReserva.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                desenhaFormulario_Reserva();
+            }
+        });
+
+
+       //definindo a ação do actionListener do menu item do menu consulta ou listagem
+       miConsultaSalario.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        }
+
+        });
+
+
         //inicializando os itens do menu consulta ou listagem
         /*miConsultaCliente = new JMenuItem("Lista Clientes");
         miConsultaFunc = new JMenuItem("Lista Funcionários");
