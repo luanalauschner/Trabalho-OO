@@ -271,18 +271,6 @@ public class TelaCliente {
 
             DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
             Locacao locacao = model.get(selectedIndex);
-
-            //model.remove(selectedIndex);
-
-            /*try {
-                contato.setEmail(tfEmail.getText());
-                contato.setNome(tfNome.getText());
-                contato.setTelefone(tfTelefone.getText());
-                contato.setDescricao(tfDescricao.getText());
-            }catch(EmailException ex){
-                JOptionPane.showMessageDialog(tela, "O email " +tfEmail.getText() +" é invalido!");
-            }*/
-
             cliente.renovarLocacao(locacao);
         }
 
@@ -296,19 +284,8 @@ public class TelaCliente {
 
             DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
             Locacao locacao = model.get(selectedIndex);
-
-            //model.remove(selectedIndex);
-
-            /*try {
-                contato.setEmail(tfEmail.getText());
-                contato.setNome(tfNome.getText());
-                contato.setTelefone(tfTelefone.getText());
-                contato.setDescricao(tfDescricao.getText());
-            }catch(EmailException ex){
-                JOptionPane.showMessageDialog(tela, "O email " +tfEmail.getText() +" é invalido!");
-            }*/
-
             cliente.cancelaLocacao(locacao, null);
+            model.remove(selectedIndex);
         }
 
     }
@@ -321,19 +298,8 @@ public class TelaCliente {
 
             DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
             Locacao locacao = model.get(selectedIndex);
-
-            //model.remove(selectedIndex);
-
-            /*try {
-                contato.setEmail(tfEmail.getText());
-                contato.setNome(tfNome.getText());
-                contato.setTelefone(tfTelefone.getText());
-                contato.setDescricao(tfDescricao.getText());
-            }catch(EmailException ex){
-                JOptionPane.showMessageDialog(tela, "O email " +tfEmail.getText() +" é invalido!");
-            }*/
-
             cliente.confirmarTermino(true, locacao);
+            model.remove(selectedIndex);
         }
 
     }
