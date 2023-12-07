@@ -439,6 +439,9 @@ public class TelaAdministrador {
         painelField.add(tfPlaca);
         painelField.add(tfPrecoDiaria);
 
+        formulario_carro.add(painelLabel);
+        formulario_carro.add(painelField);
+
         painel.setLayout(new BorderLayout());
         painel.add(formulario_carro, BorderLayout.CENTER);
 

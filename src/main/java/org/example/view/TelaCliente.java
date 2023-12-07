@@ -48,6 +48,8 @@ public class TelaCliente {
     private final int V_GAP = 10;
     private final int H_GAP = 5;
 
+    private Cliente cliente = null;
+
     private JList<Locacao> jlLocacao;
     private JList<Reserva> jlReserva;
 
@@ -58,7 +60,18 @@ public class TelaCliente {
     private JMenu menuVoltar;
     private JMenuItem miConsultaLocacao, miConsultaReservas;
     
-    public void desenha(){
+
+    //inicializa os paineis
+    private JPanel painel_dir;
+    private JPanel painel_esq;
+
+    //inicializa os text fields utilizados
+    private JTextField tfNome, tfHabilitacao, tfTelefone, tfCpf, tfCredito;
+
+    public void desenha(Cliente c){
+
+        //inicializa o cliente
+        cliente = c;
 
         tela_cliente = new JFrame("Espaço do admnistrador");
         tela_cliente.setSize(WIDTH, HEIGHT);
@@ -132,5 +145,56 @@ public class TelaCliente {
         menuConsulta.setEnabled(true);
         menuAtualiza.setEnabled(true);
         menuBarra.setVisible(true);
+    }
+
+    public void desenhaPaginaInicial(){
+
+        //implementação painel esquerdo
+        painel_esq = new JPanel();
+        painel_esq.setBorder(BorderFactory.createTitledBorder("Dados do Cliente"));
+
+        //no painel esq vai ser exibido os dados do cliente
+        JPanel painelLabel = new JPanel();
+        painelLabel.setLayout(new GridLayout(0, 1, H_GAP,V_GAP));
+        painelLabel.add(new JLabel("Nome"));
+        painelLabel.add(new JLabel("Habilitação:"));
+        painelLabel.add(new JLabel("Telefone:"));
+        painelLabel.add(new JLabel("CPF:"));
+        painelLabel.add(new JLabel("Crédito:"));
+
+        //implementação dos espaços com as informações do cliente
+        JPanel painelField = new JPanel();
+        painelField.setLayout(new GridLayout(0, 1, H_GAP,V_GAP));
+        
+        tfNome = new JTextField(cliente.getNome());
+        tfHabilitacao = new JTextField(cliente.getHabilitacao());
+        tfTelefone = new JTextField(cliente.getTelefone());
+        tfCpf = new JTextField(cliente.getCpf());
+
+        if(cliente.getCredito())
+            tfCredito = new JTextField("Positivo");
+            else
+            tfCredito = new JTextField("Negativo");
+
+        //insercao dos elemento TextField
+        painelField.add(tfNome);
+        painelField.add(tfHabilitacao);
+        painelField.add(tfTelefone);
+        painelField.add(tfCpf);
+
+        painel_esq.add(painelLabel);
+        painel_esq.add(painelField);
+
+        painel_esq.setLayout(new BorderLayout());
+        //painel_esq.add(painelLabel, BorderLayout.CENTER);
+
+
+
+        //implementação painel direito
+        painel_dir = new JPanel();
+        painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Locações ativas:"));
+
+        
+
     }
 }
