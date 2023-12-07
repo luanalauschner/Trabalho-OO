@@ -249,7 +249,7 @@ public class TelaAdministrador {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
-                    if("CLIENTE".equals(lista.getSelectedValue().toUpperCase())){
+                    if("CLIENTES".equals(lista.getSelectedValue().toUpperCase())){
                         DefaultListModel<Cliente> model = new DefaultListModel<>();
                         jlClientes =  new JList<>(model);
                         painel_dir.add(new JScrollPane(jlClientes));
