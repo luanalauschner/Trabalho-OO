@@ -7,19 +7,9 @@ package org.example.view;
 
 //importação do package de controller
 import org.example.controller.*;
-import org.example.controller.controllerAdiciona.AdicionaCliente;
-import org.example.controller.controllerAdiciona.AdicionaCarro;
-import org.example.controller.controllerAdiciona.AdicionaFilial;
-import org.example.controller.controllerAdiciona.AdicionaFuncionario;
-import org.example.controller.controllerSeleciona.SelecionaCarros;
-import org.example.controller.controllerSeleciona.SelecionaClientes;
-import org.example.controller.controllerSeleciona.SelecionaFiliais;
-import org.example.controller.controllerSeleciona.SelecionaFuncionarios;
 import org.example.controller.controllerSeleciona.SelecionaLocacoes;
 import org.example.controller.controllerSeleciona.SelecionaReservas;
 
-//importação do package exception
-import org.example.exception.FormatoException;
 
 //importação do package model
 import org.example.model.*;
@@ -81,7 +71,7 @@ public class TelaCliente {
         tela_cliente.setLayout(new BorderLayout());
         
         inicializaComponentes();
-        //desenhaSplitPanel();
+        desenhaPaginaInicial();
         
         tela_cliente.pack();
     }
@@ -203,6 +193,48 @@ public class TelaCliente {
 
         sp.setDividerLocation(250);
         tela_cliente.add(sp);
-        
+
     }
+
+    public void exibeLocacao(){
+
+        /*int selectedIndex = jlLocacao.getSelectedIndex();
+
+
+        JTextField tfId, tfCarro, tfDataInicio, tfDataFim, tfValidade, tfLocador;
+
+        if(selectedIndex != -1){
+            DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
+            Locacao l = model.get(selectedIndex);
+
+            //conversão do tipo date para String
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+            tfId = new JTextField(String.valueOf(l.getId()));
+            tfCarro = new JTextField(l.getCarro_alugado().getPlaca());
+            tfDataInicio = new JTextField(formato.format(l.getDataInicio()));
+            tfDataFim = new JTextField(formato.format(l.getDataFim()));
+            tfValidade = new JTextField(String.valueOf(Locacao.validade(l)));
+            tfLocador = new JTextField(l.getLocador().getNome());
+
+            painel_dir.add(tfId);
+            painel_dir.add(tfNome);
+            painel_dir.add(tfCarro);
+            painel_dir.add(tfDataInicio);
+            painel_dir.add(tfDataFim);
+            painel_dir.add(tfValidade);
+            painel_dir.add(tfLocador); 
+
+            JButton btnRenova = new JButton("Renova");
+            btnAdicionar.addActionListener(new AdicionaFilial(this));
+
+            JButton btnCancela = new JButton("Cancela");
+            btnCancela.addActionListener();
+
+            JButton btnConfirma = new JButton("Confirma Fim do Contrato");
+            btnConfirma.addActionListener();
+            */
+
+    }
+
 }
