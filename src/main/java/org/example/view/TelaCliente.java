@@ -7,8 +7,9 @@ package org.example.view;
 
 //importação do package de controller
 import org.example.controller.*;
-import org.example.controller.controllerSeleciona.SelecionaLocacoes;
-import org.example.controller.controllerSeleciona.SelecionaReservas;
+import org.example.controller.controllerSeleciona.SelecionaCarros;
+import org.example.controller.controllerSeleciona.SelecionaLocacao;
+import org.example.controller.controllerSeleciona.SelecionaReserva;
 
 
 //importação do package model
@@ -238,7 +239,7 @@ public class TelaCliente {
     }
 
     public void exibeReserva(){
-        
+
     }
 
     public void renovaLocacao(){
@@ -318,11 +319,34 @@ public class TelaCliente {
 
     public void listaLocacao(){
 
+        painel_dir = new JPanel();
+        painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Locações ativas:"));
+
+        DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
+        JList<Locacao> modelList = new JList<>(model);
+
+        modelList.addListSelectionListener(new SelecionaLocacao(this));
+
+        JScrollPane sc = new JScrollPane(modelList);
+
+        painel_dir.add(sc);
+
     }
 
 
     public void listaReserva(){
 
+        painel_dir = new JPanel();
+        painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Reservas ativas:"));
+
+        DefaultListModel<Reserva> model = (DefaultListModel<Reserva>)jlReserva.getModel();
+        JList<Reserva> modelList = new JList<>(model);
+
+        modelList.addListSelectionListener(new SelecionaReserva(this));
+
+        JScrollPane sc = new JScrollPane(modelList);
+
+        painel_dir.add(sc);
     }
 
 }
