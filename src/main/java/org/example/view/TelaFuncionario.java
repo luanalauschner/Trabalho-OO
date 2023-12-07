@@ -70,6 +70,56 @@ public class TelaFuncionario {
 
     public void inicializaComponentes(){
 
+        //inicializa os menus
+        menuBarra = new JMenuBar();
+        menuConsulta = new JMenu("Consulta");
+        //menuAtualiza = new JMenu("Atualiza dados");
+        menuVoltar = new JMenu("Página Inicial");
+
+        //inicializa os itens do menu consulta
+        miLocacoes = new JMenuItem("Consulta Locações ");
+        miReservas = new JMenuItem("Consulta Reservas");
+
+        //definindo o actionListener
+        miConsultaLocacao.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                listaLocacao();
+            }
+        });
+
+        miConsultaReservas.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                listaReserva();
+            }
+        });
+
+        /*menuAtualiza.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+            }
+
+        });*/
+
+        menuVoltar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                desenha(cliente);
+            }
+        });
+
+        //adicionando os itens ao menu consulta
+        menuConsulta.add(miConsultaLocacao);
+        menuConsulta.add(miConsultaReservas);
+
+        //adicionando ao menu barra
+        menuBarra.add(menuVoltar);
+        //menuBarra.add(menuAtualiza);
+        menuBarra.add(menuConsulta);
+
     }
 
     public void desenhaPaginaInicial(){
