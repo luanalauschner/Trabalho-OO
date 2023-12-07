@@ -7,6 +7,7 @@ package org.example.view;
 
 //importação do package de controller
 import org.example.controller.*;
+import org.example.controller.controllerRemove.RemoveLocacao;
 import org.example.controller.controllerSeleciona.SelecionaCarros;
 import org.example.controller.controllerSeleciona.SelecionaLocacao;
 import org.example.controller.controllerSeleciona.SelecionaReserva;
@@ -47,7 +48,7 @@ public class TelaCliente {
     //inicialização do menu
     private JMenuBar menuBarra;
     private JMenu menuConsulta;
-    private JMenu menuAtualiza;
+    //private JMenu menuAtualiza;
     private JMenu menuVoltar;
     private JMenuItem miConsultaLocacao, miConsultaReservas;
     
@@ -82,7 +83,7 @@ public class TelaCliente {
         //inicializa os menus
         menuBarra = new JMenuBar();
         menuConsulta = new JMenu("Consulta");
-        menuAtualiza = new JMenu("Atualiza dados");
+        //menuAtualiza = new JMenu("Atualiza dados");
         menuVoltar = new JMenu("Página Inicial");
 
         //inicializa os itens do menu consulta
@@ -93,29 +94,25 @@ public class TelaCliente {
         miConsultaLocacao.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+                listaLocacao();
             }
-
         });
 
         miConsultaReservas.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+                listaReserva();
             }
-
         });
 
-        menuAtualiza.addActionListener(new ActionListener(){
+        /*menuAtualiza.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 // TODO Auto-generated method stub
                 throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
             }
 
-        });
+        });*/
 
         //adicionando os itens ao menu consulta
         menuConsulta.add(miConsultaLocacao);
@@ -123,7 +120,7 @@ public class TelaCliente {
 
         //adicionando ao menu barra
         menuBarra.add(menuVoltar);
-        menuBarra.add(menuAtualiza);
+        //menuBarra.add(menuAtualiza);
         menuBarra.add(menuConsulta);
 
         tela_cliente.setJMenuBar(menuBarra);
@@ -134,7 +131,7 @@ public class TelaCliente {
     public void liberaMenu(){
         menuVoltar.setEnabled(true);
         menuConsulta.setEnabled(true);
-        menuAtualiza.setEnabled(true);
+        //menuAtualiza.setEnabled(true);
         menuBarra.setVisible(true);
     }
 
@@ -230,9 +227,9 @@ public class TelaCliente {
             //btnAdicionar.addActionListener();
 
             JButton btnCancela = new JButton("Cancela");
-            //btnCancela.addActionListener();
+            btnCancela.addActionListener(new RemoveLocacao(this));
 
-            JButton btnConfirma = new JButton("Confirma de locacao");
+            JButton btnConfirma = new JButton("Confirma fim de locacao");
             //btnConfirma.addActionListener();
         }    
 

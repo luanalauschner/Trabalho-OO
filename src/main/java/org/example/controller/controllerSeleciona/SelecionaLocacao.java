@@ -1,6 +1,5 @@
 package org.example.controller.controllerSeleciona;
 
-import org.example.view.TelaAdministrador;
 import org.example.view.TelaCliente;
 
 import javax.swing.event.ListSelectionEvent;
