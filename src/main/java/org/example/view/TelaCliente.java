@@ -198,7 +198,7 @@ public class TelaCliente {
 
     public void exibeLocacao(){
 
-        /*int selectedIndex = jlLocacao.getSelectedIndex();
+        int selectedIndex = jlLocacao.getSelectedIndex();
 
 
         JTextField tfId, tfCarro, tfDataInicio, tfDataFim, tfValidade, tfLocador;
@@ -226,14 +226,26 @@ public class TelaCliente {
             painel_dir.add(tfLocador); 
 
             JButton btnRenova = new JButton("Renova");
-            btnAdicionar.addActionListener(new AdicionaFilial(this));
+            //btnAdicionar.addActionListener(new AdicionaFilial(this));
 
             JButton btnCancela = new JButton("Cancela");
-            btnCancela.addActionListener();
+            //btnCancela.addActionListener();
 
-            JButton btnConfirma = new JButton("Confirma Fim do Contrato");
-            btnConfirma.addActionListener();
-            */
+            JButton btnConfirma = new JButton("Confirma de locacao");
+            //btnConfirma.addActionListener();
+            
+
+    }
+
+    public void renovaLocacao(){
+
+    }
+
+    public void cancelaLocacao(){
+
+    }
+
+    public void confirmaTermino(){
 
     }
 
