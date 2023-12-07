@@ -32,10 +32,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 
-/**
- *
- * @author Lana S. Silva
- */
 public class TelaAdministrador {
     
     private JFrame tela_adm;
