@@ -194,7 +194,15 @@ public class TelaCliente {
         painel_dir = new JPanel();
         painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Locações ativas:"));
 
-        
+        DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
+        JList<Locacao> modelList = new JList<>(model);
 
+        painel_dir.add(new JScrollPane(modelList));
+
+        JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, painel_esq, painel_dir);
+
+        sp.setDividerLocation(250);
+        tela_cliente.add(sp);
+        
     }
 }
