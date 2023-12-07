@@ -233,7 +233,7 @@ public class TelaCliente {
 
             JButton btnConfirma = new JButton("Confirma de locacao");
             //btnConfirma.addActionListener();
-            
+        }    
 
     }
 
