@@ -345,12 +345,13 @@ public class TelaAdministrador {
         formulario_cliente.add(painelLabel);
         formulario_cliente.add(painelField);
 
-        painel.setLayout(new BorderLayout());
-        painel.add(formulario_cliente, BorderLayout.CENTER);
-
         JButton btnAdicionar = new JButton("Adicionar");
         btnAdicionar.addActionListener(new AdicionaCliente(this));
 
+        painel.setLayout(new BorderLayout());
+        painel.add(formulario_cliente, BorderLayout.CENTER);
+
+        tela_adm.getContentPane().add(painel, BorderLayout.CENTER);
         tela_adm.pack();
 
     }
