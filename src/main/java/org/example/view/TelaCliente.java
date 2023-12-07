@@ -8,7 +8,8 @@ package org.example.view;
 //importação do package de controller
 import org.example.controller.*;
 import org.example.controller.controllerRemove.RemoveLocacao;
-import org.example.controller.controllerSeleciona.SelecionaCarros;
+import org.example.controller.controllerRenova.RenovaLocacao;
+import org.example.controller.controllerCancela.CancelaLocacao;
 import org.example.controller.controllerSeleciona.SelecionaLocacao;
 import org.example.controller.controllerSeleciona.SelecionaReserva;
 
@@ -224,13 +225,13 @@ public class TelaCliente {
             painel_dir.add(tfLocador); 
 
             JButton btnRenova = new JButton("Renova");
-            //btnAdicionar.addActionListener();
+            btnRenova.addActionListener(new RenovaLocacao(this));
 
             JButton btnCancela = new JButton("Cancela");
-            btnCancela.addActionListener(new RemoveLocacao(this));
+            btnCancela.addActionListener(new CancelaLocacao(this));
 
             JButton btnConfirma = new JButton("Confirma fim de locacao");
-            //btnConfirma.addActionListener();
+            btnConfirma.addActionListener(new RemoveLocacao(this));
         }    
 
     }
