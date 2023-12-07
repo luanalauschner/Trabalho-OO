@@ -237,6 +237,10 @@ public class TelaCliente {
 
     }
 
+    public void exibeReserva(){
+        
+    }
+
     public void renovaLocacao(){
 
         int selectedIndex = jlLocacao.getSelectedIndex();
@@ -312,6 +316,13 @@ public class TelaCliente {
 
     }
 
-    
+    public void listaLocacao(){
+
+    }
+
+
+    public void listaReserva(){
+
+    }
 
 }
