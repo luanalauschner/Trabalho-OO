@@ -226,7 +226,7 @@ public class TelaCliente {
             painel_dir.add(tfLocador); 
 
             JButton btnRenova = new JButton("Renova");
-            //btnAdicionar.addActionListener(new AdicionaFilial(this));
+            //btnAdicionar.addActionListener();
 
             JButton btnCancela = new JButton("Cancela");
             //btnCancela.addActionListener();
@@ -239,14 +239,79 @@ public class TelaCliente {
 
     public void renovaLocacao(){
 
+        int selectedIndex = jlLocacao.getSelectedIndex();
+
+        if(selectedIndex != -1){
+
+            DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
+            Locacao locacao = model.get(selectedIndex);
+
+            //model.remove(selectedIndex);
+
+            /*try {
+                contato.setEmail(tfEmail.getText());
+                contato.setNome(tfNome.getText());
+                contato.setTelefone(tfTelefone.getText());
+                contato.setDescricao(tfDescricao.getText());
+            }catch(EmailException ex){
+                JOptionPane.showMessageDialog(tela, "O email " +tfEmail.getText() +" é invalido!");
+            }*/
+
+            cliente.renovarLocacao(locacao);
+        }
+
     }
 
     public void cancelaLocacao(){
+
+        int selectedIndex = jlLocacao.getSelectedIndex();
+
+        if(selectedIndex != -1){
+
+            DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
+            Locacao locacao = model.get(selectedIndex);
+
+            //model.remove(selectedIndex);
+
+            /*try {
+                contato.setEmail(tfEmail.getText());
+                contato.setNome(tfNome.getText());
+                contato.setTelefone(tfTelefone.getText());
+                contato.setDescricao(tfDescricao.getText());
+            }catch(EmailException ex){
+                JOptionPane.showMessageDialog(tela, "O email " +tfEmail.getText() +" é invalido!");
+            }*/
+
+            cliente.cancelaLocacao(locacao, null);
+        }
 
     }
 
     public void confirmaTermino(){
 
+        int selectedIndex = jlLocacao.getSelectedIndex();
+
+        if(selectedIndex != -1){
+
+            DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
+            Locacao locacao = model.get(selectedIndex);
+
+            //model.remove(selectedIndex);
+
+            /*try {
+                contato.setEmail(tfEmail.getText());
+                contato.setNome(tfNome.getText());
+                contato.setTelefone(tfTelefone.getText());
+                contato.setDescricao(tfDescricao.getText());
+            }catch(EmailException ex){
+                JOptionPane.showMessageDialog(tela, "O email " +tfEmail.getText() +" é invalido!");
+            }*/
+
+            cliente.confirmarTermino(true, locacao);
+        }
+
     }
+
+    
 
 }
