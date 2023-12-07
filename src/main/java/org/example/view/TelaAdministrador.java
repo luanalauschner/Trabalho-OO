@@ -445,7 +445,7 @@ public class TelaAdministrador {
         btnAdicionar.addActionListener(new AdicionaCarro(this));
 
         painel.setLayout(new BorderLayout());
-        painel.add(btnAdicionar);
+        tela_adm.add(btnAdicionar);
         painel.add(formulario_carro, BorderLayout.CENTER);
         
 
