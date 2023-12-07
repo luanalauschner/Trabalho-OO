@@ -113,7 +113,7 @@ public class TelaAdministrador {
         menuVoltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                desenha();
+                desenhaSplitPanel();
             } 
         });
 
@@ -307,6 +307,8 @@ public class TelaAdministrador {
      
         //inicialização do splitPane
         JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, painel_esq, painel_dir);
+
+        painel_dir.setVisible(true);
         
         sp.setDividerLocation(250); //confira o local inicial da divisão
         tela_adm.add(sp); //adiciona o splitPane ao JFrame
@@ -350,9 +352,11 @@ public class TelaAdministrador {
 
         painel.setLayout(new BorderLayout());
         painel.add(formulario_cliente, BorderLayout.CENTER);
+        
+        painel_esq.setVisible(false);
 
         tela_adm.getContentPane().add(painel, BorderLayout.WEST);
-        //tela_adm.pack();
+        tela_adm.pack();
 
     }
 
