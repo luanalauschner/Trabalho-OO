@@ -240,6 +240,30 @@ public class TelaCliente {
 
     public void exibeReserva(){
 
+        int selectedIndex = jlLocacao.getSelectedIndex();
+
+
+        JTextField tfId, tfCarro, tfDataInicio, tfDataFim;
+
+        if(selectedIndex != -1){
+            DefaultListModel<Reserva> model = (DefaultListModel<Reserva>)jlReserva.getModel();
+            Reserva r = model.get(selectedIndex);
+
+            //conversão do tipo date para String
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+            tfId = new JTextField(String.valueOf(r.getId()));
+            tfCarro = new JTextField(r.getCarro().getPlaca());
+            tfDataInicio = new JTextField(formato.format(r.getDataInicio()));
+            tfDataFim = new JTextField(formato.format(r.getDataFim()));
+
+            painel_dir.add(tfId);
+            painel_dir.add(tfNome);
+            painel_dir.add(tfCarro);
+            painel_dir.add(tfDataInicio);
+            painel_dir.add(tfDataFim);
+        } 
+
     }
 
     public void renovaLocacao(){
