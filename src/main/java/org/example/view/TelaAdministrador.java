@@ -680,12 +680,9 @@ public class TelaAdministrador {
 
     public void cadastraCarro(){
         DefaultListModel<Carro> model = (DefaultListModel<Carro>)jlCarro.getModel();
-        try{
+        
             model.addElement(new Carro(Integer.parseInt(tfAno.getText()), tfPlaca.getText(), tfCor.getText(), tfMarca.getText(), tfModelo.getText(), true, Double.parseDouble(tfPrecoDiaria.getText())));
             JOptionPane.showMessageDialog(tela_adm, "Carro cadastrado com sucesso!");
-        } catch(FormatoException e){
-            JOptionPane.showMessageDialog(tela_adm, "Placa no formato errado");
-        }
 
     }
 
