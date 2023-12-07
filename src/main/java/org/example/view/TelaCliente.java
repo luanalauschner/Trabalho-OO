@@ -115,6 +115,13 @@ public class TelaCliente {
 
         });*/
 
+        menuVoltar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                desenha(cliente);
+            }
+        });
+
         //adicionando os itens ao menu consulta
         menuConsulta.add(miConsultaLocacao);
         menuConsulta.add(miConsultaReservas);
