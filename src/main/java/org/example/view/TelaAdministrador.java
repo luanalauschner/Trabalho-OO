@@ -394,11 +394,12 @@ public class TelaAdministrador {
         formulario_func.add(painelLabel);
         formulario_func.add(painelField);
 
-        painel.setLayout(new BorderLayout());
-        painel.add(formulario_func, BorderLayout.CENTER);
-
         JButton btnAdicionar = new JButton("Adicionar");
         btnAdicionar.addActionListener(new AdicionaFuncionario(this));
+
+        painel.setLayout(new BorderLayout());
+        painel.add(btnAdicionar);
+        painel.add(formulario_func, BorderLayout.CENTER);
 
 
     }
@@ -439,12 +440,14 @@ public class TelaAdministrador {
 
         formulario_carro.add(painelLabel);
         formulario_carro.add(painelField);
-
-        painel.setLayout(new BorderLayout());
-        painel.add(formulario_carro, BorderLayout.CENTER);
-
+        
         JButton btnAdicionar = new JButton("Adicionar");
         btnAdicionar.addActionListener(new AdicionaCarro(this));
+
+        painel.setLayout(new BorderLayout());
+        painel.add(btnAdicionar);
+        painel.add(formulario_carro, BorderLayout.CENTER);
+        
 
     }
 
@@ -491,12 +494,14 @@ public class TelaAdministrador {
         painelField.add(tfCep);
         painelField.add(tfEstado);
         painelField.add(jcGerentes);
-
-        painel.setLayout(new BorderLayout());
-        painel.add(formulario_filial, BorderLayout.CENTER);
-
+        
         JButton btnAdicionar = new JButton("Adicionar");
         btnAdicionar.addActionListener(new AdicionaFilial(this));
+
+        painel.setLayout(new BorderLayout());
+        painel.add(btnAdicionar);
+        painel.add(formulario_filial, BorderLayout.CENTER);
+
 
     }
     
@@ -517,6 +522,7 @@ public class TelaAdministrador {
             painel_dir.add(tfCpf_Cliente);
             painel_dir.add(tfTelefone_Cliente);
             painel_dir.add(tfHabilitacao_Cliente);
+
         }
         
     }
