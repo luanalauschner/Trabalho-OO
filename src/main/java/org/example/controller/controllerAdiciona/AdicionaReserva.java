@@ -5,10 +5,7 @@
  */
 package org.example.controller.controllerAdiciona;
 
-/**
- *
- * @author Lana S. Silva
- */
+
 public class AdicionaReserva {
     
 }

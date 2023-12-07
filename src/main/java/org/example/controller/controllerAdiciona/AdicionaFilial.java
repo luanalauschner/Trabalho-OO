@@ -10,10 +10,6 @@ import java.awt.event.ActionListener;
 
 import org.example.view.TelaAdministrador;
 
-/**
- *
- * @author Lana S. Silva
- */
 public class AdicionaFilial implements ActionListener{
 
     private final TelaAdministrador tela;

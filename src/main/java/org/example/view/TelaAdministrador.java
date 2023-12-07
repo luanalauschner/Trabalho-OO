@@ -355,6 +355,8 @@ public class TelaAdministrador {
         JButton btnAdicionar = new JButton("Adicionar");
         btnAdicionar.addActionListener(new AdicionaCliente(this));
 
+        tela_adm.pack();
+
     }
 
     public void desenhaFormulario_Func(){
@@ -400,6 +402,8 @@ public class TelaAdministrador {
 
         JButton btnAdicionar = new JButton("Adicionar");
         btnAdicionar.addActionListener(new AdicionaFuncionario(this));
+
+
     }
 
     public void desenhaFormulario_carro(){

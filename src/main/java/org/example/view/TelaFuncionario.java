@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+ 
 package org.example.view;
 
 import org.example.controller.*;
@@ -24,7 +24,7 @@ import java.util.List;
 /**
  *
  * @author Lana S. Silva
- */
+ 
 public class TelaFuncionario {
 
     private JFrame tela_funcionario;
@@ -102,7 +102,7 @@ public class TelaFuncionario {
                 throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
             }
 
-        });*/
+        });
 
         menuVoltar.addActionListener(new ActionListener(){
             @Override
@@ -126,3 +126,5 @@ public class TelaFuncionario {
 
     }
 }
+
+*/

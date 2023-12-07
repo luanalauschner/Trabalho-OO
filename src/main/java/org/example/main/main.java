@@ -5,9 +5,12 @@
  */
 package org.example.main;
 
+import org.example.view.TelaAdministrador;
+
 public class main {
     
     public static void main(String args[]){
-        
+        TelaAdministrador tela = new TelaAdministrador();
+        tela.desenha();
     }
 }
