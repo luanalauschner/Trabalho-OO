@@ -301,8 +301,8 @@ public class TelaAdministrador {
         painel_esq.setBorder(BorderFactory.createTitledBorder("Listagem"));
         
         //definição do tamanho dos paineis
-        //painel_dir.setPreferredSize(new Dimension(WIDTH/2, HEIGHT));
-        //painel_esq.setPreferredSize(new Dimension(WIDTH/2, HEIGHT));
+        painel_dir.setPreferredSize(new Dimension(WIDTH/2, HEIGHT));
+        painel_esq.setPreferredSize(new Dimension(WIDTH/2, HEIGHT));
       
      
         //inicialização do splitPane
@@ -351,8 +351,8 @@ public class TelaAdministrador {
         painel.setLayout(new BorderLayout());
         painel.add(formulario_cliente, BorderLayout.CENTER);
 
-        tela_adm.getContentPane().add(painel, BorderLayout.CENTER);
-        tela_adm.pack();
+        tela_adm.getContentPane().add(painel, BorderLayout.WEST);
+        //tela_adm.pack();
 
     }
 
