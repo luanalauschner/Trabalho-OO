@@ -22,9 +22,9 @@ public class Carro {
     private boolean disponibilidade;
     private double preco_diaria;
 
-    public Carro(int ano, String placa, String cor, String marca, String modelo, boolean disponibilidade, double preco_diaria) throws FormatoException{
+    public Carro(int ano, String placa, String cor, String marca, String modelo, boolean disponibilidade, double preco_diaria){
         this.ano = ano;
-        this.placa = validaPlaca(placa);
+        this.placa = placa;
         this.cor = cor;
         this.marca = marca;
         this.modelo = modelo;
@@ -145,9 +145,4 @@ public class Carro {
         return this.placa;
     }
 
-    public String validaPlaca(String s) throws FormatoException{
-        //valida o formato da placa, sendo ele: XXXNXNN (x = letra e n = numero)
-
-        return s;
-    }
 }
