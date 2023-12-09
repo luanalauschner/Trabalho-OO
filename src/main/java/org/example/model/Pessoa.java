@@ -40,12 +40,12 @@ public abstract class Pessoa {
         this.nome = nome;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setTelefone(String telefone) throws FormatoException{
+        this.telefone = validarTelefone(telefone);
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setCpf(String cpf) throws FormatoException{
+        this.cpf = validarCpf(cpf);
     }
 
     /*public static boolean confereCaracter(String s){

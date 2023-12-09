@@ -56,8 +56,8 @@ public class Cliente extends Pessoa{
         return credito;
     }
 
-    public void setHabilitacao(String habilitacao) {
-        this.habilitacao = habilitacao;
+    public void setHabilitacao(String habilitacao) throws FormatoException{
+        this.habilitacao = validaHabilitacao(habilitacao);
     }
 
 

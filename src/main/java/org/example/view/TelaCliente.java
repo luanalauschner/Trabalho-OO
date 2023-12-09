@@ -15,8 +15,7 @@ import org.example.controller.controllerCancela.CancelaLocacao;
 import org.example.controller.controllerCancela.CancelaReserva;
 import org.example.controller.controllerSeleciona.SelecionaLocacao;
 import org.example.controller.controllerSeleciona.SelecionaReserva;
-
-
+import org.example.exception.FormatoException;
 //importação do package model
 import org.example.model.*;
 
@@ -439,7 +438,33 @@ public class TelaCliente {
     }
 
     public void atualizaCliente(){
+        
+        if(tfNome.getText() != null)
+            cliente.setNome(tfNome.getText());
 
+        if(tfCpf.getText()!=null){
+            try{
+                cliente.setCpf(tfCpf.getText());
+            }catch(FormatoException e){
+                JOptionPane.showMessageDialog(tela_cliente, "O CPf apresenta um formato inválido!");
+            }
+        }
+
+        if(tfHabilitacao.getText()!=null){
+            try{
+                cliente.setHabilitacao(tfHabilitacao.getText());
+            }catch(FormatoException e){
+                JOptionPane.showMessageDialog(tela_cliente, "A CNH apresenta um formato inválido!");
+            }
+        }
+        
+        if(tfTelefone.getText()!=null){
+            try{
+                cliente.setTelefone(tfTelefone.getText());
+            }catch(FormatoException e){
+                JOptionPane.showMessageDialog(tela_cliente, "O telefone apresenta um formato inválido!");
+            }
+        }
     }
 
 }

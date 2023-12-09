@@ -5,7 +5,20 @@
  */
 package org.example.controller.controllerAdiciona;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class AdicionaReserva {
-    
+import org.example.view.TelaFuncionario;
+
+public class AdicionaReserva implements ActionListener{
+
+    private TelaFuncionario tela;
+
+    public AdicionaReserva(TelaFuncionario tela) {
+        this.tela = tela;
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        tela.adicionaReserva();
+    }
 }

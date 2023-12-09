@@ -1,11 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- 
 package org.example.view;
 
 import org.example.controller.*;
+import org.example.controller.controllerAdiciona.AdicionaFuncionario;
+import org.example.controller.controllerAdiciona.AdicionaLocacao;
+import org.example.controller.controllerAdiciona.AdicionaReserva;
+import org.example.controller.controllerAtualiza.AtualizaFuncionario;
+import org.example.controller.controllerCancela.CancelaLocacao;
+import org.example.controller.controllerRemove.RemoveLocacao;
+import org.example.controller.controllerRenova.RenovaLocacao;
 import org.example.exception.*;
 
 //import do controller model
@@ -19,11 +21,10 @@ import org.example.model.Cliente;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-/**
- *
- * @author Lana S. Silva
+
  
 public class TelaFuncionario {
 
@@ -37,19 +38,20 @@ public class TelaFuncionario {
 
     private JList<Locacao> jlLocacao;
     private JList<Reserva> jlReserva;
-    private JList<Cliente> jlCliente;
 
     //inicialização do menu
     private JMenuBar menuBarra;
-    private JMenu menuConsulta;
     private JMenu menuVoltar;
+    private JMenu menuAtualiza;
 
-    //inicializacao do menuItem
-    private JMenuItem miLocacoes, miReservas;
 
     //inicializacao dos botões utilizados
     private JButton adicionaLocacao, adicionaReserva, calculaComissao, calculaSalario;
     private JButton validaCredito;
+
+    private JComboBox<String> jcLista_cargos;
+
+    private JTextField tfNome, tfSalario, tfCpf, tfTelefone;
 
     public void desenha(Funcionario f){
         
@@ -72,34 +74,12 @@ public class TelaFuncionario {
 
         //inicializa os menus
         menuBarra = new JMenuBar();
-        menuConsulta = new JMenu("Consulta");
-        //menuAtualiza = new JMenu("Atualiza dados");
         menuVoltar = new JMenu("Página Inicial");
 
-        //inicializa os itens do menu consulta
-        miLocacoes = new JMenuItem("Consulta Locações ");
-        miReservas = new JMenuItem("Consulta Reservas");
-
-        //definindo o actionListener
-        miConsultaLocacao.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                listaLocacao();
-            }
-        });
-
-        miConsultaReservas.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                listaReserva();
-            }
-        });
-
-        /*menuAtualiza.addActionListener(new ActionListener(){
+        menuAtualiza.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+                formularioAtualiza();
             }
 
         });
@@ -107,24 +87,154 @@ public class TelaFuncionario {
         menuVoltar.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                desenha(cliente);
+                desenha(funcionario);
             }
         });
 
-        //adicionando os itens ao menu consulta
-        menuConsulta.add(miConsultaLocacao);
-        menuConsulta.add(miConsultaReservas);
-
         //adicionando ao menu barra
         menuBarra.add(menuVoltar);
-        //menuBarra.add(menuAtualiza);
-        menuBarra.add(menuConsulta);
+
+        tela_funcionario.setJMenuBar(menuBarra);
 
     }
 
     public void desenhaPaginaInicial(){
 
+        JPanel painel = new JPanel();
+        JPanel painel2 = new JPanel();
+        JPanel painelButton = new JPanel();
+
+        DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
+        JList<Locacao> modelList = new JList<>(model);
+
+        painel.add(new JScrollPane(modelList));
+        
+        DefaultListModel<Reserva> model2 = (DefaultListModel<Reserva>)jlReserva.getModel();
+        JList<Reserva> modelList2 = new JList<>(model2);
+
+        painel2.add(new JScrollPane(modelList2));
+
+        JButton btnRenova = new JButton("Adiciona locação");
+        btnRenova.addActionListener(new AdicionaLocacao(this));
+
+        JButton btnCancela = new JButton("Adiciona reserva");
+        btnCancela.addActionListener(new AdicionaReserva(this));
+
+        JButton btnConfirma = new JButton("Valida crédito");
+        btnConfirma.addActionListener(new ValidaClientes(this));
+
+        painelButton.add(btnRenova);
+        painelButton.add(btnCancela);
+        painelButton.add(btnConfirma);
+
+        JPanel listas = new JPanel();
+        listas.add(painel, BorderLayout.WEST);
+        listas.add(painel2, BorderLayout.EAST);
+
+        JPanel principal = new JPanel();
+        principal.add(listas, BorderLayout.CENTER);
+        principal.add(painelButton, BorderLayout.SOUTH);
+
+        tela_funcionario.getContentPane().add(principal);
+
+    }
+
+    public void formularioAtualiza(){
+        //criação do painel
+        JPanel painel = new JPanel();
+        painel.setBorder(BorderFactory.createTitledBorder("Atualiza dados"));
+
+        //criação do painel que contém o formulário
+        JPanel formulario_func = new JPanel();
+        JPanel painelLabel = new JPanel();
+        painelLabel.setLayout(new GridLayout(0, 1, H_GAP,V_GAP));
+        painelLabel.add(new JLabel("Nome"));
+        painelLabel.add(new JLabel("CPF"));
+        painelLabel.add(new JLabel("Telefone"));
+        painelLabel.add(new JLabel("Cargo"));
+        painelLabel.add(new JLabel("Salário"));
+
+        //implementação que contém os espaços que o usuário preenche os dados do funcionário
+        JPanel painelField = new JPanel();
+        painelField.setLayout(new GridLayout(0,1, H_GAP,V_GAP));
+        tfNome = new JTextField(20);
+        tfCpf = new JTextField(20);
+        tfTelefone = new JTextField(20);
+        tfSalario = new JTextField(20);
+
+        //inicialização do jComboBox para seleção do cargo
+        String[] list = {"Locador", "Gerente"};
+        jcLista_cargos = new JComboBox(list);
+
+        //inserção do elementos TextField
+        painelField.add(tfNome);
+        painelField.add(tfCpf);
+        painelField.add(tfTelefone);
+        painelField.add(jcLista_cargos);
+        painelField.add(tfSalario);
+
+        formulario_func.add(painelLabel);
+        formulario_func.add(painelField);
+
+        JButton btnAdicionar = new JButton("Adicionar");
+        btnAdicionar.addActionListener(new AtualizaFuncionario(this));
+
+        painel.setLayout(new BorderLayout());
+        painel.add(btnAdicionar);
+        painel.add(formulario_func, BorderLayout.CENTER);
+
+        JPanel principal = new JPanel();
+
+        principal.add(painel, BorderLayout.NORTH);
+        principal.add(btnAdicionar, BorderLayout.SOUTH);
+
+        
+        principal.setVisible(true);
+        //splitPanel.setVisible(false);
+
+        tela_funcionario.add(principal);
+        tela_funcionario.pack();
+
+    }
+
+    public void atualizaFuncionario(){
+        
+        if(tfNome.getText() != null)
+            funcionario.setNome(tfNome.getText());
+
+        if(tfCpf.getText()!=null){
+            try{
+                funcionario.setCpf(tfCpf.getText());
+            }catch(FormatoException e){
+                JOptionPane.showMessageDialog(tela_funcionario, "O CPf apresenta um formato inválido!");
+            }
+        }
+        
+        if(jcLista_cargos.getSelectedItem() != null)
+            funcionario.setCargo((String)jcLista_cargos.getSelectedItem());
+        
+        if(tfSalario.getText() != null)
+            funcionario.setSalario(Double.parseDouble(tfSalario.getText()));
+        
+        if(tfTelefone.getText()!= null){
+            try{
+                funcionario.setTelefone(tfTelefone.getText());
+            }catch(FormatoException e){
+                JOptionPane.showMessageDialog(tela_funcionario, "O telefone apresenta um formato inválido!");
+            }
+        }
+    }
+
+    public void adicionaReserva(){
+
+    }
+
+    public void adicionaLocacao(){
+
+    }
+
+    public void validaCredito(){
+        funcionario.validaCliente();
     }
 }
 
-*/
