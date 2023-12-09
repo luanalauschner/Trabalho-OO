@@ -745,7 +745,7 @@ public class TelaAdministrador {
             try{
                 model.addElement(new Carro(Integer.parseInt(tfAno.getText()), tfPlaca.getText(), tfCor.getText(), tfMarca.getText(), tfModelo.getText(), true, Double.parseDouble(tfPrecoDiaria.getText())));
                 JOptionPane.showMessageDialog(tela_adm, "Carro cadastrado com sucesso!");
-            }catch(FormatoException){
+            }catch(FormatoException e){
                 System.out.println("Formato da placa inválida!");
             }
 
