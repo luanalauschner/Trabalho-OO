@@ -94,8 +94,15 @@ public class Filial extends Endereco{
         locacoes.add(l);
     }
 
-    @Override
+    public void removeReserva(Reserva r){
+        reservas.remove(r);
+    }
 
+    public void adicionaReserva(Reserva r){
+        reservas.add(r);
+    }
+
+    @Override
     public String toString(){
         return String.valueOf(this.id);
     }

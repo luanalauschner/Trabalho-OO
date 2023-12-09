@@ -5,17 +5,17 @@ import java.awt.event.ActionListener;
 
 import org.example.view.TelaCliente;
 
-public class CancelaLocacao implements ActionListener{
+public class CancelaReserva implements ActionListener{
 
     private final TelaCliente tela;
 
-    public CancelaLocacao(TelaCliente tela) {
+    public CancelaReserva(TelaCliente tela) {
         this.tela = tela;
     }
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        tela.cancelaLocacao();
+        tela.cancelaReserva();
     }
     
 }

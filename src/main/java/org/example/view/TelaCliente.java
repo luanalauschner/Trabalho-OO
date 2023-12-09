@@ -8,10 +8,11 @@ package org.example.view;
 //importação do package de controller
 import org.example.controller.*;
 import org.example.controller.controllerAdiciona.AdicionaCliente;
+import org.example.controller.controllerAtualiza.AtualizaClientes;
 import org.example.controller.controllerRemove.RemoveLocacao;
-import org.example.controller.controllerRemove.RemoveReserva;
 import org.example.controller.controllerRenova.RenovaLocacao;
 import org.example.controller.controllerCancela.CancelaLocacao;
+import org.example.controller.controllerCancela.CancelaReserva;
 import org.example.controller.controllerSeleciona.SelecionaLocacao;
 import org.example.controller.controllerSeleciona.SelecionaReserva;
 
@@ -410,7 +411,7 @@ public class TelaCliente {
         formulario_cliente.add(painelField);
 
         JButton btnAdicionar = new JButton("Adicionar");
-        btnAdicionar.addActionListener(new AtualizaCliente(this));
+        btnAdicionar.addActionListener(new AtualizaClientes(this));
 
         painel3.setLayout(new BorderLayout());
         painel3.add(formulario_cliente, BorderLayout.NORTH);
@@ -422,6 +423,23 @@ public class TelaCliente {
 
         tela_cliente.add(principal);
         tela_cliente.pack();
+    }
+
+    public void cancelaReserva(){
+
+        int selectedIndex = jlReserva.getSelectedIndex();
+
+        if(selectedIndex != -1){
+
+            DefaultListModel<Reserva> model = (DefaultListModel<Reserva>)jlReserva.getModel();
+            Reserva reserva = model.get(selectedIndex);
+            cliente.cancelaReserva(reserva);
+            model.remove(selectedIndex);
+        }
+    }
+
+    public void atualizaCliente(){
+
     }
 
 }

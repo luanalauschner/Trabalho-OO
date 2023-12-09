@@ -258,4 +258,22 @@ public class Cliente extends Pessoa{
         }
         return s;
     }
+
+    public void cancelaReserva(Reserva r){
+        reservas.remove(r);
+        Administrador.removeReserva(r);
+    }
+
+    public void reservaFilial(Reserva l){
+        List<Filial> filiais = Administrador.getFiliais();
+        List<Reserva> reservas = null;
+
+        for(Filial f : filiais){
+            reservas = f.getReservas();
+            for(Reserva l2 : reservas){
+                if(l.equals(l2))
+                    f.removeReserva(l);
+            }
+        }
+    }
 }
