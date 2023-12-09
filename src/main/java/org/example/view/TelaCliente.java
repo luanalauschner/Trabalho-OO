@@ -7,7 +7,9 @@ package org.example.view;
 
 //importação do package de controller
 import org.example.controller.*;
+import org.example.controller.controllerAdiciona.AdicionaCliente;
 import org.example.controller.controllerRemove.RemoveLocacao;
+import org.example.controller.controllerRemove.RemoveReserva;
 import org.example.controller.controllerRenova.RenovaLocacao;
 import org.example.controller.controllerCancela.CancelaLocacao;
 import org.example.controller.controllerSeleciona.SelecionaLocacao;
@@ -51,12 +53,10 @@ public class TelaCliente {
     private JMenu menuConsulta;
     //private JMenu menuAtualiza;
     private JMenu menuVoltar;
+    private JMenu menuAtualiza;
     private JMenuItem miConsultaLocacao, miConsultaReservas;
     
-
-    //inicializa os paineis
-    private JPanel painel_dir;
-    private JPanel painel_esq;
+    private JTextField tfId, tfCarro, tfDataInicio, tfDataFim, tfValidade, tfLocador;
 
     //inicializa os text fields utilizados
     private JTextField tfNome, tfHabilitacao, tfTelefone, tfCpf, tfCredito;
@@ -84,7 +84,7 @@ public class TelaCliente {
         //inicializa os menus
         menuBarra = new JMenuBar();
         menuConsulta = new JMenu("Consulta");
-        //menuAtualiza = new JMenu("Atualiza dados");
+        menuAtualiza = new JMenu("Atualiza dados");
         menuVoltar = new JMenu("Página Inicial");
 
         //inicializa os itens do menu consulta
@@ -106,14 +106,13 @@ public class TelaCliente {
             }
         });
 
-        /*menuAtualiza.addActionListener(new ActionListener(){
+        menuAtualiza.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+                formularioAtualiza();
             }
 
-        });*/
+        });
 
         menuVoltar.addActionListener(new ActionListener(){
             @Override
@@ -128,7 +127,7 @@ public class TelaCliente {
 
         //adicionando ao menu barra
         menuBarra.add(menuVoltar);
-        //menuBarra.add(menuAtualiza);
+        menuBarra.add(menuAtualiza);
         menuBarra.add(menuConsulta);
 
         tela_cliente.setJMenuBar(menuBarra);
@@ -139,15 +138,15 @@ public class TelaCliente {
     public void liberaMenu(){
         menuVoltar.setEnabled(true);
         menuConsulta.setEnabled(true);
-        //menuAtualiza.setEnabled(true);
+        menuAtualiza.setEnabled(true);
         menuBarra.setVisible(true);
     }
 
     public void desenhaPaginaInicial(){
 
         //implementação painel esquerdo
-        painel_esq = new JPanel();
-        painel_esq.setBorder(BorderFactory.createTitledBorder("Dados do Cliente"));
+        JPanel painel = new JPanel();
+        painel.setBorder(BorderFactory.createTitledBorder("Dados do Cliente"));
 
         //no painel esq vai ser exibido os dados do cliente
         JPanel painelLabel = new JPanel();
@@ -161,7 +160,6 @@ public class TelaCliente {
         //implementação dos espaços com as informações do cliente
         JPanel painelField = new JPanel();
         painelField.setLayout(new GridLayout(0, 1, H_GAP,V_GAP));
-        
         tfNome = new JTextField(cliente.getNome());
         tfHabilitacao = new JTextField(cliente.getHabilitacao());
         tfTelefone = new JTextField(cliente.getTelefone());
@@ -178,36 +176,25 @@ public class TelaCliente {
         painelField.add(tfTelefone);
         painelField.add(tfCpf);
 
-        painel_esq.add(painelLabel);
-        painel_esq.add(painelField);
+        painel.add(painelLabel);
+        painel.add(painelField);
 
-        painel_esq.setLayout(new BorderLayout());
-        //painel_esq.add(painelLabel, BorderLayout.CENTER);
-
-
+        tela_cliente.getContentPane().add(painel, BorderLayout.WEST);
 
         //implementação painel direito
-        painel_dir = new JPanel();
-        painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Locações ativas:"));
+        JPanel painel2 = new JPanel();
+        painel2.setBorder(BorderFactory.createTitledBorder("Lista de Locações ativas:"));
 
         DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
         JList<Locacao> modelList = new JList<>(model);
 
-        painel_dir.add(new JScrollPane(modelList));
-
-        JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, painel_esq, painel_dir);
-
-        sp.setDividerLocation(250);
-        tela_cliente.add(sp);
+        painel2.add(new JScrollPane(modelList));
+        tela_cliente.getContentPane().add(painel2, BorderLayout.CENTER);
 
     }
 
     public void exibeLocacao(){
-
         int selectedIndex = jlLocacao.getSelectedIndex();
-
-
-        JTextField tfId, tfCarro, tfDataInicio, tfDataFim, tfValidade, tfLocador;
 
         if(selectedIndex != -1){
             DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
@@ -216,57 +203,34 @@ public class TelaCliente {
             //conversão do tipo date para String
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
-            tfId = new JTextField(String.valueOf(l.getId()));
-            tfCarro = new JTextField(l.getCarro_alugado().getPlaca());
-            tfDataInicio = new JTextField(formato.format(l.getDataInicio()));
-            tfDataFim = new JTextField(formato.format(l.getDataFim()));
-            tfValidade = new JTextField(String.valueOf(Locacao.validade(l)));
-            tfLocador = new JTextField(l.getLocador().getNome());
+            tfId.setText(String.valueOf(l.getId()));
+            tfCarro.setText(l.getCarro_alugado().getPlaca());
+            tfDataInicio.setText(formato.format(l.getDataInicio()));
+            tfDataFim.setText(formato.format(l.getDataFim()));
+            tfValidade.setText(String.valueOf(Locacao.validade(l)));
+            tfLocador.setText(l.getLocador().getNome());
 
-            painel_dir.add(tfId);
-            painel_dir.add(tfNome);
-            painel_dir.add(tfCarro);
-            painel_dir.add(tfDataInicio);
-            painel_dir.add(tfDataFim);
-            painel_dir.add(tfValidade);
-            painel_dir.add(tfLocador); 
-
-            JButton btnRenova = new JButton("Renova");
-            btnRenova.addActionListener(new RenovaLocacao(this));
-
-            JButton btnCancela = new JButton("Cancela");
-            btnCancela.addActionListener(new CancelaLocacao(this));
-
-            JButton btnConfirma = new JButton("Confirma fim de locacao");
-            btnConfirma.addActionListener(new RemoveLocacao(this));
         }    
 
     }
 
     public void exibeReserva(){
 
-        int selectedIndex = jlLocacao.getSelectedIndex();
-
-
-        JTextField tfId, tfCarro, tfDataInicio, tfDataFim;
+        int selectedIndex = jlLocacao.getSelectedIndex(); //JTextField tfId, tfCarro, tfDataInicio, tfDataFim;
 
         if(selectedIndex != -1){
             DefaultListModel<Reserva> model = (DefaultListModel<Reserva>)jlReserva.getModel();
-            Reserva r = model.get(selectedIndex);
+            Reserva l = model.get(selectedIndex);
 
             //conversão do tipo date para String
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
-            tfId = new JTextField(String.valueOf(r.getId()));
-            tfCarro = new JTextField(r.getCarro().getPlaca());
-            tfDataInicio = new JTextField(formato.format(r.getDataInicio()));
-            tfDataFim = new JTextField(formato.format(r.getDataFim()));
+            tfId = new JTextField(String.valueOf(l.getId()));
+            tfCarro = new JTextField(l.getCarro().getPlaca());
+            tfDataInicio = new JTextField(formato.format(l.getDataInicio()));
+            tfDataFim = new JTextField(formato.format(l.getDataFim()));
 
-            painel_dir.add(tfId);
-            painel_dir.add(tfNome);
-            painel_dir.add(tfCarro);
-            painel_dir.add(tfDataInicio);
-            painel_dir.add(tfDataFim);
+            
         } 
 
     }
@@ -314,34 +278,150 @@ public class TelaCliente {
 
     public void listaLocacao(){
 
-        painel_dir = new JPanel();
-        painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Locações ativas:"));
+        JPanel painel = new JPanel();
+        JPanel painelLabel = new JPanel();
+        JPanel painelField = new JPanel();
+        painel.setBorder(BorderFactory.createTitledBorder("Lista de Locações ativas:"));
 
         DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
         JList<Locacao> modelList = new JList<>(model);
-
         modelList.addListSelectionListener(new SelecionaLocacao(this));
 
-        JScrollPane sc = new JScrollPane(modelList);
+        tfId = new JTextField();
+        tfCarro = new JTextField();
+        tfDataInicio = new JTextField();
+        tfDataFim = new JTextField();
+        tfValidade = new JTextField();
+        tfLocador = new JTextField();
 
-        painel_dir.add(sc);
+        painelField.add(tfId);
+        painelField.add(tfCarro);
+        painelField.add(tfDataInicio);
+        painelField.add(tfDataFim);
+        painelField.add(tfValidade);
+        painelField.add(tfLocador);
 
+        painelLabel.add(new JLabel("ID"));
+        painelLabel.add(new JLabel("Carro"));
+        painelLabel.add(new JLabel("Data início"));
+        painelLabel.add(new JLabel("Data Fim"));
+        painelLabel.add(new JLabel("Validade"));
+        painelLabel.add(new JLabel("Locador"));
+
+        JButton btnRenova = new JButton("Renova");
+        btnRenova.addActionListener(new RenovaLocacao(this));
+
+        JButton btnCancela = new JButton("Cancela");
+        btnCancela.addActionListener(new CancelaLocacao(this));
+
+        JButton btnConfirma = new JButton("Confirma fim de locacao");
+        btnConfirma.addActionListener(new RemoveLocacao(this));
+
+        JPanel painelButton = new JPanel();
+
+        painelButton.add(btnRenova);
+        painelButton.add(btnCancela);
+        painelButton.add(btnConfirma);
+
+        JPanel exibicao = new JPanel();
+        exibicao.add(painelLabel);
+        exibicao.add(painelField);
+
+        JPanel principal = new JPanel();
+
+        principal.add(exibicao, BorderLayout.CENTER);
+        principal.add(painelButton, BorderLayout.SOUTH);
+
+        tela_cliente.getContentPane().add(principal, BorderLayout.CENTER);
+        
     }
 
 
     public void listaReserva(){
 
-        painel_dir = new JPanel();
-        painel_dir.setBorder(BorderFactory.createTitledBorder("Lista de Reservas ativas:"));
+        JPanel painelField = new JPanel();
+        JPanel painelLabel = new JPanel();
+
+        painelField.setBorder(BorderFactory.createTitledBorder("Lista de Reservas ativas:"));
 
         DefaultListModel<Reserva> model = (DefaultListModel<Reserva>)jlReserva.getModel();
         JList<Reserva> modelList = new JList<>(model);
 
         modelList.addListSelectionListener(new SelecionaReserva(this));
 
-        JScrollPane sc = new JScrollPane(modelList);
+        painelField.add(tfId);
+        painelField.add(tfCarro);
+        painelField.add(tfDataInicio);
+        painelField.add(tfDataFim);
 
-        painel_dir.add(sc);
+        painelLabel.add(new JLabel("ID"));
+        painelLabel.add(new JLabel("Carro"));
+        painelLabel.add(new JLabel("Data início"));
+        painelLabel.add(new JLabel("Data Fim"));
+
+        JButton btnCancela = new JButton("Cancela");
+        btnCancela.addActionListener(new CancelaReserva(this));
+
+        JPanel painelButton = new JPanel();
+
+        painelButton.add(btnCancela);
+
+        JPanel exibicao = new JPanel();
+        exibicao.add(painelLabel);
+        exibicao.add(painelField);
+
+        JPanel principal = new JPanel();
+
+        principal.add(exibicao, BorderLayout.CENTER);
+        principal.add(painelButton, BorderLayout.SOUTH);
+
+        tela_cliente.getContentPane().add(principal, BorderLayout.CENTER);
+    }
+
+    public void formularioAtualiza(){
+
+        //criação do painel
+        JPanel painel3 = new JPanel();
+        painel3.setBorder(BorderFactory.createTitledBorder("Atualiza dados"));
+
+        //criação do painel que contém o formulário
+        JPanel formulario_cliente = new JPanel();
+        JPanel painelLabel = new JPanel();
+        painelLabel.setLayout(new GridLayout(0, 1, H_GAP,V_GAP));
+        painelLabel.add(new JLabel("Nome"));
+        painelLabel.add(new JLabel("CPF"));
+        painelLabel.add(new JLabel("Telefone"));
+        painelLabel.add(new JLabel("Habilitação"));
+
+        //implementação que contém os espaços que o usuário preenche os dados do cliente
+        JPanel painelField = new JPanel();
+        painelField.setLayout(new GridLayout(0,1, H_GAP,V_GAP));
+        tfNome = new JTextField(20);
+        tfCpf = new JTextField(20);
+        tfTelefone = new JTextField(20);
+        tfHabilitacao = new JTextField(20);
+
+        painelField.add(tfNome);
+        painelField.add(tfCpf);
+        painelField.add(tfTelefone);
+        painelField.add(tfHabilitacao);
+
+        formulario_cliente.add(painelLabel);
+        formulario_cliente.add(painelField);
+
+        JButton btnAdicionar = new JButton("Adicionar");
+        btnAdicionar.addActionListener(new AtualizaCliente(this));
+
+        painel3.setLayout(new BorderLayout());
+        painel3.add(formulario_cliente, BorderLayout.NORTH);
+
+        JPanel principal = new JPanel();
+
+        principal.add(painel3, BorderLayout.CENTER);
+        principal.add(btnAdicionar, BorderLayout.SOUTH);
+
+        tela_cliente.add(principal);
+        tela_cliente.pack();
     }
 
 }
