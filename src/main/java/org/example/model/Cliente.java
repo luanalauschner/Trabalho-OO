@@ -243,4 +243,19 @@ public class Cliente extends Pessoa{
 
         return numeroAleatorio;
     }
+
+    public String validaHabilitacao(String s) throws FormatoException{
+        //habilitação do tipo NNNNNNNNNNN (11) (N=numero)
+        char[] aux = s.toCharArray();
+
+        if(s.length() != 11){
+            throw new FormatoException();
+        }
+        for(int i=0; i < s.length(); i++){
+             if(aux[i] < '0' && aux[i] > '9'){
+                 throw new FormatoException();
+                }
+        }
+        return s;
+    }
 }

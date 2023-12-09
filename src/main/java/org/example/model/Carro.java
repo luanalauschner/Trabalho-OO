@@ -145,4 +145,24 @@ public class Carro {
         return this.placa;
     }
 
+    public String validaPlaca(String s) throws FormatoException{
+        //placa do tipo LLLNLNN (L=letra e N=numero)
+        String aux_s = s.toUpperCase();
+        char[] aux = aux_s.toCharArray();
+
+        for(int i=0; i < aux_s.length(); i++){
+            if(i>=0 && i<3 || i==4){
+                if(!Character.toString(aux[i]).matches("[A-Z]")){
+                    throw new FormatoException();
+                }
+            }
+
+            if(i==3 || i==5 || i==6){
+                if(aux[i] < '0' && aux[i] > '9'){
+                    throw new FormatoException();
+                }
+            }
+        }
+        return s;
+    }
 }
