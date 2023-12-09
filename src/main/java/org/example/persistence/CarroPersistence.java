@@ -3,7 +3,6 @@ package org.example.persistence;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.example.model.Carro;
-import org.example.model.Cliente;
 
 import java.io.File;
 import java.lang.reflect.Type;
@@ -40,5 +39,7 @@ public class CarroPersistence implements Persistence<Carro> {
             if (carros == null)
                 carros = new ArrayList<>();
         }
+
+        return carros;
     }
 }

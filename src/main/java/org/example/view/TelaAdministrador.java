@@ -243,12 +243,11 @@ public class TelaAdministrador {
     public void desenhaLista(){
 
         JPanel painel = new JPanel();
-        painel.setBorder(BorderFactory.createTitledBorder("Lista de: "));
+        painel.setBorder(BorderFactory.createTitledBorder("Listagem"));
         painel.setPreferredSize(new Dimension(WIDTH/3, HEIGHT));
         painel.setLayout(new BorderLayout());
 
         JPanel painel2 = new JPanel();
-        painel2.setBorder(BorderFactory.createTitledBorder("Lista de: "));
         painel2.setPreferredSize(new Dimension(WIDTH/3, HEIGHT));
         painel2.setLayout(new BorderLayout());
         
@@ -325,16 +324,6 @@ public class TelaAdministrador {
 
     public void desenhaFormulario_Cliente(){
 
-        JInternalFrame formulario = new JInternalFrame();
-        formulario.setTitle("Formulário novo cliente");
-
-        JDesktopPane desktop= new JDesktopPane();
-        tela_adm.add(desktop, BorderLayout.CENTER);  
-
-        formulario.setLocation(10, 10);  
-        formulario.setSize(500, 300);  
-        formulario.setVisible(true); 
-
         //criação do painel
         JPanel painel3 = new JPanel();
         painel3.setBorder(BorderFactory.createTitledBorder("Formulário novo cliente"));
@@ -374,9 +363,6 @@ public class TelaAdministrador {
 
         principal.add(painel3, BorderLayout.CENTER);
         principal.add(btnAdicionar, BorderLayout.SOUTH);
-        
-        //formulario.add(principal);
-        //desktop.add(formulario);
 
         tela_adm.add(principal);
         tela_adm.pack();
@@ -431,6 +417,7 @@ public class TelaAdministrador {
 
         principal.add(painel, BorderLayout.NORTH);
         principal.add(btnAdicionar, BorderLayout.SOUTH);
+
         
         principal.setVisible(true);
         //splitPanel.setVisible(false);
@@ -477,16 +464,21 @@ public class TelaAdministrador {
 
         formulario_carro.add(painelLabel);
         formulario_carro.add(painelField);
+
+        painel.add(formulario_carro, BorderLayout.SOUTH);
         
         JButton btnAdicionar = new JButton("Adicionar");
         btnAdicionar.addActionListener(new AdicionaCarro(this));
 
-        painel.setLayout(new BorderLayout());
-        tela_adm.add(btnAdicionar);
-        painel.add(formulario_carro, BorderLayout.CENTER);
-        
+        JPanel principal = new JPanel();
 
+        principal.add(painel, BorderLayout.CENTER);
+        principal.add(btnAdicionar, BorderLayout.SOUTH);
+
+        tela_adm.add(principal);
+        tela_adm.pack();
     }
+
 
     public void desenhaFormulario_filial(){
 
@@ -534,17 +526,26 @@ public class TelaAdministrador {
         
         JButton btnAdicionar = new JButton("Adicionar");
         btnAdicionar.addActionListener(new AdicionaFilial(this));
+        painel.add(formulario_filial);
+        
+        JPanel principal = new JPanel();
 
-        painel.setLayout(new BorderLayout());
-        painel.add(btnAdicionar);
-        painel.add(formulario_filial, BorderLayout.CENTER);
+        principal.add(painel, BorderLayout.CENTER);
+        principal.add(btnAdicionar, BorderLayout.SOUTH);
 
-
+        tela_adm.add(principal);
+        tela_adm.pack();
     }
+
     
     public void atualizaPainelDir_Clientes(){
 
         int selectedIndex = jlClientes.getSelectedIndex();
+        JPanel painel = new JPanel();
+        painel.setBorder(BorderFactory.createTitledBorder("Informações sobre o cliente"));
+        painel.setPreferredSize(new Dimension(WIDTH/3, HEIGHT));
+        painel.setLayout(new BorderLayout());
+        tela_adm.add(painel, BorderLayout.SOUTH);
 
         if(selectedIndex != -1){
             DefaultListModel<Cliente> model = (DefaultListModel<Cliente>)jlClientes.getModel();
@@ -554,6 +555,11 @@ public class TelaAdministrador {
             tfCpf_Cliente.setText(cliente.getCpf());
             tfTelefone_Cliente.setText(cliente.getTelefone());
             tfHabilitacao_Cliente.setText(cliente.getHabilitacao());
+
+            painel.add(tfNome_Cliente);
+            painel.add(tfCpf_Cliente);
+            painel.add(tfTelefone_Cliente);
+            painel.add(tfHabilitacao_Cliente);
         }
         
     }
@@ -561,6 +567,11 @@ public class TelaAdministrador {
     public void atualizaPainelDir_Carros(){
 
         int selectedIndex = jlCarro.getSelectedIndex();
+        JPanel painel = new JPanel();
+        painel.setBorder(BorderFactory.createTitledBorder("Informações sobre o carro"));
+        painel.setPreferredSize(new Dimension(WIDTH/3, HEIGHT));
+        painel.setLayout(new BorderLayout());
+        tela_adm.add(painel, BorderLayout.SOUTH);
 
         if(selectedIndex != -1){
             DefaultListModel<Carro> model = (DefaultListModel<Carro>)jlCarro.getModel();
@@ -572,11 +583,11 @@ public class TelaAdministrador {
             tfPlaca.setText(carro.getPlaca());
             tfPrecoDiaria.setText(String.valueOf(carro.getPreco_diaria()));
             
-            painel_dir.add(tfMarca);
-            painel_dir.add(tfModelo);
-            painel_dir.add(tfAno);
-            painel_dir.add(tfPlaca);
-            painel_dir.add(tfPrecoDiaria);
+            painel.add(tfMarca);
+            painel.add(tfModelo);
+            painel.add(tfAno);
+            painel.add(tfPlaca);
+            painel.add(tfPrecoDiaria);
 
         }
         
@@ -585,6 +596,11 @@ public class TelaAdministrador {
     public void atualizaPainelDir_Funcionarios(){
 
         int selectedIndex = jlFunc.getSelectedIndex();
+        JPanel painel = new JPanel();
+        painel.setBorder(BorderFactory.createTitledBorder("Informações sobre o funcionário"));
+        painel.setPreferredSize(new Dimension(WIDTH/3, HEIGHT));
+        painel.setLayout(new BorderLayout());
+        tela_adm.add(painel, BorderLayout.SOUTH);
         JTextField tfCargo, tfId;
 
         if(selectedIndex != -1){
@@ -597,11 +613,11 @@ public class TelaAdministrador {
             tfSalario.setText(String.valueOf(func.getSalario()));
             tfId = new JTextField(String.valueOf(func.getId()));
 
-            painel_dir.add(tfNome_Func);
-            painel_dir.add(tfCpf_Func);
-            painel_dir.add(tfCargo);
-            painel_dir.add(tfSalario);
-            painel_dir.add(tfId);
+            painel.add(tfNome_Func);
+            painel.add(tfCpf_Func);
+            painel.add(tfCargo);
+            painel.add(tfSalario);
+            painel.add(tfId);
 
         }
         
@@ -610,7 +626,11 @@ public class TelaAdministrador {
     public void atualizaPainelDir_Locacoes(){
 
         int selectedIndex = jlLocacao.getSelectedIndex();
-
+        JPanel painel = new JPanel();
+        painel.setBorder(BorderFactory.createTitledBorder("Informações sobre a locação"));
+        painel.setPreferredSize(new Dimension(WIDTH/3, HEIGHT));
+        painel.setLayout(new BorderLayout());
+        tela_adm.add(painel, BorderLayout.SOUTH);
 
         JTextField tfId, tfNome, tfCarro, tfDataInicio, tfDataFim, tfValidade, tfLocador;
 
@@ -629,13 +649,13 @@ public class TelaAdministrador {
             tfValidade = new JTextField(String.valueOf(Locacao.validade(l)));
             tfLocador = new JTextField(l.getLocador().getNome());
 
-            painel_dir.add(tfId);
-            painel_dir.add(tfNome);
-            painel_dir.add(tfCarro);
-            painel_dir.add(tfDataInicio);
-            painel_dir.add(tfDataFim);
-            painel_dir.add(tfValidade);
-            painel_dir.add(tfLocador);
+            painel.add(tfId);
+            painel.add(tfNome);
+            painel.add(tfCarro);
+            painel.add(tfDataInicio);
+            painel.add(tfDataFim);
+            painel.add(tfValidade);
+            painel.add(tfLocador);
         }
         
     }
@@ -643,6 +663,11 @@ public class TelaAdministrador {
     public void atualizaPainelDir_Reservas(){
 
         int selectedIndex = jlReserva.getSelectedIndex();
+        JPanel painel = new JPanel();
+        painel.setBorder(BorderFactory.createTitledBorder("Informações sobre a reserva"));
+        painel.setPreferredSize(new Dimension(WIDTH/3, HEIGHT));
+        painel.setLayout(new BorderLayout());
+        tela_adm.add(painel, BorderLayout.SOUTH);
 
         JTextField tfId, tfNome, tfCarro, tfDataInicio, tfDataFim;
 
@@ -659,11 +684,11 @@ public class TelaAdministrador {
             tfDataInicio = new JTextField(formato.format(l.getDataInicio()));
             tfDataFim = new JTextField(formato.format(l.getDataFim()));
 
-            painel_dir.add(tfId);
-            painel_dir.add(tfNome);
-            painel_dir.add(tfCarro);
-            painel_dir.add(tfDataInicio);
-            painel_dir.add(tfDataFim);
+            painel.add(tfId);
+            painel.add(tfNome);
+            painel.add(tfCarro);
+            painel.add(tfDataInicio);
+            painel.add(tfDataFim);
 
         }
         
@@ -672,6 +697,11 @@ public class TelaAdministrador {
     public void atualizaPainelDir_Filiais(){
 
         int selectedIndex = jlFilial.getSelectedIndex();
+        JPanel painel = new JPanel();
+        painel.setBorder(BorderFactory.createTitledBorder("Informações sobre o carro"));
+        painel.setPreferredSize(new Dimension(WIDTH/3, HEIGHT));
+        painel.setLayout(new BorderLayout());
+        tela_adm.add(painel, BorderLayout.SOUTH);
 
         JTextField tfId, tfNome;
 
@@ -687,13 +717,13 @@ public class TelaAdministrador {
             tfEstado.setText(f.getEstado());
             tfCep.setText(f.getCep());
 
-            painel_dir.add(tfId);
-            painel_dir.add(tfNome);
-            painel_dir.add(tfLogadouro);
-            painel_dir.add(tfNumero);
-            painel_dir.add(tfCidade);
-            painel_dir.add(tfEstado);
-            painel_dir.add(tfCep);
+            painel.add(tfId);
+            painel.add(tfNome);
+            painel.add(tfLogadouro);
+            painel.add(tfNumero);
+            painel.add(tfCidade);
+            painel.add(tfEstado);
+            painel.add(tfCep);
 
         }
  
@@ -712,8 +742,12 @@ public class TelaAdministrador {
     public void cadastraCarro(){
         DefaultListModel<Carro> model = (DefaultListModel<Carro>)jlCarro.getModel();
         
-            model.addElement(new Carro(Integer.parseInt(tfAno.getText()), tfPlaca.getText(), tfCor.getText(), tfMarca.getText(), tfModelo.getText(), true, Double.parseDouble(tfPrecoDiaria.getText())));
-            JOptionPane.showMessageDialog(tela_adm, "Carro cadastrado com sucesso!");
+            try{
+                model.addElement(new Carro(Integer.parseInt(tfAno.getText()), tfPlaca.getText(), tfCor.getText(), tfMarca.getText(), tfModelo.getText(), true, Double.parseDouble(tfPrecoDiaria.getText())));
+                JOptionPane.showMessageDialog(tela_adm, "Carro cadastrado com sucesso!");
+            }catch(FormatoException){
+                System.out.println("Formato da placa inválida!");
+            }
 
     }
 

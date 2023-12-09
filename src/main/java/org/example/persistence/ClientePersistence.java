@@ -40,6 +40,8 @@ public class ClientePersistence implements Persistence<Cliente> {
             if (clientes == null)
                 clientes = new ArrayList<>();
         }
+
+        return clientes;
     }
     
 }
