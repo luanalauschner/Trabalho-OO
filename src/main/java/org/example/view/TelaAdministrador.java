@@ -65,6 +65,9 @@ public class TelaAdministrador {
     private JTextField tfTelefone_Cliente, tfTelefone_Func;
     private JTextField tfHabilitacao_Cliente;
     private JTextField tfSalario;
+    private JTextField tfCargo, tfId;
+    private JTextField tfNome_filial;
+    private JTextField tfNome_reserva, tfCarro, tfDataInicio, tfDataFim, tfValidade, tfLocador;
 
     //inicialização dos textFields do carro
     private JTextField tfMarca, tfCor, tfAno, tfPlaca, tfPrecoDiaria, tfModelo;
@@ -541,11 +544,6 @@ public class TelaAdministrador {
     public void atualizaPainelDir_Clientes(){
 
         int selectedIndex = jlClientes.getSelectedIndex();
-        JPanel painel = new JPanel();
-        painel.setBorder(BorderFactory.createTitledBorder("Informações sobre o cliente"));
-        painel.setPreferredSize(new Dimension(WIDTH/3, HEIGHT));
-        painel.setLayout(new BorderLayout());
-        tela_adm.add(painel, BorderLayout.SOUTH);
 
         if(selectedIndex != -1){
             DefaultListModel<Cliente> model = (DefaultListModel<Cliente>)jlClientes.getModel();
@@ -555,11 +553,6 @@ public class TelaAdministrador {
             tfCpf_Cliente.setText(cliente.getCpf());
             tfTelefone_Cliente.setText(cliente.getTelefone());
             tfHabilitacao_Cliente.setText(cliente.getHabilitacao());
-
-            painel.add(tfNome_Cliente);
-            painel.add(tfCpf_Cliente);
-            painel.add(tfTelefone_Cliente);
-            painel.add(tfHabilitacao_Cliente);
         }
         
     }
@@ -567,11 +560,6 @@ public class TelaAdministrador {
     public void atualizaPainelDir_Carros(){
 
         int selectedIndex = jlCarro.getSelectedIndex();
-        JPanel painel = new JPanel();
-        painel.setBorder(BorderFactory.createTitledBorder("Informações sobre o carro"));
-        painel.setPreferredSize(new Dimension(WIDTH/3, HEIGHT));
-        painel.setLayout(new BorderLayout());
-        tela_adm.add(painel, BorderLayout.SOUTH);
 
         if(selectedIndex != -1){
             DefaultListModel<Carro> model = (DefaultListModel<Carro>)jlCarro.getModel();
@@ -582,26 +570,13 @@ public class TelaAdministrador {
             tfAno.setText(String.valueOf(carro.getAno()));
             tfPlaca.setText(carro.getPlaca());
             tfPrecoDiaria.setText(String.valueOf(carro.getPreco_diaria()));
-            
-            painel.add(tfMarca);
-            painel.add(tfModelo);
-            painel.add(tfAno);
-            painel.add(tfPlaca);
-            painel.add(tfPrecoDiaria);
 
         }
-        
     }
     
     public void atualizaPainelDir_Funcionarios(){
 
         int selectedIndex = jlFunc.getSelectedIndex();
-        JPanel painel = new JPanel();
-        painel.setBorder(BorderFactory.createTitledBorder("Informações sobre o funcionário"));
-        painel.setPreferredSize(new Dimension(WIDTH/3, HEIGHT));
-        painel.setLayout(new BorderLayout());
-        tela_adm.add(painel, BorderLayout.SOUTH);
-        JTextField tfCargo, tfId;
 
         if(selectedIndex != -1){
             DefaultListModel<Funcionario> model = (DefaultListModel<Funcionario>)jlFunc.getModel();
@@ -613,12 +588,6 @@ public class TelaAdministrador {
             tfSalario.setText(String.valueOf(func.getSalario()));
             tfId = new JTextField(String.valueOf(func.getId()));
 
-            painel.add(tfNome_Func);
-            painel.add(tfCpf_Func);
-            painel.add(tfCargo);
-            painel.add(tfSalario);
-            painel.add(tfId);
-
         }
         
     }
@@ -626,13 +595,6 @@ public class TelaAdministrador {
     public void atualizaPainelDir_Locacoes(){
 
         int selectedIndex = jlLocacao.getSelectedIndex();
-        JPanel painel = new JPanel();
-        painel.setBorder(BorderFactory.createTitledBorder("Informações sobre a locação"));
-        painel.setPreferredSize(new Dimension(WIDTH/3, HEIGHT));
-        painel.setLayout(new BorderLayout());
-        tela_adm.add(painel, BorderLayout.SOUTH);
-
-        JTextField tfId, tfNome, tfCarro, tfDataInicio, tfDataFim, tfValidade, tfLocador;
 
         if(selectedIndex != -1){
             DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
@@ -642,34 +604,18 @@ public class TelaAdministrador {
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
             tfId = new JTextField(String.valueOf(l.getId()));
-            tfNome = new JTextField(l.getLocatario().getNome());
+            tfNome_Cliente = new JTextField(l.getLocatario().getNome());
             tfCarro = new JTextField(l.getCarro_alugado().getPlaca());
             tfDataInicio = new JTextField(formato.format(l.getDataInicio()));
             tfDataFim = new JTextField(formato.format(l.getDataFim()));
             tfValidade = new JTextField(String.valueOf(Locacao.validade(l)));
             tfLocador = new JTextField(l.getLocador().getNome());
-
-            painel.add(tfId);
-            painel.add(tfNome);
-            painel.add(tfCarro);
-            painel.add(tfDataInicio);
-            painel.add(tfDataFim);
-            painel.add(tfValidade);
-            painel.add(tfLocador);
         }
-        
     }
     
     public void atualizaPainelDir_Reservas(){
 
         int selectedIndex = jlReserva.getSelectedIndex();
-        JPanel painel = new JPanel();
-        painel.setBorder(BorderFactory.createTitledBorder("Informações sobre a reserva"));
-        painel.setPreferredSize(new Dimension(WIDTH/3, HEIGHT));
-        painel.setLayout(new BorderLayout());
-        tela_adm.add(painel, BorderLayout.SOUTH);
-
-        JTextField tfId, tfNome, tfCarro, tfDataInicio, tfDataFim;
 
         if(selectedIndex != -1){
             DefaultListModel<Reserva> model = (DefaultListModel<Reserva>)jlReserva.getModel();
@@ -679,54 +625,31 @@ public class TelaAdministrador {
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
             tfId = new JTextField(String.valueOf(l.getId()));
-            tfNome = new JTextField(l.getCliente().getNome());
+            tfNome_reserva = new JTextField(l.getCliente().getNome());
             tfCarro = new JTextField(l.getCarro().getPlaca());
             tfDataInicio = new JTextField(formato.format(l.getDataInicio()));
             tfDataFim = new JTextField(formato.format(l.getDataFim()));
 
-            painel.add(tfId);
-            painel.add(tfNome);
-            painel.add(tfCarro);
-            painel.add(tfDataInicio);
-            painel.add(tfDataFim);
-
         }
-        
     }
     
     public void atualizaPainelDir_Filiais(){
 
         int selectedIndex = jlFilial.getSelectedIndex();
-        JPanel painel = new JPanel();
-        painel.setBorder(BorderFactory.createTitledBorder("Informações sobre o carro"));
-        painel.setPreferredSize(new Dimension(WIDTH/3, HEIGHT));
-        painel.setLayout(new BorderLayout());
-        tela_adm.add(painel, BorderLayout.SOUTH);
-
-        JTextField tfId, tfNome;
 
         if(selectedIndex != -1){
             DefaultListModel<Filial> model = (DefaultListModel<Filial>)jlFilial.getModel();
             Filial f = model.get(selectedIndex);
 
             tfId = new JTextField(String.valueOf(f.getId()));
-            tfNome = new JTextField(f.getGerente().getNome());
+            tfNome_filial = new JTextField(f.getGerente().getNome());
             tfLogadouro.setText(f.getLogadouro());
             tfNumero.setText(String.valueOf(f.getNumero()));
             tfCidade.setText(f.getCidade());
             tfEstado.setText(f.getEstado());
             tfCep.setText(f.getCep());
-
-            painel.add(tfId);
-            painel.add(tfNome);
-            painel.add(tfLogadouro);
-            painel.add(tfNumero);
-            painel.add(tfCidade);
-            painel.add(tfEstado);
-            painel.add(tfCep);
-
         }
- 
+        
     }
     
     public void cadastraCliente(){
@@ -776,134 +699,251 @@ public class TelaAdministrador {
 
     public void desenhaListaClientes(){
 
-        painel_esq = new JPanel();
-        painel_dir = new JPanel();
-        
+        JPanel formulario = new JPanel();
+        JPanel painel_esq = new JPanel();
+        JPanel painel_dir = new JPanel();
+        JPanel painelField = new JPanel();
+
         DefaultListModel<Cliente> model = (DefaultListModel<Cliente>)jlClientes.getModel();
         JList<Cliente> modelList = new JList<>(model);
 
         modelList.addListSelectionListener(new SelecionaClientes(this));
+        painel_esq.add(new JScrollPane(modelList));
+        painel_esq.setBorder(BorderFactory.createTitledBorder("Listagem de funcionários"));
 
-        painel_esq.add(new JScrollPane(modelList)); //adiciona a lista co rolamento ao painel esquerda
+        painel_dir.setLayout(new GridLayout(0, 1, H_GAP,V_GAP));
+        painel_dir.add(new JLabel("Nome Cliente"));
+        painel_dir.add(new JLabel("CPF"));
+        painel_dir.add(new JLabel("Telefone"));
+        painel_dir.add(new JLabel("Habilitação"));
 
-        //painel_dir.add();
-        
-        //criação da borda dos paineis que vão compor o SplitPane
-        painel_esq.setBorder(BorderFactory.createTitledBorder("Listagem de clientes"));
-        
-        //inicialização do splitPane
-        JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, painel_esq, painel_dir);
-        
-        sp.setDividerLocation(250); //confira o local inicial da divisão
-        tela_adm.add(sp); //adiciona o splitPane ao JFrame
+        tfNome_Cliente = new JTextField(20);
+        tfCpf_Cliente = new JTextField(20);
+        tfTelefone_Cliente = new JTextField(20);
+        tfHabilitacao_Cliente = new JTextField(20);
+
+        painel_dir.add(tfNome_Cliente);
+        painel_dir.add(tfCpf_Cliente);
+        painel_dir.add(tfTelefone_Cliente);
+        painel_dir.add(tfHabilitacao_Cliente);
+
+        formulario.add(painel_dir);
+        formulario.add(painelField);
+
+        tela_adm.getContentPane().add(formulario, BorderLayout.CENTER);
     }
 
     public void desenhaListaFuncionario(){
 
-        painel_esq = new JPanel();
-        painel_dir = new JPanel();
+        JPanel formulario = new JPanel();
+        JPanel painel_esq = new JPanel();
+        JPanel painel_dir = new JPanel();
+        JPanel painelField = new JPanel();
 
         DefaultListModel<Funcionario> model = (DefaultListModel<Funcionario>)jlFunc.getModel();
         JList<Funcionario> modelList = new JList<>(model);
 
         modelList.addListSelectionListener(new SelecionaFuncionarios(this));
-
         painel_esq.add(new JScrollPane(modelList));
-
         painel_esq.setBorder(BorderFactory.createTitledBorder("Listagem de funcionários"));
 
-        //inicialização do splitPane
-        JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, painel_esq, painel_dir);
-        
-        sp.setDividerLocation(250); //confira o local inicial da divisão
-        tela_adm.add(sp); //adiciona o splitPane ao JFrame
-    }
+        painel_dir.setLayout(new GridLayout(0, 1, H_GAP,V_GAP));
+        painel_dir.add(new JLabel("Nome Funcionário"));
+        painel_dir.add(new JLabel("CPF"));
+        painel_dir.add(new JLabel("Cargo"));
+        painel_dir.add(new JLabel("Salário"));
+        painel_dir.add(new JLabel("ID"));
+
+        tfId = new JTextField(20);
+        tfNome_Func = new JTextField(20);
+        tfCpf_Func= new JTextField(20);
+        tfSalario = new JTextField(20);
+        tfCargo = new JTextField(20);
+
+        painelField.add(tfNome_Func);
+        painelField.add(tfCpf_Func);
+        painelField.add(tfSalario);
+        painelField.add(tfCargo);
+        painelField.add(tfId);
+
+        formulario.add(painel_dir);
+        formulario.add(painelField);
+
+        tela_adm.getContentPane().add(formulario, BorderLayout.CENTER);
+    }    
 
     public void desenhaListaFilial(){
 
-        painel_esq = new JPanel();
-        painel_dir = new JPanel();
+        JPanel formulario = new JPanel();
+        JPanel painel_esq = new JPanel();
+        JPanel painel_dir = new JPanel();
+        JPanel painelField = new JPanel();
 
         DefaultListModel<Filial> model = (DefaultListModel<Filial>)jlFilial.getModel();
         JList<Filial> modelList = new JList<>(model);
 
         modelList.addListSelectionListener(new SelecionaFiliais(this));
-
         painel_esq.add(new JScrollPane(modelList));
-
         painel_esq.setBorder(BorderFactory.createTitledBorder("Listagem de filiais"));
 
-        //inicialização do splitPane
-        JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, painel_esq, painel_dir);
-        
-        sp.setDividerLocation(250); //confira o local inicial da divisão
-        tela_adm.add(sp); //adiciona o splitPane ao JFrame
+        painel_dir.setLayout(new GridLayout(0, 1, H_GAP,V_GAP));
+        painel_dir.add(new JLabel("ID"));
+        painel_dir.add(new JLabel("Nome"));
+        painel_dir.add(new JLabel("Logadouro"));
+        painel_dir.add(new JLabel("Número"));
+        painel_dir.add(new JLabel("Cidade"));
+        painel_dir.add(new JLabel("Estado"));
+        painel_dir.add(new JLabel("CEP"));
+
+        tfId = new JTextField(20);
+        tfNome_filial = new JTextField(20);
+        tfLogadouro = new JTextField(20);
+        tfNumero = new JTextField(20);
+        tfCidade = new JTextField(20);
+        tfEstado = new JTextField(20);
+        tfCep = new JTextField(20);
+
+        painelField.add(tfId);
+        painelField.add(tfNome_filial);
+        painelField.add(tfLogadouro);
+        painelField.add(tfNumero);
+        painelField.add(tfCidade);
+        painelField.add(tfEstado);
+        painelField.add(tfCep);
+
+        formulario.add(painel_dir);
+        formulario.add(painelField);
+
+        tela_adm.getContentPane().add(formulario, BorderLayout.CENTER);
 
     }
 
     public void desenhaListaCarro(){
 
-        painel_esq = new JPanel();
-        painel_dir = new JPanel();
+        JPanel formulario = new JPanel();
+        JPanel painel_esq = new JPanel();
+        JPanel painel_dir = new JPanel();
+        JPanel painelField = new JPanel();
 
         DefaultListModel<Carro> model = (DefaultListModel<Carro>)jlCarro.getModel();
         JList<Carro> modelList = new JList<>(model);
 
         modelList.addListSelectionListener(new SelecionaCarros(this));
-
         painel_esq.add(new JScrollPane(modelList));
-
         painel_esq.setBorder(BorderFactory.createTitledBorder("Listagem de carros"));
 
-        //inicialização do splitPane
-        JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, painel_esq, painel_dir);
-        
-        sp.setDividerLocation(250); //confira o local inicial da divisão
-        tela_adm.add(sp); //adiciona o splitPane ao JFrame
+        painel_dir.setLayout(new GridLayout(0, 1, H_GAP,V_GAP));
+        painel_dir.add(new JLabel("Placa"));
+        painel_dir.add(new JLabel("Marca"));
+        painel_dir.add(new JLabel("Modelo"));
+        painel_dir.add(new JLabel("Cor"));
+        painel_dir.add(new JLabel("Ano"));
+        painel_dir.add(new JLabel("Preço da diária"));
+
+        tfPlaca = new JTextField(20);
+        tfModelo = new JTextField(20);
+        tfMarca = new JTextField(20);
+        tfCor = new JTextField(20);
+        tfAno = new JTextField(20);
+        tfPrecoDiaria = new JTextField(20);
+
+        painelField.add(tfPlaca);
+        painelField.add(tfModelo);
+        painelField.add(tfMarca);
+        painelField.add(tfCor);
+        painelField.add(tfAno);
+        painelField.add(tfPrecoDiaria);
+
+        formulario.add(painel_dir);
+        formulario.add(painelField);
+
+        tela_adm.getContentPane().add(formulario, BorderLayout.CENTER);
+
 
     }
 
     public void desenhaListaReserva(){
-
-        painel_esq = new JPanel();
-        painel_dir = new JPanel();
+        
+        JPanel formulario = new JPanel();
+        JPanel painel_esq = new JPanel();
+        JPanel painel_dir = new JPanel();
+        JPanel painelField = new JPanel();
 
         DefaultListModel<Reserva> model = (DefaultListModel<Reserva>)jlReserva.getModel();
         JList<Reserva> modelList = new JList<>(model);
 
         modelList.addListSelectionListener(new SelecionaReservas(this));
-
         painel_esq.add(new JScrollPane(modelList));
+        painel_esq.setBorder(BorderFactory.createTitledBorder("Listagem de locações"));
 
-        painel_esq.setBorder(BorderFactory.createTitledBorder("Listagem de reservas"));
+        painel_dir.setLayout(new GridLayout(0, 1, H_GAP,V_GAP));
+        painel_dir.add(new JLabel("ID"));
+        painel_dir.add(new JLabel("Nome Cliente"));
+        painel_dir.add(new JLabel("Placa do carro"));
+        painel_dir.add(new JLabel("Data Início"));
+        painel_dir.add(new JLabel("Data Final"));
 
-        //inicialização do splitPane
-        JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, painel_esq, painel_dir);
+        tfId = new JTextField(20);
+        tfNome_Cliente = new JTextField(20);
+        tfPlaca = new JTextField(20);
+        tfDataInicio = new JTextField(20);
+        tfDataFim = new JTextField(20);
+
+        painelField.add(tfId);
+        painelField.add(tfNome_Cliente);
+        painelField.add(tfPlaca);
+        painelField.add(tfDataInicio);
+        painelField.add(tfDataFim);
+
+        formulario.add(painel_dir);
+        formulario.add(painelField);
+
+        tela_adm.getContentPane().add(formulario, BorderLayout.CENTER);
         
-        sp.setDividerLocation(250); //confira o local inicial da divisão
-        tela_adm.add(sp); //adiciona o splitPane ao JFrame
-
     }
 
     public void desenhaListaLocacao(){
 
-        JPanel esq = new JPanel();
-        JPanel dir = new JPanel();
+        JPanel formulario = new JPanel();
+        JPanel painel_esq = new JPanel();
+        JPanel painel_dir = new JPanel();
+        JPanel painelField = new JPanel();
 
         DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
         JList<Locacao> modelList = new JList<>(model);
 
         modelList.addListSelectionListener(new SelecionaLocacoes(this));
+        painel_esq.add(new JScrollPane(modelList));
+        painel_esq.setBorder(BorderFactory.createTitledBorder("Listagem de locações"));
 
-        esq.add(new JScrollPane(modelList));
+        painel_dir.setLayout(new GridLayout(0, 1, H_GAP,V_GAP));
+        painel_dir.add(new JLabel("ID"));
+        painel_dir.add(new JLabel("Nome Cliente"));
+        painel_dir.add(new JLabel("Placa do carro"));
+        painel_dir.add(new JLabel("Data Início"));
+        painel_dir.add(new JLabel("Data Final"));
+        painel_dir.add(new JLabel("Valor"));
+        painel_dir.add(new JLabel("Locador"));
 
-        esq.setBorder(BorderFactory.createTitledBorder("Listagem de locacoes"));
+        tfId = new JTextField(20);
+        tfNome_Cliente = new JTextField(20);
+        tfPlaca = new JTextField(20);
+        tfDataInicio = new JTextField(20);
+        tfDataFim = new JTextField(20);
+        tfValidade = new JTextField(20);
+        tfLocador = new JTextField(20);
 
-        //inicialização do splitPane
-        JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, esq, dir);
-        
-        sp.setDividerLocation(250); //confira o local inicial da divisão
-        tela_adm.add(sp); //adiciona o splitPane ao JFrame
-        tela_adm.pack();
+        painelField.add(tfId);
+        painelField.add(tfNome_Cliente);
+        painelField.add(tfPlaca);
+        painelField.add(tfDataInicio);
+        painelField.add(tfDataFim);
+        painelField.add(tfValidade);
+        painelField.add(tfLocador);
+
+        formulario.add(painel_dir);
+        formulario.add(painelField);
+
+        tela_adm.getContentPane().add(formulario, BorderLayout.CENTER);
     }
 }
