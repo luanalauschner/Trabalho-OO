@@ -22,9 +22,9 @@ public class Carro {
     private boolean disponibilidade;
     private double preco_diaria;
 
-    public Carro(int ano, String placa, String cor, String marca, String modelo, boolean disponibilidade, double preco_diaria){
+    public Carro(int ano, String placa, String cor, String marca, String modelo, boolean disponibilidade, double preco_diaria) throws FormatoException{
         this.ano = ano;
-        this.placa = placa;
+        this.placa = validaPlaca(placa);
         this.cor = cor;
         this.marca = marca;
         this.modelo = modelo;
