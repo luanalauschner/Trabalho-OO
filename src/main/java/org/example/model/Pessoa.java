@@ -5,7 +5,6 @@
  */
 package org.example.model;
 
-import java.util.InputMismatchException;
 import org.example.exception.FormatoException;
 
 /**
@@ -48,15 +47,6 @@ public abstract class Pessoa {
         this.cpf = validarCpf(cpf);
     }
 
-    /*public static boolean confereCaracter(String s){
-        try {
-            valor = teclado.nextInt();
-        } catch (InputMismatchException e) {
-            System.out.println("");
-        }
-
-        return true;
-    }*/
     
     public static String validarCpf(String c) throws FormatoException{
         String[] aux = c.split("[\\.-]");

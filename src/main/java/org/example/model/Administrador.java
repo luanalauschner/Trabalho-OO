@@ -45,30 +45,6 @@ public class Administrador {
     public static List<Reserva> getReservas() {
         return reservas;
     }
-
-    /*public void setClientes(List<Cliente> clientes) {
-        this.clientes = clientes;
-    }
-
-    public void setFuncionarios(List<Funcionario> funcionarios) {
-        this.funcionarios = funcionarios;
-    }
-
-    public void setCarros(List<Carro> carros) {
-        Administrador.carros = carros;
-    }
-
-    public void setFiliais(List<Filial> filiais) {
-        Administrador.filiais = filiais;
-    }
-
-    public void setLocacoes(List<Locacao> locacoes) {
-        Administrador.locacoes = locacoes;
-    }
-
-    public void setReservas(List<Reserva> reservas) {
-        Administrador.reservas = reservas;
-    }*/
     
     public static void removeLocacao(Locacao l){
         locacoes.remove(l);
