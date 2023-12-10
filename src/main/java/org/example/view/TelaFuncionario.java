@@ -51,6 +51,7 @@ public class TelaFuncionario {
 
     private JTextField tfNome, tfSalario, tfCpf, tfTelefone;
     private JTextField tfDataInicio, tfDataFim, tfId, tfPlaca;
+    private JTextField tfValidade, tfLocador;
 
     public void desenha(Funcionario f){
         
@@ -370,6 +371,47 @@ public class TelaFuncionario {
         tela_funcionario.add(principal);
         tela_funcionario.pack();
 
+    }
+
+    public void atualizaPainelDir_Locacoes(){
+
+        int selectedIndex = jlLocacao.getSelectedIndex();
+
+        if(selectedIndex != -1){
+            DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
+            Locacao l = model.get(selectedIndex);
+
+            //conversão do tipo date para String
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+            tfId.setText(String.valueOf(l.getId()));
+            tfNome.setText(l.getLocatario().getNome());
+            tfPlaca.setText(l.getCarro_alugado().getPlaca());
+            tfDataInicio.setText(formato.format(l.getDataInicio()));
+            tfDataFim.setText(formato.format(l.getDataFim()));
+            tfValidade.setText(String.valueOf(Locacao.validade(l)));
+            tfLocador.setText(l.getLocador().getNome());
+        }
+    }
+    
+    public void atualizaPainelDir_Reservas(){
+
+        int selectedIndex = jlReserva.getSelectedIndex();
+
+        if(selectedIndex != -1){
+            DefaultListModel<Reserva> model = (DefaultListModel<Reserva>)jlReserva.getModel();
+            Reserva l = model.get(selectedIndex);
+
+            //conversão do tipo date para String
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+            tfId.setText(String.valueOf(l.getId()));
+            tfNome.setText(l.getCliente().getNome());
+            tfPlaca.setText(l.getCarro().getPlaca());
+            tfDataInicio.setText(formato.format(l.getDataInicio()));
+            tfDataFim.setText(formato.format(l.getDataFim()));
+
+        }
     }
 }
 

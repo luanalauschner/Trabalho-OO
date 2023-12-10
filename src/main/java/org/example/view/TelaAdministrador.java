@@ -624,11 +624,11 @@ public class TelaAdministrador {
             //conversão do tipo date para String
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
-            tfId = new JTextField(String.valueOf(l.getId()));
-            tfNome_reserva = new JTextField(l.getCliente().getNome());
-            tfCarro = new JTextField(l.getCarro().getPlaca());
-            tfDataInicio = new JTextField(formato.format(l.getDataInicio()));
-            tfDataFim = new JTextField(formato.format(l.getDataFim()));
+            tfId.setText(String.valueOf(l.getId()));
+            tfNome_reserva.setText(l.getCliente().getNome());
+            tfCarro.setText(l.getCarro().getPlaca());
+            tfDataInicio.setText(formato.format(l.getDataInicio()));
+            tfDataFim.setText(formato.format(l.getDataFim()));
 
         }
     }
@@ -641,8 +641,8 @@ public class TelaAdministrador {
             DefaultListModel<Filial> model = (DefaultListModel<Filial>)jlFilial.getModel();
             Filial f = model.get(selectedIndex);
 
-            tfId = new JTextField(String.valueOf(f.getId()));
-            tfNome_filial = new JTextField(f.getGerente().getNome());
+            tfId.setText(String.valueOf(f.getId()));
+            tfNome_filial.setText(f.getGerente().getNome());
             tfLogadouro.setText(f.getLogadouro());
             tfNumero.setText(String.valueOf(f.getNumero()));
             tfCidade.setText(f.getCidade());
