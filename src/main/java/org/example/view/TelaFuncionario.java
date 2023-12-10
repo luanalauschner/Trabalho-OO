@@ -12,10 +12,6 @@ import org.example.exception.*;
 
 //import do controller model
 import org.example.model.*;
-import org.example.model.Funcionario;
-import org.example.model.Locacao;
-import org.example.model.Reserva;
-import org.example.model.Cliente;
 
 //import da biblioteca swing
 import javax.swing.*;
@@ -23,6 +19,8 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
  
@@ -46,12 +44,13 @@ public class TelaFuncionario {
 
 
     //inicializacao dos botões utilizados
-    private JButton adicionaLocacao, adicionaReserva, calculaComissao, calculaSalario;
+    private JButton adicionaLocacao, adicionaReserva;
     private JButton validaCredito;
 
     private JComboBox<String> jcLista_cargos;
 
     private JTextField tfNome, tfSalario, tfCpf, tfTelefone;
+    private JTextField tfDataInicio, tfDataFim, tfId, tfPlaca;
 
     public void desenha(Funcionario f){
         
@@ -114,17 +113,29 @@ public class TelaFuncionario {
 
         painel2.add(new JScrollPane(modelList2));
 
-        JButton btnRenova = new JButton("Adiciona locação");
-        btnRenova.addActionListener(new AdicionaLocacao(this));
+        adicionaLocacao = new JButton("Adiciona locação");
+        adicionaLocacao.addActionListener(new ActionListener(){
 
-        JButton btnCancela = new JButton("Adiciona reserva");
-        btnCancela.addActionListener(new AdicionaReserva(this));
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                desenhaFormulario();
+            }
+
+        });
+
+        adicionaReserva = new JButton("Adiciona reserva");
+        adicionaReserva.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                desenhaFormulario2();
+            }
+        });
 
         JButton btnConfirma = new JButton("Valida crédito");
         btnConfirma.addActionListener(new ValidaClientes(this));
 
-        painelButton.add(btnRenova);
-        painelButton.add(btnCancela);
+        painelButton.add(adicionaLocacao);
+        painelButton.add(adicionaReserva);
         painelButton.add(btnConfirma);
 
         JPanel listas = new JPanel();
@@ -226,15 +237,139 @@ public class TelaFuncionario {
     }
 
     public void adicionaReserva(){
+        DefaultListModel<Reserva> model = (DefaultListModel<Reserva>)jlReserva.getModel();
 
+        try {
+            if(funcionario.novaReserva(tfPlaca.getText(), tfId.getText(), tfDataInicio.getText(), tfDataFim.getText()))
+                model.addElement(new Reserva(tfPlaca.getText(), tfId.getText(), tfDataInicio.getText(), tfDataFim.getText()));
+            else
+                JOptionPane.showMessageDialog(tela_funcionario, "Carro indiponível nessa data");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        JOptionPane.showMessageDialog(tela_funcionario, "Reserva realizada com sucesso");
     }
 
     public void adicionaLocacao(){
+        DefaultListModel<Locacao> model = (DefaultListModel<Locacao>)jlLocacao.getModel();
 
+        try {
+            if(funcionario.novaLocacao(tfPlaca.getText(), tfId.getText(), tfDataInicio.getText(), tfDataFim.getText()))
+                model.addElement(new Locacao(tfDataInicio.getText(), tfDataFim.getText(), tfId.getText(), tfPlaca.getText(), true));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        JOptionPane.showMessageDialog(tela_funcionario, "Locacao realizada com sucesso");
     }
 
     public void validaCredito(){
-        funcionario.validaCliente();
+    }
+
+    public void desenhaFormulario(){
+
+        //criação do painel
+        JPanel painel = new JPanel();
+        painel.setBorder(BorderFactory.createTitledBorder("Nova Locação"));
+
+        //criação do painel que contém o formulário
+        JPanel formulario_locacao = new JPanel();
+        JPanel painelLabel = new JPanel();
+        painelLabel.setLayout(new GridLayout(0, 1, H_GAP,V_GAP));
+        painelLabel.add(new JLabel("ID do cliente"));
+        painelLabel.add(new JLabel("Placa do carro"));
+        painelLabel.add(new JLabel("Data início"));
+        painelLabel.add(new JLabel("Data fim"));
+
+        //implementação que contém os espaços que o usuário preenche os dados do funcionário
+        JPanel painelField = new JPanel();
+        painelField.setLayout(new GridLayout(0,1, H_GAP,V_GAP));
+        tfPlaca = new JTextField(20);
+        tfId = new JTextField(20);
+        tfDataInicio = new JTextField(20);
+        tfDataFim = new JTextField(20);
+
+        //inserção do elementos TextField
+        painelField.add(tfId);
+        painelField.add(tfPlaca);
+        painelField.add(tfDataInicio);
+        painelField.add(tfDataFim);
+
+        formulario_locacao.add(painelLabel);
+        formulario_locacao.add(painelField);
+
+        JButton btnAdicionar = new JButton("Adicionar");
+        btnAdicionar.addActionListener(new AdicionaLocacao(this));
+
+        painel.setLayout(new BorderLayout());
+        painel.add(btnAdicionar);
+        painel.add(formulario_locacao, BorderLayout.CENTER);
+
+        JPanel principal = new JPanel();
+
+        principal.add(painel, BorderLayout.NORTH);
+        principal.add(btnAdicionar, BorderLayout.SOUTH);
+
+        
+        principal.setVisible(true);
+        //splitPanel.setVisible(false);
+
+        tela_funcionario.add(principal);
+        tela_funcionario.pack();
+
+    }
+
+    public void desenhaFormulario2(){
+
+        //criação do painel
+        JPanel painel = new JPanel();
+        painel.setBorder(BorderFactory.createTitledBorder("Nova Reserva"));
+
+        //criação do painel que contém o formulário
+        JPanel formulario_locacao = new JPanel();
+        JPanel painelLabel = new JPanel();
+        painelLabel.setLayout(new GridLayout(0, 1, H_GAP,V_GAP));
+        painelLabel.add(new JLabel("ID do cliente"));
+        painelLabel.add(new JLabel("Placa do carro"));
+        painelLabel.add(new JLabel("Data início"));
+        painelLabel.add(new JLabel("Data fim"));
+
+        //implementação que contém os espaços que o usuário preenche os dados do funcionário
+        JPanel painelField = new JPanel();
+        painelField.setLayout(new GridLayout(0,1, H_GAP,V_GAP));
+        tfPlaca = new JTextField(20);
+        tfId = new JTextField(20);
+        tfDataInicio = new JTextField(20);
+        tfDataFim = new JTextField(20);
+
+        //inserção do elementos TextField
+        painelField.add(tfId);
+        painelField.add(tfPlaca);
+        painelField.add(tfDataInicio);
+        painelField.add(tfDataFim);
+
+        formulario_locacao.add(painelLabel);
+        formulario_locacao.add(painelField);
+
+        JButton btnAdicionar = new JButton("Adicionar");
+        btnAdicionar.addActionListener(new AdicionaReserva(this));
+
+        painel.setLayout(new BorderLayout());
+        painel.add(btnAdicionar);
+        painel.add(formulario_locacao, BorderLayout.CENTER);
+
+        JPanel principal = new JPanel();
+
+        principal.add(painel, BorderLayout.NORTH);
+        principal.add(btnAdicionar, BorderLayout.SOUTH);
+
+        
+        principal.setVisible(true);
+        //splitPanel.setVisible(false);
+
+        tela_funcionario.add(principal);
+        tela_funcionario.pack();
+
     }
 }
 

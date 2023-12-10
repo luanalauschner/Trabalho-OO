@@ -22,7 +22,7 @@ public class Administrador {
     private static List <Locacao> locacoes;
     private static List <Reserva> reservas;
 
-    public List<Cliente> getClientes() {
+    public static List<Cliente> getClientes() {
         return clientes;
     }
 

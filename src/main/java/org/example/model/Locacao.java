@@ -9,6 +9,8 @@ import org.example.model.Carro;
 import org.example.model.Funcionario;
 import org.example.model.Cliente;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,12 +30,12 @@ public class Locacao {
     private static boolean validade;
     //true = contrato em período de validade; false = contrato encerrado ou cancelado (é mesmo necessário?)
 
-    public Locacao(int id, String dataInicio, String dataFim, Cliente locatario, Carro carro_alugado, boolean validade) throws ParseException{
-        this.id = id;
+    public Locacao(String dataInicio, String dataFim, String id, String placa, boolean validade) throws ParseException{
+        this.id = gerarId();
         this.dataInicio = retornaData(dataInicio);
         this.dataFim = retornaData(dataFim);
-        this.locatario = locatario;
-        this.carro_alugado = carro_alugado;
+        this.locatario = retornaCliente(id);
+        this.carro_alugado = retornaCarro(placa);
         //this.locador = locador;
         Locacao.validade = validade;
     }
@@ -141,5 +143,36 @@ public class Locacao {
 
         d = formato.parse(s);
         return d;
+    }
+
+    public Carro retornaCarro(String p){
+        List<Carro> carros= Administrador.getCarros();
+
+        for(Carro c : carros){
+            if(c.confereCarro(p))
+                return c;
+        }
+
+        return null;
+
+    }
+
+    public Cliente retornaCliente(String id){
+        List<Cliente> clientes= Administrador.getClientes();
+
+        for(Cliente c : clientes){
+            if(c.getId() == (Integer.parseInt(id)))
+                return c;
+        }
+
+        return null;
+    }
+
+    public static int gerarId() {
+        
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(1000);
+
+        return numeroAleatorio;
     }
 }

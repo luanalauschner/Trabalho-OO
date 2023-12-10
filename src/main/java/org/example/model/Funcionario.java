@@ -131,19 +131,14 @@ public class Funcionario extends Pessoa {
         
         return catalogo;
     }
-
-    public static int gerarId() {
-        
-        Random random = new Random();
-        int numeroAleatorio = random.nextInt(1000);
-
-        return numeroAleatorio;
-    }
     
     //realiza o contrato de locacao de um carro dado a disponibilidade do mesmo e o crédito positivo
     //do cliente.
-    public boolean novaLocacao(Cliente locatario, Carro c, String inicio, String fim, Filial f) throws ParseException{
-        int id;
+    public boolean novaLocacao(String id, String placa, String inicio, String fim) throws ParseException{
+        Cliente locatario = retornaCliente(id);
+        Carro c = retornaCarro(placa);
+        Filial f = retornaFilial(placa);
+
         //confere disponibilidade do carro
         if(!c.isDisponibilidade())
             return false;
@@ -153,8 +148,7 @@ public class Funcionario extends Pessoa {
             return false;
 
         List<Reserva> reservas = Administrador.getReservas();
-        id = gerarId();
-        Locacao l = new Locacao(id, inicio, fim, locatario, c, true);
+        Locacao l = new Locacao(inicio, fim, id, placa, true);
 
         for(Reserva r : reservas){
             if(r.getCarro().equals(c)){
@@ -181,8 +175,11 @@ public class Funcionario extends Pessoa {
     } 
 
     //realiza a reserva de um carro dado a disponibilidade do mesmo e o crédito positiva do cliente.
-    public boolean novaReserva(Cliente locatario, Carro c, String inicio, String fim, Filial f) throws ParseException{
-        int id;
+    public boolean novaReserva(String id, String placa, String inicio, String fim) throws ParseException{
+        Cliente locatario = retornaCliente(id);
+        Carro c = retornaCarro(placa);
+        Filial f = retornaFilial(placa);
+        
         //confere disponibilidade do carro
         if(!c.isDisponibilidade())
             return false;
@@ -192,8 +189,8 @@ public class Funcionario extends Pessoa {
             return false;
 
         List<Reserva> reservas = Administrador.getReservas();
-        id = gerarId();
-        Reserva r = new Reserva( c, locatario, inicio, fim);
+
+        Reserva r = new Reserva( placa, id, inicio, fim);
 
         for(Reserva r1 : reservas){
             if(r1.getCarro().equals(c)){
@@ -229,5 +226,51 @@ public class Funcionario extends Pessoa {
     @Override
     public String toString() {
         return this.getNome();
+    }
+
+    public Carro retornaCarro(String p){
+        List<Carro> carros= Administrador.getCarros();
+
+        for(Carro c : carros){
+            if(c.confereCarro(p))
+                return c;
+        }
+
+        return null;
+
+    }
+
+    public Cliente retornaCliente(String id){
+        List<Cliente> clientes= Administrador.getClientes();
+
+        for(Cliente c : clientes){
+            if(c.getId() == (Integer.parseInt(id)))
+                return c;
+        }
+
+        return null;
+    }
+
+    public static int gerarId() {
+        
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(1000);
+
+        return numeroAleatorio;
+    }
+
+    public Filial retornaFilial(String id){
+        List<Filial> filiais= Administrador.getFiliais();
+        List<Carro> carros = null;
+
+        for(Filial c : filiais){
+            carros = c.getCarrosDisponiveis();
+            for(Carro c2: carros){
+                if(c2.confereCarro(id))
+                    return c;
+            }
+        }
+
+        return null;
     }
 }

@@ -7,6 +7,7 @@ package org.example.model;
 import org.example.model.Locacao;
 import org.example.model.Carro;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,10 +24,10 @@ public class Reserva {
     private Date dataInicio;
     private Date dataFim;
 
-    public Reserva (Carro carro, Cliente c, String dataInicio, String dataFim) throws ParseException{
+    public Reserva (String placa, String id, String dataInicio, String dataFim) throws ParseException{
         this.id = gerarId();
-        this.carro = carro;
-        this.locatario = c;
+        this.carro = retornaCarro(placa);
+        this.locatario = retornaCliente(id);
         this.dataInicio = retornaData(dataInicio);
         this.dataFim = retornaData(dataFim);
     }
@@ -151,5 +152,28 @@ public class Reserva {
 
         d = formato.parse(s);
         return d;
+    }
+
+    public Carro retornaCarro(String p){
+        List<Carro> carros= Administrador.getCarros();
+
+        for(Carro c : carros){
+            if(c.confereCarro(p))
+                return c;
+        }
+
+        return null;
+
+    }
+
+    public Cliente retornaCliente(String id){
+        List<Cliente> clientes= Administrador.getClientes();
+
+        for(Cliente c : clientes){
+            if(c.getId() == (Integer.parseInt(id)))
+                return c;
+        }
+
+        return null;
     }
 }
